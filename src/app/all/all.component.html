@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+	<h1>Omni Green</h1>
+	<h1>&nbsp;&nbsp;|</h1>
+	<!-- <button mat-button >Home</button> -->
+	<!-- <button mat-button >About</button> -->
+	
+	<mat-form-field class="search-form-field">
+		<mat-label>Search</mat-label>
+		<input matInput type="text">
+		<button mat-button matSuffix mat-icon-button aria-label="Search" (click)="value=''">
+			<mat-icon>()</mat-icon>
+	  </button>
+	</mat-form-field>
+
+
+</mat-toolbar>
+
+<mat-card *ngFor="let product of products">
+	<mat-card-header>
+		<mat-card-title>{{ product.Name }}</mat-card-title>
+		<mat-card-title>{{ product.brandName }}</mat-card-title>
+		<mat-card-subtitle>{{ product.Prices[0] }}</mat-card-subtitle>
+		<mat-card-subtitle *ngIf="product.THCContent">THC: {{ product.THCContent.value }}</mat-card-subtitle>
+		<mat-card-subtitle *ngIf="product.CBDContent">CBD: {{ product.CBDContent.value }}</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<img [src]="product.Image" width="85px">
+		<div>{{ product.DispensaryID }}</div>
+	</mat-card-content>
+</mat-card>
