@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { MatToolbarModule, MatIconModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatInputModule, MatListModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { AllComponent } from './all/all.component';
-
-import { MatToolbarModule, MatIconModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatInputModule, MatListModule } from '@angular/material';
+// import { WeightPipe } from './pipes/weight.pipe';
+import { UnitPipe } from './pipes/unit.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		AllComponent
+		AllComponent,
+		// WeightPipe,
+		UnitPipe
 	],
 	imports: [
 		BrowserModule,
