@@ -1,12 +1,38 @@
+.product {
+	height:200px;
+	padding:1rem;
+	background: #fff;
+	border-radius: 8px;
+}
+.mat-card {
+	padding:1rem !important;
+	background: #e3e3e3;
+}
+img {
+	height:150px;
+}
 mat-card {
 	height:250px;
 	background:#e3e3e3;
 }
-mat-card-header { 
-	margin: 1rem;
-	background: #fff;
-}
 mat-card-content {
 	margin: 1rem;
 	background: #fff;
+	border-radius: 8px;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin:0.25rem;
+}
+h1 {
+	font-size: 1rem;
+	font-weight:normal;
+}
+h4 { 
+	font-weight:normal;
+}
+h5 { 
+	font-weight:normal;
+}
+h6 { 
+	font-weight:normal;
 }

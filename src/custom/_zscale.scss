@@ -1,0 +1,15 @@
+$z-scale: (
+  bottom: -100,
+  background: -10,
+  foreground: auto,
+  overlay: 10,
+  overlayTop: 50,
+  top: -100
+);
+
+$z-bottom: get($z-scale, 'bottom');
+$z-background: get($z-scale, 'background');
+$z-foreground: get($z-scale, 'foreground');
+$z-overlay: get($z-scale, 'overlay');
+$z-overlayTop: get($z-scale, 'overlayTop');
+$z-top: get($z-scale, 'top');

@@ -16,22 +16,25 @@
 
 
 	</mat-toolbar>
-
-	<mat-card class="col s12 m6 l3" *ngFor="let product of products">
-		<mat-card-header>
-			<mat-card-title>{{ product.Name }}</mat-card-title>
-			<mat-card-title><strong>${{ product.Prices[0] }}</strong></mat-card-title>
-			<mat-card-subtitle>{{ product.brandName }}</mat-card-subtitle>
-			<mat-card-subtitle *ngIf="product.recSpecialPrices[0] != null">{{ product.recSpecialPrices[0] }}</mat-card-subtitle>
-			<mat-card-subtitle *ngIf="product.THCContent.value"><strong>THC</strong>: {{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</mat-card-subtitle>
-			<mat-card-subtitle *ngIf="product.CBDContent.value"><strong>CBD</strong>: {{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</mat-card-subtitle>
-			<!-- <mat-card-subtitle>{{ product.weight }}</mat-card-subtitle> -->
-		</mat-card-header>
-		<mat-card-content>
-			<img [src]="product.Image" width="85px">
-			<div>{{ product.DispensaryID }}</div>
-			<div>{{ product.subcategory }}</div>
-		</mat-card-content>
-	</mat-card>
+	<div class="mat-card col s12 m10 l4" *ngFor="let product of products">
+		
+		<div class="product">
+				<div class="col s6 m6 l6">
+					<h1>{{ product.Name }}</h1>
+					<h6>{{ product.DispensaryID | dispensary }}</h6>
+					<h2><strong>${{ product.Prices[0] }}</strong></h2>
+					<!-- <h6>{{ product.brandName }}</h6> -->
+					<h5 *ngIf="product.recSpecialPrices[0] != null">{{ product.recSpecialPrices[0] }}</h5>
+					<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>
+					<h5 *ngIf="product.CBDContent?.value">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>
+				</div>
+				<div class="details-column col s6 m6 l6">
+					<img [src]="product.Image">
+					<!-- <div>{{ product.subcategory }}</div> -->
+				</div>
+				
+				
+		</div>
+</div>
 
 </section>

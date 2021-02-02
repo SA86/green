@@ -1,0 +1,53 @@
+// FLEX-GRID Layout classes
+@mixin grid($margin: base(3)) {
+  display: flex;
+  justify-content: space-between;
+
+  .md-flex-col {
+    flex: 1;
+    margin-right: $margin;
+    margin-bottom: $margin;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    & .md-flex-col {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@mixin grid-vert($margin: base(4)) {
+  display: flex;
+  flex-direction: column;
+
+  .md-flex-row:not(:last-child) {
+    margin-bottom: $margin;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.md-flex-grid {
+  @include grid();
+}
+
+.md-flex-grid-vert {
+  @include grid-vert();
+}
+
+// Generates .md-flex-grid-## classes w/ variable gutters
+$gutters: 0 10 15 20 30;
+
+@each $gutter in $gutters {
+  .md-flex-grid-#{$gutter} {
+    @include grid(#{$gutter}px);
+  }
+
+  .md-flex-grid-vert-#{$gutter} {
+    @include grid-vert(#{$gutter}px);
+  }
+}

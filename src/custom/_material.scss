@@ -1,0 +1,252 @@
+@import "_variables.scss";
+@import "_mixins.scss";
+@import "_zscale.scss";
+@import "_flex.scss";
+@import "_element.scss";
+@import "_grid.scss";
+@import "_utilities.scss";
+
+//Global Layout
+
+.md-app {
+  @include flexVert();
+
+  flex: 1;
+
+  app-sidenav {
+    display: flex;
+    flex: 1;
+
+    .mat-sidenav {
+      @include flexVert();
+    }
+
+    .mat-sidenav-container {
+      flex: 1;
+    }
+
+    .mat-drawer {
+      background-color: transparent;
+    }
+  }
+}
+
+// Custom Chip Styles
+// example: .md-chip-list-sm
+$chipSizeLabels: "xs", "sm", "md", "lg";
+$chipSizes: 10, 12, 14, 16;
+
+@mixin chip($label) {
+  $index: index($chipSizeLabels, $label);
+  $size: nth($chipSizes, $index);
+
+  .mat-chip:not(.mat-basic-chip) {
+    padding: #{$size/2 - 2}px #{$size - 2}px;
+
+    @if ($size >= 14) {
+      font-size: #{$size - 2}px;
+    } @else if $size < 14 {
+      font-size: #{$size}px;
+    }
+
+    text-transform: capitalize;
+
+    &.md-chip-alt {
+      border-radius: 2px;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+
+    .mat-icon {
+      font-size: #{$size + 4}px;
+      height: #{$size + 4}px;
+      margin-right: 4px;
+      width: #{$size + 4}px;
+    }
+  }
+}
+
+@each $chipLabel in $chipSizeLabels {
+  .md-chip-list-#{$chipLabel} {
+    .mat-chip-list-wrapper {
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    @include chip($chipLabel);
+  }
+}
+
+.mat-chip:not(.mat-basic-chip) {
+  @include addColors("background-color");
+}
+
+.md-chip-list-squared {
+  .mat-chip-list-wrapper {
+    .mat-chip {
+      border-radius: 3px;
+      padding: 2px 6px;
+    }
+  }
+}
+
+// Menu
+.mat-menu-panel {
+  &.md-menu-lg {
+    max-width: 600px;
+  }
+
+  &.md-menu-sm {
+    max-width: 300px;
+  }
+
+  .mat-list {
+    padding-top: 0;
+  }
+}
+
+// Custom Card Styles
+.mat-card {
+  background-color: $white;
+  box-sizing: border-box;
+  min-height: 135px;
+
+  .mat-card-title {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    white-space: nowrap;
+    width: 100%;
+
+    @include flex();
+  }
+
+  .md-card-menu {
+    background-color: transparent;
+    line-height: 24px;
+    min-width: 0;
+    padding: 0;
+  }
+}
+
+// Progress Circle
+.mat-progress-spinner {
+  &.md-progress-circle {
+    z-index: 1;
+    height: 100% !important;
+    width: 100% !important;
+
+    svg {
+      height: 100% !important;
+      width: 100% !important;
+    }
+  }
+
+  &.md-progress-circle-bg {
+    position: absolute;
+    top: 0;
+    height: 100% !important;
+    width: 100% !important;
+
+    svg {
+      height: 100% !important;
+      width: 100% !important;
+
+      circle {
+        stroke: #e8e8e8;
+      }
+    }
+  }
+}
+
+// Mat Button
+a.mat-button {
+  font-weight: 600;
+}
+
+.md-button-list {
+  white-space: nowrap;
+}
+
+// Add custon colors to icons
+.mat-icon {
+  @include addColors();
+}
+
+// Custom Dialog Styles
+mat-dialog-content {
+  .md-dialog-subtitle {
+    margin-top: 0;
+  }
+
+  .md-dialog-body {
+    font-size: 1em;
+  }
+}
+// Container styling
+.md-container-wrapper {
+  display: flex;
+  justify-content: center;
+  //   height:100%;
+}
+
+.md-container,
+.md-navbar-center {
+  max-width: getBreakpoint("xl");
+  min-width: getBreakpoint(("sm"));
+  width: 100%;
+}
+
+.md-container {
+  &-full {
+    flex: 1;
+    // margin: 32px 64px;
+  }
+}
+// Custom Navbar Styles
+.md-navbar {
+  width: 100%;
+
+  @include flex();
+}
+
+.md-navbar-left {
+  display: flex;
+  margin-right: auto;
+}
+
+.md-navbar-right {
+  display: flex;
+  margin-left: auto;
+}
+
+.md-navbar-item {
+  margin-right: 25px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: getBreakpoint("xl")) {
+  .md-container {
+    max-width: getBreakpoint("lg");
+  }
+
+  .md-navbar {
+    .md-navbar-center {
+      max-width: getBreakpoint("lg");
+    }
+  }
+}
+
+@media screen and (max-width: getBreakpoint("lg")) {
+  .md-flex-grid {
+    flex-direction: column;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    .md-flex-col {
+      margin-right: 0;
+    }
+  }
+}

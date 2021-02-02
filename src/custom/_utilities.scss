@@ -1,0 +1,83 @@
+$spacing: 0, 4, 5, 8, 10, 12, 15, 16, 20, 24, 25, 28, 30, 32, 40, 45, 48, 50, 55,
+  56, 64;
+
+// Floats
+.md-float-right {
+  float: right;
+}
+
+// Truncate
+//Must set width on element
+.md-truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.md-height-auto {
+  min-height: auto !important;
+}
+
+//Margins
+
+$margins: $spacing;
+
+@each $margin in $margins {
+  .md-margin-#{$margin} {
+    margin: #{$margin}px !important;
+  }
+
+  .md-margin-top-#{$margin} {
+    margin-top: #{$margin}px !important;
+  }
+
+  .md-margin-right-#{$margin} {
+    margin-right: #{$margin}px !important;
+  }
+
+  .md-margin-bottom-#{$margin} {
+    margin-bottom: #{$margin}px !important;
+  }
+
+  .md-margin-left-#{$margin} {
+    margin-left: #{$margin}px !important;
+  }
+
+  .md-margin-vert-#{$margin} {
+    margin-top: #{$margin}px !important;
+    margin-bottom: #{$margin}px !important;
+  }
+
+  .md-margin-hor-#{$margin} {
+    margin-left: #{$margin}px !important;
+    margin-right: #{$margin}px !important;
+  }
+}
+
+//Padding
+
+$paddings: $spacing;
+
+@each $padding in $paddings {
+  .md-padding-top-#{$padding} {
+    padding-top: #{$padding}px !important;
+  }
+
+  .md-padding-right-#{$padding} {
+    padding-right: #{$padding}px !important;
+  }
+
+  .md-padding-bottom-#{$padding} {
+    padding-bottom: #{$padding}px !important;
+  }
+
+  .md-padding-left-#{$padding} {
+    padding-left: #{$padding}px !important;
+  }
+
+  .md-padding-vert-#{$padding} {
+    padding-top: #{$padding}px !important;
+    padding-bottom: #{$padding}px !important;
+  }
+}

@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { AllComponent } from './all/all.component';
 // import { WeightPipe } from './pipes/weight.pipe';
 import { UnitPipe } from './pipes/unit.pipe';
+import { DispensaryPipe } from './pipes/dispensary.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		AllComponent,
 		// WeightPipe,
-		UnitPipe
+		UnitPipe,
+		DispensaryPipe
 	],
 	imports: [
 		BrowserModule,
