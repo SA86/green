@@ -42,8 +42,7 @@ export default StyleSheet.create({
     margin: [{ unit: 'rem', value: 0.25 }, { unit: 'rem', value: 0.25 }, { unit: 'rem', value: 0.25 }, { unit: 'rem', value: 0.25 }]
   },
   h1: {
-    fontSize: [{ unit: 'rem', value: 1 }],
-    fontWeight: 'normal'
+    fontSize: [{ unit: 'rem', value: 1 }]
   },
   h4: {
     fontWeight: 'normal'

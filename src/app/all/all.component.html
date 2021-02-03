@@ -6,14 +6,27 @@
 		<!-- <button mat-button >Home</button> -->
 		<!-- <button mat-button >About</button> -->
 		
-		<mat-form-field class="search-form-field">
+		<!-- <mat-form-field class="search-form-field">
 			<mat-label>Search</mat-label>
 			<input matInput type="text">
 			<button mat-button matSuffix mat-icon-button aria-label="Search" (click)="value=''">
 				<mat-icon>()</mat-icon>
-		  </button>
+			</button>
+		</mat-form-field> -->
+		<mat-form-field appearance="fill">
+			<mat-label>Toppings</mat-label>
+			<mat-select [formControl]="dispensary" multiple>
+				<mat-select-trigger>
+					{{dispensary.value ? dispensary.value[0] : ''}}
+					<span *ngIf="dispensary.value?.length > 1" class="example-additional-selection">
+						(+{{dispensary.value.length - 1}} {{dispensary.value?.length === 2 ? 'other' : 'others'}})
+					</span>
+				</mat-select-trigger>
+				<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary">{{dispensary}}</mat-option>
+			</mat-select>
 		</mat-form-field>
 
+		
 
 	</mat-toolbar>
 	<div class="mat-card col s12 m10 l4" *ngFor="let product of products">

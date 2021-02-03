@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProvidersService } from '../providers.service';
 import { Observable, throwError } from 'rxjs';
+import { FormControl } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
+import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy } from 'lodash';
 
 interface Products {
 	products: any;
@@ -16,6 +18,10 @@ interface Products {
 })
 
 export class AllComponent implements OnInit {
+
+	dispensary = new FormControl();
+
+	dispensaryList: string[] = ['Cannabis Nation-Beaverton', 'Nectar-Aloha', 'Nectar-Regatta', 'LaMota-Beaverton'];
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
 
@@ -4418,7 +4424,8 @@ export class AllComponent implements OnInit {
 		this.providersService.getRequest().subscribe((data: Products) => {
 			console.log('h88 data', data);
 			// this.products = data.data.filteredProducts.products;
-			this.products = data;
+			let sortedByPrice = sortBy(data, ['Prices[0]']);
+			this.products = sortedByPrice;
 		});
 		// this.products = this.statics.data.filteredProducts.products;
 	}

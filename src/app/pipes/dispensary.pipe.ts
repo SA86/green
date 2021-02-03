@@ -10,7 +10,7 @@ export class DispensaryPipe implements PipeTransform {
 			case 'oJN2QYZJHAxvBDWrL':
 				return 'La Mota - Beaverton'
 				break;
-			case 'bTHoLFPigH4scErj':
+			case 'YbTHoLFPigH4scErj':
 				return 'Nectar - Aloha'
 				break;
 				case '5f6bdb8157c27500f22d66ea':
