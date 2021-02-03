@@ -20,7 +20,12 @@ interface Products {
 export class AllComponent implements OnInit {
 
 	dispensary = new FormControl();
-	dispensaryList: string[] = ['Cannabis Nation-Beaverton', 'Nectar-Aloha', 'Nectar-Regatta', 'LaMota-Beaverton'];
+	// dispensaryList: string[] = ['Cannabis Nation-Beaverton', 'Nectar-Aloha', 'Nectar-Regatta', 'LaMota-Beaverton'];
+	// { 'name': 'dat', 'value':'dat' }
+	dispensaryList: any[] = [
+		{ 'name': 'Cannabis Nation-Beaverton', 'value':'acMFAfbvyQ9CKsrNy' }, { 'name': 'Nectar-Aloha', 'value':'YbTHoLFPigH4scErj' }, { 'name': 'Nectar-Regatta', 'value':'5f6bdb8157c27500f22d66ea' }, { 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' }
+	]
+		
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
 	
@@ -32,6 +37,12 @@ export class AllComponent implements OnInit {
 		this.getConcentrates();
 	}
 
+
+	sortByDispensary(o) {
+		let dispensary = filter(this.originalProducts, ['DispensaryID',o.value[0]])
+		console.log('h88 oooo', o.value[0], dispensary);
+		this.products = dispensary;
+	}
 
 	// show sales
 	sortBySale() {
