@@ -11,6 +11,16 @@ export default StyleSheet.create({
     padding: [{ unit: 'rem', value: 1 }, { unit: 'string', value: '!important' }, { unit: 'rem', value: 1 }, { unit: 'string', value: '!important' }],
     background: '#e3e3e3'
   },
+  'sale-price': {
+    color: '#d00ea0'
+  },
+  'regular-price': {
+    color: '#777',
+    textDecoration: 'line-through'
+  },
+  'power h5': {
+    display: 'inline'
+  },
   img: {
     height: [{ unit: 'px', value: 150 }]
   },
