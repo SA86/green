@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AllComponent } from './all/all.component';
 import { UnitPipe } from './pipes/unit.pipe';
 import { DispensaryPipe } from './pipes/dispensary.pipe';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,9 @@ import { DispensaryPipe } from './pipes/dispensary.pipe';
 		AppRoutingModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
-		MaterialModule
+		MaterialModule,
+		FormsModule,
+		ReactiveFormsModule		
 	],
 	providers: [],
 	bootstrap: [AppComponent],
