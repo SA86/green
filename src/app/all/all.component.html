@@ -1,22 +1,22 @@
 <section class="row">
 	
 	<mat-toolbar color="primary">
-		<h1>Omni Green</h1>
-		<h1>&nbsp;&nbsp;|</h1>
+		<!-- <h1>Omni Green</h1> -->
+		<!-- <h1>&nbsp;&nbsp;|</h1> -->
 		<button mat-button (click)="sortBySale()">Sales</button>
 		<button mat-button (click)="sortByAll()">All</button>
 		
 		<mat-form-field class="search-form-field">
-			<mat-label>Search</mat-label>
+			<!-- <mat-label>Search</mat-label> -->
 			<input matInput type="text" [(ngModel)]='search'>
 			<!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
 				<mat-icon>close</mat-icon>
 			</button> -->
-			<button mat-button (click)="doSearch()">Search</button>
+			<button mat-button (click)="doSearch()"><mat-icon>search</mat-icon></button>
 		</mat-form-field>
 		
 		
-		<mat-form-field appearance="fill" style="display:none;">
+		<mat-form-field appearance="fill">
 			<mat-label>Place</mat-label>
 			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
 				<!-- <mat-select-trigger>
@@ -41,7 +41,7 @@
 					
 					<!-- no sale -->
 					<h2 *ngIf="product.recSpecialPrices[0] == null"><strong>${{ product.Prices[0] }}</strong></h2>
-					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }} %{{ product.discount }}</h3>
+					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }} <span class="percentoff">{{ product.discount }}%</span></h3>
 					
 					<!-- sale -->
 					<h2 class="sale-price" *ngIf="product.recSpecialPrices.length == 199.1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }} </h2>

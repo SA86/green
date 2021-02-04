@@ -18,19 +18,19 @@ interface Products {
 })
 
 export class AllComponent implements OnInit {
-
+	search: string = '';
 	dispensary = new FormControl();
 	// { 'name': 'dat', 'value':'dat' }
 	dispensaryList: any[] = [
 		{ 'name': 'Cannabis Nation-Beaverton', 'value':'acMFAfbvyQ9CKsrNy' }, { 'name': 'Nectar-Aloha', 'value':'YbTHoLFPigH4scErj' }, { 'name': 'Nectar-Regatta', 'value':'5f6bdb8157c27500f22d66ea' }, { 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' }
 	];
 	formSearch: FormGroup = new FormGroup({});
-	form = fb.group({
-		query: ['', [Validators.required]],
-	});
+	// form = fb.group({
+	// 	query: ['', [Validators.required]],
+	// });
 		
 
-	constructor(private httpClient: HttpClient, private providersService: ProvidersService, private fb: FormBuilder) { }
+	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
 	
 	originalProducts: any;
 	products: any;
@@ -39,35 +39,45 @@ export class AllComponent implements OnInit {
 		this.getConcentrates();
 	}
 
-
+	// search by query
 	doSearch() {
 		console.log(this.search);
 		let query = this.search;
 		let searched = filter(this.originalProducts, function(o){
-			if(includes(o.Name, query)){
-				console.log('h88', o.Name, query);
+			let name = o.Name.toLowerCase();
+			if(name.includes(query)){
 				return o;
 			}			
 		});
-		console.log('h88 searched', searched);
 		this.products = searched;
 	}
 
+	//sort by dispensary
 	sortByDispensary(o) {
-		let dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
-		console.log('h88 oooo', o.value[0], dispensary);
+		let dispensary;
+		if(o.value.length === 1) {
+			dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
+		} else {
+			dispensary = filter(this.originalProducts, function(e){
+				for (let i = 0; i < o.value.length; i++) {
+					if(e.DispensaryID === o.value[i]) {
+						return o
+					}
+				}
+			});
+		}
 		this.products = dispensary;
 	}
 
 	// show sales
 	sortBySale() {
+		this.products = this.originalProducts;
 		let filteredForSale = filter(this.products, function(o){
 			if(o.recSpecialPrices.length > 0) {
-				console.log('h88 diff', o.recSpecialPrices[0], o.Prices[0]);
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
-				console.log('h88 oo', o);
+				o.discount = o.discount * 100;
 				return o
 			}
 		});

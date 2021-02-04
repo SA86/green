@@ -21,6 +21,14 @@ export default StyleSheet.create({
   'power h5': {
     display: 'inline'
   },
+  percentoff: {
+    color: '#000',
+    fontWeight: 'normal',
+    fontSize: [{ unit: 'rem', value: 1 }]
+  },
+  'search-form-field': {
+    marginRight: [{ unit: 'px', value: 60 }]
+  },
   img: {
     height: [{ unit: 'px', value: 150 }]
   },
