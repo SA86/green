@@ -19,6 +19,12 @@ export class DispensaryPipe implements PipeTransform {
 			case 'acMFAfbvyQ9CKsrNy':
 				return 'Cannabis Nation - Beaverson'
 				break;
+			case 'CAcMm4qtR9t29dzg6':
+				return 'Nectar - Beaverson-Allen'
+				break;
+			case 'cynASLBsrjDueyH3A':
+				return 'Nectar - Beaverson-Hall'
+				break;
 		
 			default:
 				return ''

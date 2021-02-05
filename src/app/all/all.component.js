@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   product: {
-    height: [{ unit: 'px', value: 200 }],
+    height: [{ unit: 'px', value: 176 }],
     padding: [{ unit: 'rem', value: 1 }, { unit: 'rem', value: 1 }, { unit: 'rem', value: 1 }, { unit: 'rem', value: 1 }],
     background: '#fff',
-    borderRadius: '8px'
+    borderRadius: '8px',
+    overflow: 'hidden'
   },
   'mat-card': {
     padding: [{ unit: 'rem', value: 1 }, { unit: 'string', value: '!important' }, { unit: 'rem', value: 1 }, { unit: 'string', value: '!important' }],
@@ -14,20 +15,33 @@ export default StyleSheet.create({
   'sale-price': {
     color: '#d00ea0'
   },
+  'sale-price strong': {
+    fontSize: [{ unit: 'rem', value: 1 }],
+    fontWeight: 'normal',
+    color: '#222'
+  },
   'regular-price': {
     color: '#777',
-    textDecoration: 'line-through'
+    textDecoration: 'line-through',
+    fontSize: [{ unit: 'rem', value: 0.76 }]
   },
   'power h5': {
     display: 'inline'
   },
   percentoff: {
-    color: '#000',
+    color: '#a42873',
     fontWeight: 'normal',
-    fontSize: [{ unit: 'rem', value: 1 }]
+    fontSize: [{ unit: 'rem', value: 0.76 }]
+  },
+  'percentoff span': {
+    color: '#222'
   },
   'search-form-field': {
     marginRight: [{ unit: 'px', value: 60 }]
+  },
+  'details-column': {
+    overflow: 'hidden',
+    textAlign: 'right'
   },
   img: {
     height: [{ unit: 'px', value: 150 }]

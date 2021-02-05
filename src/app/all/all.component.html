@@ -32,20 +32,21 @@
 		
 
 	</mat-toolbar>
-	<div class="mat-card col s12 m10 l4" *ngFor="let product of products">
+	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
 		
 		<div class="product">
+			<h1>{{ product.Name }}</h1>
 				<div class="col s6 m6 l6">
-					<h1>{{ product.Name }}</h1>
 					<h6>{{ product.DispensaryID | dispensary }}</h6>
 					
 					<!-- no sale -->
 					<h2 *ngIf="product.recSpecialPrices[0] == null"><strong>${{ product.Prices[0] }}</strong></h2>
-					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }} <span class="percentoff">{{ product.discount }}%</span></h3>
+					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>
+					<h4 class="percentoff" *ngIf="product.recSpecialPrices.length >= 1"><span>Save:</span> {{ product.discount }}</h4>
 					
 					<!-- sale -->
-					<h2 class="sale-price" *ngIf="product.recSpecialPrices.length == 199.1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }} </h2>
-					<h4 class="regular-price"*ngIf="product.recSpecialPrices[0] != null"><strong>${{ product.Prices[0] }}</strong></h4>
+					<h2 class="sale-price" *ngIf="product.recSpecialPrices.length == 199.1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }}</h2>
+					<h4 class="regular-price"*ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
 					
 					
 										<!-- <h2 class="sale-price" *ngIf="product.recSpecialPrices.length == 199.1"><strong>Sale</strong>: ${{ product.recSpecialPrices[0] }} <span class="regular-price"*ngIf="product.recSpecialPrices[0] != null">${{ product.Prices[0] }</span></h2> -->

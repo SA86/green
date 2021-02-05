@@ -1,8 +1,9 @@
 .product {
-	height:200px;
+	height:176px;
 	padding:1rem;
 	background: #fff;
 	border-radius: 8px;
+	overflow: hidden;
 }
 .mat-card {
 	padding:1rem !important;
@@ -10,21 +11,34 @@
 }
 .sale-price {
 	color:#d00ea0;
+	strong {
+		font-size: 1rem;
+		font-weight:normal;
+		color:#222;
+	}
 }
 .regular-price {
 	color: #777;
 	text-decoration: line-through;
+	font-size: 0.76rem;
 }
 .power h5 {
 	display:inline;
 }
 .percentoff {
-	color: #000;
+	color: #a42873;
 	font-weight: normal;
-	font-size: 1rem;
+	font-size: 0.76rem;
+	span {
+		color:#222;
+	}
 }
 .search-form-field {
 	margin-right:60px;
+}
+.details-column {
+	overflow: hidden;
+	text-align: right;
 }
 img {
 	height:150px;

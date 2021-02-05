@@ -22,7 +22,12 @@ export class AllComponent implements OnInit {
 	dispensary = new FormControl();
 	// { 'name': 'dat', 'value':'dat' }
 	dispensaryList: any[] = [
-		{ 'name': 'Cannabis Nation-Beaverton', 'value':'acMFAfbvyQ9CKsrNy' }, { 'name': 'Nectar-Aloha', 'value':'YbTHoLFPigH4scErj' }, { 'name': 'Nectar-Regatta', 'value':'5f6bdb8157c27500f22d66ea' }, { 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' }
+		{ 'name': 'Cannabis Nation-Beaverton', 'value':'acMFAfbvyQ9CKsrNy' },
+		{ 'name': 'Nectar-Aloha', 'value':'YbTHoLFPigH4scErj' },
+		{ 'name': 'Nectar-Beaverton-Allen', 'value':'CAcMm4qtR9t29dzg6' },
+		{ 'name': 'Nectar-Beaverton-Hall', 'value':'cynASLBsrjDueyH3A' },
+		{ 'name': 'Nectar-Regatta', 'value':'5f6bdb8157c27500f22d66ea' },
+		{ 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' },
 	];
 	formSearch: FormGroup = new FormGroup({});
 	// form = fb.group({
@@ -78,6 +83,7 @@ export class AllComponent implements OnInit {
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
 				o.discount = o.discount * 100;
+				o.discount = '$'+diff+ '('+o.discount+'%)';
 				return o
 			}
 		});
