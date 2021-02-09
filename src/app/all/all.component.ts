@@ -30,10 +30,6 @@ export class AllComponent implements OnInit {
 		{ 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' },
 	];
 	formSearch: FormGroup = new FormGroup({});
-	// form = fb.group({
-	// 	query: ['', [Validators.required]],
-	// });
-		
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
 	
@@ -95,13 +91,22 @@ export class AllComponent implements OnInit {
 	sortByAll() {
 		this.products = this.originalProducts;
 	}
+	
+	removeUnusedProducts(products){
+		let filteredProducts = filter(products, function(o){
+			let name = o.Name.toLowerCase();
+			if(name.includes('kief') === false){ // remove names with kief
+				return o;
+			}				
+		});	
+		return filteredProducts	
+	}
 
 	getConcentrates() {
 		this.providersService.getRequest().subscribe((data: Products) => {
-			console.log('h88 data', data);
 			let sortedByPrice = sortBy(data, ['Prices[0]']);
-			this.products = sortedByPrice;
-			this.originalProducts = sortedByPrice;
+			this.products = this.removeUnusedProducts(sortedByPrice);
+			this.originalProducts = this.products;
 		});
 	}
 

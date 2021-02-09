@@ -9,6 +9,6 @@ export class ProvidersService {
 	constructor(private httpClient: HttpClient) { }
 
 	getRequest() {
-		return this.httpClient.get('http://api.sa86.com:8051/green');
+		return this.httpClient.get('http://api.endo86.com:8051/green');
 	}
 }

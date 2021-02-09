@@ -9,10 +9,10 @@
 		<mat-form-field class="search-form-field">
 			<!-- <mat-label>Search</mat-label> -->
 			<input matInput type="text" [(ngModel)]='search'>
-			<!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()">
 				<mat-icon>close</mat-icon>
-			</button> -->
-			<button mat-button (click)="doSearch()"><mat-icon>search</mat-icon></button>
+			</button>
+			<button class="btn-search" mat-button (click)="doSearch()"><mat-icon>search</mat-icon></button>
 		</mat-form-field>
 		
 		
@@ -34,8 +34,8 @@
 	</mat-toolbar>
 	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
 		
-		<div class="product">
-			<h1>{{ product.Name }}</h1>
+		<div class="product" [style.background-image]="'url('+product.Image+')'">
+			<h1 class="product-name">{{ product.Name }}</h1>
 				<div class="col s6 m6 l6">
 					<h6>{{ product.DispensaryID | dispensary }}</h6>
 					
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="details-column col s6 m6 l6">
-					<img [src]="product.Image">
+					<!-- <img [src]="product.Image"> -->
 					<!-- <div>{{ product.subcategory }}</div> -->
 				</div>
 				

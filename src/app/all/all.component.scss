@@ -1,9 +1,12 @@
 .product {
-	height:176px;
+	height:130px;
 	padding:1rem;
 	background: #fff;
 	border-radius: 8px;
 	overflow: hidden;
+	background-size:50%;
+	background-repeat: no-repeat;
+	background-position: right bottom;
 }
 .mat-card {
 	padding:1rem !important;
@@ -39,6 +42,9 @@
 .details-column {
 	overflow: hidden;
 	text-align: right;
+}
+.btn-search {
+	right:-27px;
 }
 img {
 	height:150px;

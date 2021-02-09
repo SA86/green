@@ -2,11 +2,14 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   product: {
-    height: [{ unit: 'px', value: 176 }],
+    height: [{ unit: 'px', value: 130 }],
     padding: [{ unit: 'rem', value: 1 }, { unit: 'rem', value: 1 }, { unit: 'rem', value: 1 }, { unit: 'rem', value: 1 }],
     background: '#fff',
     borderRadius: '8px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    backgroundSize: '50%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right bottom'
   },
   'mat-card': {
     padding: [{ unit: 'rem', value: 1 }, { unit: 'string', value: '!important' }, { unit: 'rem', value: 1 }, { unit: 'string', value: '!important' }],
@@ -42,6 +45,9 @@ export default StyleSheet.create({
   'details-column': {
     overflow: 'hidden',
     textAlign: 'right'
+  },
+  'btn-search': {
+    right: [{ unit: 'px', value: -27 }]
   },
   img: {
     height: [{ unit: 'px', value: 150 }]
