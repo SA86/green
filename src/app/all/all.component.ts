@@ -79,7 +79,7 @@ export class AllComponent implements OnInit {
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
 				o.discount = o.discount * 100;
-				o.discount = '$'+diff+ '('+o.discount+'%)';
+				o.discount = '$'+diff.toFixed(2)+ '('+o.discount.toFixed()+'%)';
 				return o
 			}
 		});
