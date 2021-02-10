@@ -41,16 +41,17 @@ export class AllComponent implements OnInit {
 	}
 
 	// search by query
-	doSearch() {
-		console.log(this.search);
-		let query = this.search;
-		let searched = filter(this.originalProducts, function(o){
-			let name = o.Name.toLowerCase();
-			if(name.includes(query)){
-				return o;
-			}			
-		});
-		this.products = searched;
+	doSearch(e) {
+		if(e.keyCode === 13) {
+			let query = this.search.toLowerCase();
+			let searched = filter(this.originalProducts, function(o){
+				let name = o.Name.toLowerCase();
+				if(name.includes(query)){
+					return o;
+				}			
+			});
+			this.products = searched;
+		}
 	}
 
 	//sort by dispensary
@@ -95,7 +96,7 @@ export class AllComponent implements OnInit {
 	removeUnusedProducts(products){
 		let filteredProducts = filter(products, function(o){
 			let name = o.Name.toLowerCase();
-			if(name.includes('kief') === false){ // remove names with kief
+			if(name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false){ // remove names with kief
 				return o;
 			}				
 		});	

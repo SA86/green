@@ -49,6 +49,9 @@ export default StyleSheet.create({
   'btn-search': {
     right: [{ unit: 'px', value: -27 }]
   },
+  '#select-dispensary': {
+    width: [{ unit: 'px', value: 300 }]
+  },
   img: {
     height: [{ unit: 'px', value: 150 }]
   },

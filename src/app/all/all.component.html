@@ -1,37 +1,37 @@
+<mat-toolbar color="primary">
+	<!-- <h1>Omni Green</h1> -->
+	<!-- <h1>&nbsp;&nbsp;|</h1> -->
+	<button mat-button (click)="sortBySale()">Sales</button>
+	<button mat-button (click)="sortByAll()">All</button>
+	
+	<mat-form-field class="search-form-field">
+		<!-- <mat-label>Search</mat-label> -->
+		<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)">
+		<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()">
+			<mat-icon>close</mat-icon>
+		</button>
+		<button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button>
+	</mat-form-field>
+	
+	
+	<mat-form-field id="select-dispensary" appearance="fill">
+		<mat-label>Location...</mat-label>
+		<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
+			<!-- <mat-select-trigger>
+				{{dispensary.value ? dispensary.value[0] : ''}}
+				<span *ngIf="dispensary.value?.length > 1" class="example-additional-selection">
+					(+{{dispensary.value.length - 1}} {{dispensary.value?.length === 2 ? 'other' : 'others'}})
+				</span>
+			</mat-select-trigger> -->
+			<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary.value">{{dispensary.name}}</mat-option>
+		</mat-select>
+	</mat-form-field>
+	
+	
+	
+</mat-toolbar>
 <section class="row">
 	
-	<mat-toolbar color="primary">
-		<!-- <h1>Omni Green</h1> -->
-		<!-- <h1>&nbsp;&nbsp;|</h1> -->
-		<button mat-button (click)="sortBySale()">Sales</button>
-		<button mat-button (click)="sortByAll()">All</button>
-		
-		<mat-form-field class="search-form-field">
-			<!-- <mat-label>Search</mat-label> -->
-			<input matInput type="text" [(ngModel)]='search'>
-			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()">
-				<mat-icon>close</mat-icon>
-			</button>
-			<button class="btn-search" mat-button (click)="doSearch()"><mat-icon>search</mat-icon></button>
-		</mat-form-field>
-		
-		
-		<mat-form-field appearance="fill">
-			<mat-label>Place</mat-label>
-			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
-				<!-- <mat-select-trigger>
-					{{dispensary.value ? dispensary.value[0] : ''}}
-					<span *ngIf="dispensary.value?.length > 1" class="example-additional-selection">
-						(+{{dispensary.value.length - 1}} {{dispensary.value?.length === 2 ? 'other' : 'others'}})
-					</span>
-				</mat-select-trigger> -->
-				<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary.value">{{dispensary.name}}</mat-option>
-			</mat-select>
-		</mat-form-field>
-
-		
-
-	</mat-toolbar>
 	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
 		
 		<div class="product" [style.background-image]="'url('+product.Image+')'">
