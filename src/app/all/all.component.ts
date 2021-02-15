@@ -96,7 +96,7 @@ export class AllComponent implements OnInit {
 	removeUnusedProducts(products){
 		let filteredProducts = filter(products, function(o){
 			let name = o.Name.toLowerCase();
-			if(name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false){ // remove names with kief
+			if(name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false && name.includes('dripper') === false && name.includes('moonrock') === false){ // remove names with kief+
 				return o;
 			}				
 		});	
