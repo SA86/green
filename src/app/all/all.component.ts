@@ -75,7 +75,8 @@ export class AllComponent implements OnInit {
 	sortBySale() {
 		this.products = this.originalProducts;
 		let filteredForSale = filter(this.products, function(o){
-			if(o.recSpecialPrices.length > 0) {
+			if(o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) { 
+				console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
@@ -93,10 +94,13 @@ export class AllComponent implements OnInit {
 		this.products = this.originalProducts;
 	}
 	
+	
+	
 	removeUnusedProducts(products){
+		let productsToRemove = ['kief','syringe','dabaratus','dripper','moonrock','cartridge','cart','rso','preroll'];
 		let filteredProducts = filter(products, function(o){
 			let name = o.Name.toLowerCase();
-			if(name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false && name.includes('dripper') === false && name.includes('moonrock') === false){ // remove names with kief+
+			if(name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false && name.includes('dripper') === false && name.includes('moonrock') === false && name.includes('cartridge') === false && name.includes('cart') === false && name.includes('rso') === false && name.includes('preroll') === false){ // remove names with kief+
 				return o;
 			}				
 		});	
