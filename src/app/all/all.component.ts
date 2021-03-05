@@ -28,6 +28,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Nectar-Beaverton-Hall', 'value':'cynASLBsrjDueyH3A' },
 		{ 'name': 'Nectar-Regatta', 'value':'5f6bdb8157c27500f22d66ea' },
 		{ 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' },
+		{ 'name': 'Kaleafa-Beaverton', 'value':'KaleafaBeaverton' },
 	];
 	formSearch: FormGroup = new FormGroup({});
 
@@ -35,6 +36,7 @@ export class AllComponent implements OnInit {
 	
 	originalProducts: any;
 	products: any;
+	productCount: number;
 
 	ngOnInit() {
 		this.getConcentrates();
@@ -112,6 +114,8 @@ export class AllComponent implements OnInit {
 			let sortedByPrice = sortBy(data, ['Prices[0]']);
 			this.products = this.removeUnusedProducts(sortedByPrice);
 			this.originalProducts = this.products;
+			this.productCount = this.products.length
+			console.log('h88 prod', this.products);
 		});
 	}
 

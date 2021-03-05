@@ -17,13 +17,16 @@ export class DispensaryPipe implements PipeTransform {
 				return 'Nectar - Regatta'
 				break;
 			case 'acMFAfbvyQ9CKsrNy':
-				return 'Cannabis Nation - Beaverson'
+				return 'Cannabis Nation - Beaverton'
 				break;
 			case 'CAcMm4qtR9t29dzg6':
-				return 'Nectar - Beaverson-Allen'
+				return 'Nectar - Beaverton-Allen'
 				break;
 			case 'cynASLBsrjDueyH3A':
-				return 'Nectar - Beaverson-Hall'
+				return 'Nectar - Beaverton-Hall'
+				break;
+			case 'KaleafaBeaverton':
+				return 'Kaleafa-Beaverton'
 				break;
 		
 			default:
