@@ -57,6 +57,7 @@
 						<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>
 						<h5 *ngIf="product.CBDContent?.value">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>
 					</div>
+					<h5 class="cart-quantity" *ngIf="product.maxCartQuantity"><strong>{{ product.maxCartQuantity }}</strong> available</h5>
 				</div>
 				<div class="details-column col s6 m6 l6">
 					<!-- <img [src]="product.Image"> -->
