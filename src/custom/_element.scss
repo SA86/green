@@ -1,0 +1,30 @@
+//Element Styling
+
+html {
+  @include flexVert();
+
+  height: 100%;
+}
+
+body {
+  background: $background;
+  display: flex;
+  flex: 1;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  color: $linkColor; //temp
+  font-weight: 600;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &:not(.mat-button),
+  &:not(.mat-raised-button) {
+    text-decoration: none;
+  }
+}

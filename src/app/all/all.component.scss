@@ -1,0 +1,78 @@
+.product {
+	height:130px;
+	padding:1rem;
+	background: #fff;
+	border-radius: 8px;
+	overflow: hidden;
+	background-size:50%;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.mat-card {
+	padding:1rem !important;
+	background: #e3e3e3;
+}
+.sale-price {
+	color:#d00ea0;
+	strong {
+		font-size: 1rem;
+		font-weight:normal;
+		color:#222;
+	}
+}
+.regular-price {
+	color: #777;
+	text-decoration: line-through;
+	font-size: 0.76rem;
+}
+.power h5 {
+	display:inline;
+}
+.percentoff {
+	color: #a42873;
+	font-weight: normal;
+	font-size: 0.76rem;
+	span {
+		color:#222;
+	}
+}
+.search-form-field {
+	margin-right:60px;
+}
+.details-column {
+	overflow: hidden;
+	text-align: right;
+}
+.btn-search {
+	right:-27px;
+}
+#select-dispensary {
+	width:300px;
+}
+img {
+	height:150px;
+}
+mat-card {
+	height:250px;
+	background:#e3e3e3;
+}
+mat-card-content {
+	margin: 1rem;
+	background: #fff;
+	border-radius: 8px;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin:0.25rem;
+}
+h1 {
+	font-size: 1rem;
+}
+h4 { 
+	font-weight:normal;
+}
+h5 { 
+	font-weight:normal;
+}
+h6 { 
+	font-weight:normal;
+}

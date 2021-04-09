@@ -1,0 +1,361 @@
+$black: #000;
+$white: #fff;
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-metryblue: (
+  50: #e0ecf4,
+  100: #b3cee3,
+  200: #80aed0,
+  300: #4d8ebd,
+  400: #2675af,
+  500: #005da1,
+  600: #059,
+  700: #004b8f,
+  800: #004185,
+  900: #003074,
+  A100: #a2c1ff,
+  A200: #6f9eff,
+  A400: #3c7cff,
+  A700: #236bff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #fff,
+    A700: #fff
+  )
+);
+$md-metrygray: (
+  50: #fdfdfd,
+  100: #fafafa,
+  200: #f7f7f7,
+  300: #f3f4f4,
+  400: #f1f1f1,
+  500: #eeefef,
+  600: #eceded,
+  700: #e9ebeb,
+  800: #e7e8e8,
+  900: #e2e4e4,
+  A100: #fff,
+  A200: #fff,
+  A400: #fff,
+  A700: #fff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #000,
+    600: #000,
+    700: #000,
+    800: #000,
+    900: #000,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-metrygreen: (
+  50: #eefaea,
+  100: #d4f2c9,
+  200: #b8eaa6,
+  300: #9ce282,
+  400: #86db67,
+  500: #71d54c,
+  600: #69d045,
+  700: #5eca3c,
+  800: #54c433,
+  900: #42ba24,
+  A100: #f7fff6,
+  A200: #ceffc3,
+  A400: #a4ff90,
+  A700: #8fff76,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #000,
+    600: #000,
+    700: #000,
+    800: #000,
+    900: #000,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-metryorange: (
+  50: #fceee0,
+  100: #f7d5b3,
+  200: #f2b980,
+  300: #ed9c4d,
+  400: #e98726,
+  500: #e57200,
+  600: #e26a00,
+  700: #de5f00,
+  800: #da5500,
+  900: #d34200,
+  A100: #fffcfb,
+  A200: #ffd5c8,
+  A400: #ffaf95,
+  A700: #ff9b7b,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #000,
+    600: #000,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-metryyellow: (
+  50: #fff6e4,
+  100: #ffeabb,
+  200: #ffdc8e,
+  300: #ffcd60,
+  400: #ffc33e,
+  500: #ffb81c,
+  600: #ffb119,
+  700: #ffa814,
+  800: #ffa011,
+  900: #ff9109,
+  A100: #fff,
+  A200: #fffaf5,
+  A400: #ffe1c2,
+  A700: #ffd5a8,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #000,
+    600: #000,
+    700: #000,
+    800: #000,
+    900: #000,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-metrycyan: (
+  50: #e0f1f2,
+  100: #b3dddf,
+  200: #80c6ca,
+  300: #4dafb5,
+  400: #269da5,
+  500: #008c95,
+  600: #00848d,
+  700: #007982,
+  800: #006f78,
+  900: #005c67,
+  A100: #96f2ff,
+  A200: #63ebff,
+  A400: #30e5ff,
+  A700: #17e2ff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-metryred: (
+  50: #f7e2e8,
+  100: #ecb6c5,
+  200: #df869f,
+  300: #d25678,
+  400: #c9315b,
+  500: #bf0d3e,
+  600: #b90b38,
+  700: #b10930,
+  800: #a90728,
+  900: #9b031b,
+  A100: #ffc6cc,
+  A200: #ff939e,
+  A400: #ff6071,
+  A700: #ff475a,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-metrymediumblue: (
+  50: #e0eef9,
+  100: #b3d5f0,
+  200: #80b9e7,
+  300: #4d9cdd,
+  400: #2687d5,
+  500: #0072ce,
+  600: #006ac9,
+  700: #005fc2,
+  800: #0055bc,
+  900: #0042b0,
+  A100: #dae5ff,
+  A200: #a7c1ff,
+  A400: #749eff,
+  A700: #5a8cff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-xylemblue: (
+  50: #e0f0f5,
+  100: #b3dae6,
+  200: #80c2d6,
+  300: #4daac6,
+  400: #2697b9,
+  500: #0085ad,
+  600: #007da6,
+  700: #00729c,
+  800: #006893,
+  900: #005583,
+  A100: #b0dfff,
+  A200: #7dcaff,
+  A400: #4ab5ff,
+  A700: #30aaff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000
+  )
+);
+$md-sensusblue: (
+  50: #e0e7f2,
+  100: #b3c2df,
+  200: #809aca,
+  300: #4d72b5,
+  400: #2653a5,
+  500: #003595,
+  600: #00308d,
+  700: #002882,
+  800: #002278,
+  900: #001667,
+  A100: #96a4ff,
+  A200: #6377ff,
+  A400: #304bff,
+  A700: #1734ff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #fff,
+    A700: #fff
+  )
+);
+// Helper Functions
+@function get($map, $key) {
+  @return map-get($map, $key);
+}
+
+@function getContrast($themeColor, $key) {
+  $contrast: map-get($themeColor, contrast);
+
+  @return map-get($contrast, $key);
+}
+$background: get($md-metrygray, 400);
+$primary: get($md-metryblue, 500);
+$primary-text: getContrast($md-metryblue, 500);
+$primary-medium: get($md-metryblue, 300);
+$primary-medium-text: getContrast($md-metryblue, 300);
+$primary-light: get($md-metryblue, 200);
+$primary-light-text: getContrast($md-metryblue, 200);
+$linkColor: #5671a2;
+$accessory-highlight: map-get($md-metryorange, 500);
+// TODO update to theme-color
+$muted-text-color: #ababab; // TODO update to theme-color
+$badge-color: get(
+  $map: $md-metryred,
+  $key: 500
+);
+// AUX colors
+$neutral: get($md-metrygray, 500);
+$neutral-text: getContrast($md-metrygray, 500);
+$danger: get($md-metryred, 300);
+$danger-text: getContrast($md-metryred, 300);
+$success: get($md-metrygreen, 500);
+$success-text: getContrast($md-metrygreen, 500);
+$success-dark: get($md-metrygreen, 700);
+$success-dark-text: getContrast($md-metrygreen, 700);
+$caution: get($md-metryyellow, 500);
+// Colors generated from the following link
+// http://mcg.mbitson.com/#!?metryblue=%23005da1&metrygray=%23eeefef&metrygreen=%2371d54c&metryorange=%23e57200&metryyellow=%23ffb81c&metrycyan=%23008c95&metryred=%23bf0d3e&metrymediumblue=%230072ce&xylemblue=%230085ad&sensusblue=%23003595&themename=metry

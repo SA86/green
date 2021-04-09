@@ -1,0 +1,53 @@
+// Flex Styling
+
+@mixin flex() {
+  align-items: center;
+  display: flex;
+}
+
+@mixin flexVert() {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-flex {
+  @include flex();
+}
+
+.md-flex-100 {
+  width: 100%;
+
+  @include flex();
+}
+
+.md-flex-50 {
+  width: 50%;
+
+  @include flex();
+}
+
+.md-flex-vert {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-flex-right {
+  margin-left: auto;
+}
+
+.md-flex-left {
+  margin-right: auto;
+}
+
+.md-flex-top {
+  margin-bottom: auto;
+}
+
+.md-flex-bottom {
+  margin-top: auto;
+}
+
+.md-flex-center {
+  justify-content: center;
+  align-items: center;
+}

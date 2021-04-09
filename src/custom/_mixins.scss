@@ -1,0 +1,55 @@
+// Break points for media queries
+@function getBreakpoint($size) {
+  $container-max-widths: (
+    sm: 561px,
+    md: 753px,
+    lg: 977px,
+    xl: 1185px
+  );
+
+  @return map-get($container-max-widths, $size);
+}
+
+@mixin mq-xl {
+  @media screen and (max-width: getBreakpoint('xl')) {
+    @content;
+  }
+}
+
+@mixin mq-lg {
+  @media screen and (max-width: getBreakpoint('lg')) {
+    @content;
+  }
+}
+
+@mixin mq-md {
+  @media screen and (max-width: getBreakpoint('md')) {
+    @content;
+  }
+}
+
+@mixin mq-sm {
+  @media screen and (max-width: getBreakpoint('sm')) {
+    @content;
+  }
+}
+// Color Classes
+// addColors() mixin will add the aux theme colors
+// (neutral, danger, success) to whatever property you need it on
+@mixin addColors($property: 'color') {
+  $colors: (
+    neutral: $neutral,
+    danger: $danger,
+    success: $success-dark
+  );
+
+  @each $colorName, $color in $colors {
+    &.mat-#{$colorName} {
+      #{$property}: $color;
+
+      @if ($property == 'background-color') {
+        color: $white;
+      }
+    }
+  }
+}
