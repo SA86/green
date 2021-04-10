@@ -39,18 +39,30 @@ export default StyleSheet.create({
   'percentoff span': {
     color: '#222'
   },
-  'search-form-field': {
-    marginRight: [{ unit: 'px', value: 60 }]
+  'search-cont': {
+    display: 'flex'
   },
   'details-column': {
     overflow: 'hidden',
     textAlign: 'right'
   },
   'btn-search': {
-    right: [{ unit: 'px', value: -27 }]
+    position: 'relative',
+    zIndex: '2'
   },
   '#select-dispensary': {
-    width: [{ unit: 'px', value: 300 }]
+    width: [{ unit: 'px', value: 300 }],
+    paddingTop: [{ unit: 'px', value: 8 }]
+  },
+  header: {
+    color: '#fff !important',
+    backgroundColor: '#673ab7'
+  },
+  'header col': {
+    height: [{ unit: 'px', value: 80 }]
+  },
+  'header search': {
+    display: 'flex'
   },
   img: {
     height: [{ unit: 'px', value: 150 }]

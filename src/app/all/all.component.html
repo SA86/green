@@ -1,59 +1,36 @@
-<mat-toolbar color="primary">
-	<button mat-button (click)="sortBySale()">Sales</button>
-	<button mat-button (click)="sortByAll()">All</button>
+<header class="row header">
 	
-	<mat-form-field class="search-form-field">
-		<!-- <mat-label>Search</mat-label> -->
-		<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)">
-		<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()">
-			<mat-icon>close</mat-icon>
-		</button>
-		<button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button>
-	</mat-form-field>
-	
-	
-	<mat-form-field id="select-dispensary" appearance="fill">
-		<mat-label>Location...</mat-label>
-		<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
-			<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary.value">{{dispensary.name}}</mat-option>
-		</mat-select>
-	</mat-form-field>
-	<h6>{{ productCount }} total products</h6>
-	
-	
-</mat-toolbar>
-<section class="row" style="display:none">
-	
-	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
+	<div class="search col s12 m6 l6 xl6">
+		<button mat-button (click)="sortBySale()">Sales</button>
+		<button mat-button (click)="sortByAll()">All</button>
 		
-		<div class="product" [style.background-image]="'url('+product.Image+')'">
-			<h1 class="product-name">{{ product.Name }}</h1>
-				<div class="col s6 m6 l6">
-					<h6>{{ product.DispensaryID | dispensary }}</h6>
-					
-					<!-- no sale -->
-					<h2 *ngIf="product.recSpecialPrices[0] == null"><strong>${{ product.Prices[0] }}</strong></h2>
-					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>
-					<h4 class="percentoff" *ngIf="product.recSpecialPrices.length >= 1"><span>Save:</span> {{ product.discount }}</h4>
-					<!-- sale -->
-					<h4 class="regular-price"*ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
-					
-					<div class="power">
-						<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>
-						<h5 *ngIf="product.CBDContent?.value">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>
-					</div>
-					<h5 class="cart-quantity" *ngIf="product.maxCartQuantity"><strong>{{ product.maxCartQuantity }}</strong> available</h5>
+		<div>
+			<mat-form-field class="search-form-field" >
+				<!-- <mat-label>Search</mat-label> -->
+				<div class="search-cont">
+					<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)">
+					<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()"><mat-icon>close</mat-icon></button>
+					<button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button>
 				</div>
-				<!-- <div class="details-column col s6 m6 l6"></div> -->
-				
-				
+			</mat-form-field>
 		</div>
-</div>
+		
+	</div>
+	
+	<div class="col s12 m6 l6 xl6">
+		<mat-form-field id="select-dispensary" appearance="fill">
+			<mat-label>Location...</mat-label>
+			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
+				<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary.value">{{dispensary.name}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		
+	</div>
+	
+	
+</header>
 
-</section>
-
-<!-- mobile view -->
-
+<h6>{{ productCount }} total products</h6>
 <section class="row">
 	
 	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
