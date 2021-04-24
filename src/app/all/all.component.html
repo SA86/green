@@ -1,6 +1,6 @@
 <header class="row header">
 	
-	<div class="search col s12 m6 l6 xl6">
+	<div class="search col s12 m12 l6 xl4">
 		<button mat-button (click)="sortBySale()">Sales</button>
 		<button mat-button (click)="sortByAll()">All</button>
 		
@@ -17,7 +17,7 @@
 		
 	</div>
 	
-	<div class="col s12 m6 l6 xl6">
+	<div class="col s12 m12 l6 xl4">
 		<mat-form-field id="select-dispensary" appearance="fill">
 			<mat-label>Location...</mat-label>
 			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
@@ -27,6 +27,12 @@
 		
 	</div>
 	
+	<div class="col s12 m12 l6 xl4">
+		<button mat-button (click)="sort('purple')">Purple</button>
+		<button mat-button (click)="sort('diesel')">Diesel</button>
+		<button mat-button (click)="sort('dawg')">Dawg</button>
+		<button mat-button (click)="sort('bio diesel')">Bio Diesel</button>
+	</div>
 	
 </header>
 

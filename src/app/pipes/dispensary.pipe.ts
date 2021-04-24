@@ -34,6 +34,18 @@ export class DispensaryPipe implements PipeTransform {
 			case '605b64fa3da35500d1dd9d05':
 				return 'Broadway-Beaverton'
 				break;
+			case '5e7b8dfe49f75e00bbdb7b9e':
+				return 'Electric Lettuce - CedarHills'
+				break;
+			case 'OregonBudBeaverton':
+				return 'Oregon Bud - Beaverton'
+				break;
+			case 'CDCMetzger':
+				return 'CDC - Metzger'
+				break;
+			case '5e7b9f3bdbf9cc0b3d2e3ff2':
+				return 'Cola Cova - Tigard'
+				break;
 		
 			default:
 				return ''

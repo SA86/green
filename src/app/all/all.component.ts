@@ -30,7 +30,11 @@ export class AllComponent implements OnInit {
 		{ 'name': 'LaMota-Beaverton', 'value':'oJN2QYZJHAxvBDWrL' },
 		{ 'name': 'Kaleafa-Beaverton', 'value':'KaleafaBeaverton' },
 		{ 'name': 'Kaleafa-Hillsboro', 'value':'KaleafaHillsboro' },
-		{ 'name': 'Broadway-Beaverton', 'value':'605b64fa3da35500d1dd9d05' }
+		{ 'name': 'Broadway-Beaverton', 'value':'605b64fa3da35500d1dd9d05' },
+		{ 'name': 'ElectricLettuce-CedarHills', 'value':'5e7b8dfe49f75e00bbdb7b9e' },
+		{ 'name': 'Oregon Bud Comp-Beaverton', 'value':'OregonBudBeaverton' },
+		{ 'name': 'CDC-Metzger', 'value':'CDCMetzger' },
+		{ 'name': 'Cola Cove-Tigard', 'value':'5e7b9f3bdbf9cc0b3d2e3ff2' },
 	];
 	formSearch: FormGroup = new FormGroup({});
 
@@ -98,7 +102,16 @@ export class AllComponent implements OnInit {
 		this.products = this.originalProducts;
 	}
 	
-	
+	sort(name) {
+		let query = name.toLowerCase();
+		let searched = filter(this.originalProducts, function(o){
+			let name = o.Name.toLowerCase();
+			if(name.includes(query)){
+				return o;
+			}			
+		});
+		this.products = searched;
+	}
 	
 	removeUnusedProducts(products){
 		let productsToRemove = ['kief','syringe','dabaratus','dripper','moonrock','cartridge','cart','rso','preroll'];
