@@ -1,11 +1,11 @@
 <header class="row header">
-	
+
 	<div class="search col s12 m12 l6 xl4">
 		<button mat-button (click)="sortBySale()">Sales</button>
 		<button mat-button (click)="sortByAll()">All</button>
-		
+
 		<div>
-			<mat-form-field class="search-form-field" >
+			<mat-form-field class="search-form-field">
 				<!-- <mat-label>Search</mat-label> -->
 				<div class="search-cont">
 					<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)">
@@ -14,9 +14,9 @@
 				</div>
 			</mat-form-field>
 		</div>
-		
+
 	</div>
-	
+
 	<div class="col s12 m12 l6 xl4">
 		<mat-form-field id="select-dispensary" appearance="fill">
 			<mat-label>Location...</mat-label>
@@ -24,9 +24,9 @@
 				<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary.value">{{dispensary.name}}</mat-option>
 			</mat-select>
 		</mat-form-field>
-		
+
 	</div>
-	
+
 	<div class="col s12 m12 l6 xl4">
 		<button mat-button (click)="sort('purple')">Purple</button>
 		<button mat-button (click)="sort('diesel')">Diesel</button>
@@ -38,37 +38,38 @@
 		<button mat-button (click)="sort('kush')">Kush</button>
 		<button mat-button (click)="sort('rosin')">Rosin</button>
 	</div>
-	
+
 </header>
 
 <h6>{{ productCount }} total products</h6>
+<mat-paginator [length]="productCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlePage($event)">
+</mat-paginator>
 <section class="row">
-	
+
 	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
-		
+
 		<div class="product" [style.background-image]="'url('+product.Image+')'">
 			<h1 class="product-name">{{ product.Name }}</h1>
-				<div class="col s6 m6 l6">
-					<h6>{{ product.DispensaryID | dispensary }}</h6>
-					
-					<!-- no sale -->
-					<h2 *ngIf="product.recSpecialPrices[0] == null"><strong>${{ product.Prices[0] }}</strong></h2>
-					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>
-					<h4 class="percentoff" *ngIf="product.recSpecialPrices.length >= 1"><span>Save:</span> {{ product.discount }}</h4>
-					<!-- sale -->
-					<h4 class="regular-price" *ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
-					
-					<div class="power">
-						<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>
-						<h5 *ngIf="product.CBDContent?.value">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>
-					</div>
-					<h5 class="cart-quantity" *ngIf="product.maxCartQuantity"><strong>{{ product.maxCartQuantity }}</strong> available</h5>
+			<div class="col s6 m6 l6">
+				<h6>{{ product.DispensaryID | dispensary }}</h6>
+
+				<!-- no sale -->
+				<h2 *ngIf="product.recSpecialPrices[0] == null"><strong>${{ product.Prices[0] }}</strong></h2>
+				<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>
+				<h4 class="percentoff" *ngIf="product.recSpecialPrices.length >= 1"><span>Save:</span> {{ product.discount }}</h4>
+				<!-- sale -->
+				<h4 class="regular-price" *ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
+
+				<div class="power">
+					<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>
+					<h5 *ngIf="product.CBDContent?.value">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>
 				</div>
-				<!-- <div class="details-column col s6 m6 l6"></div> -->
-				
-				
+				<h5 class="cart-quantity" *ngIf="product.maxCartQuantity"><strong>{{ product.maxCartQuantity }}</strong> available</h5>
+			</div>
+			<!-- <div class="details-column col s6 m6 l6"></div> -->
+
+
 		</div>
-</div>
+	</div>
 
 </section>
-

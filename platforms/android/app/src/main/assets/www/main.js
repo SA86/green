@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"row header\">\n\t\n\t<div class=\"search col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sortByAll()\">All</button>\n\t\t\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\" >\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\t\t\n\t</div>\n\t\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\t\t\n\t</div>\n\t\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t\t<button mat-button (click)=\"sort('cheese')\">Cheese</button>\n\t\t<button mat-button (click)=\"sort('cherry')\">Cherry</button>\n\t\t<button mat-button (click)=\"sort('blue')\">Blue</button>\n\t\t<button mat-button (click)=\"sort('kush')\">Kush</button>\n\t</div>\n\t\n</header>\n\n<h6>{{ productCount }} total products</h6>\n<section class=\"row\">\n\t\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\t\t\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\t\t\t\t\t\n\t\t\t\t\t<!-- no sale -->\n\t\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t\t<!-- sale -->\n\t\t\t\t\t<h4 class=\"regular-price\"*ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"power\">\n\t\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t\t</div>\n\t\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t\t</div>\n\t\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\t\t\t\t\n\t\t\t\t\n\t\t</div>\n</div>\n\n</section>\n\n"
+module.exports = "<header class=\"row header\">\n\n\t<div class=\"search col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sortByAll()\">All</button>\n\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\">\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t\t<button mat-button (click)=\"sort('cheese')\">Cheese</button>\n\t\t<button mat-button (click)=\"sort('cherry')\">Cherry</button>\n\t\t<button mat-button (click)=\"sort('blue')\">Blue</button>\n\t\t<button mat-button (click)=\"sort('kush')\">Kush</button>\n\t\t<button mat-button (click)=\"sort('rosin')\">Rosin</button>\n\t</div>\n\n</header>\n\n<h6>{{ productCount }} total products</h6>\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n<section class=\"row\">\n\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\n\t\t\t\t<!-- no sale -->\n\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t<!-- sale -->\n\t\t\t\t<h4 class=\"regular-price\" *ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\n\t\t\t\t<div class=\"power\">\n\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t</div>\n\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t</div>\n\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\n\n\t\t</div>\n\t</div>\n\n</section>"
 
 /***/ }),
 
@@ -72,9 +72,12 @@ var AllComponent = /** @class */ (function () {
     function AllComponent(httpClient, providersService) {
         this.httpClient = httpClient;
         this.providersService = providersService;
-        this.search = '';
         this.dispensary = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]();
-        // { 'name': 'dat', 'value':'dat' }
+        this.formSearch = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({});
+        this.search = '';
+        this.pageSize = 125;
+        this.pageSizeOptions = [5, 10, 25, 100, 125, 200, 500, 1000];
+        this.currentPage = 0;
         this.dispensaryList = [
             { 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
             { 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj' },
@@ -91,10 +94,21 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
             { 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
         ];
-        this.formSearch = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({});
     }
     AllComponent.prototype.ngOnInit = function () {
         this.getConcentrates();
+    };
+    AllComponent.prototype.setPageSizeOptions = function (setPageSizeOptionsInput) {
+        this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(function (str) { return +str; });
+    };
+    // pagination event change
+    AllComponent.prototype.handlePage = function (e) {
+        this.currentPage = e.pageIndex;
+        this.pageSize = e.pageSize;
+        var end = (this.currentPage + 1) * this.pageSize;
+        var start = this.currentPage * this.pageSize;
+        var part = this.originalProducts.slice(start, end);
+        this.products = part;
     };
     // search by query
     AllComponent.prototype.doSearch = function (e) {
@@ -112,10 +126,14 @@ var AllComponent = /** @class */ (function () {
     //sort by dispensary
     AllComponent.prototype.sortByDispensary = function (o) {
         var dispensary;
-        if (o.value.length === 1) {
+        if (o.value.length === 1) { // one selection
             dispensary = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"])(this.originalProducts, ['DispensaryID', o.value[0]]);
+            this.products = dispensary;
         }
-        else {
+        else if (o.value.length === 0) { // no selection, show all
+            this.products = this.originalProducts;
+        }
+        else { // multi select
             dispensary = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"])(this.originalProducts, function (e) {
                 for (var i = 0; i < o.value.length; i++) {
                     if (e.DispensaryID === o.value[i]) {
@@ -123,8 +141,8 @@ var AllComponent = /** @class */ (function () {
                     }
                 }
             });
+            this.products = dispensary;
         }
-        this.products = dispensary;
     };
     // show sales
     AllComponent.prototype.sortBySale = function () {
@@ -136,7 +154,7 @@ var AllComponent = /** @class */ (function () {
                 var off = diff / o.Prices[0];
                 o.discount = off.toFixed(2);
                 o.discount = o.discount * 100;
-                o.discount = '$' + diff.toFixed(2) + '(' + o.discount.toFixed() + '%)';
+                o.discount = "$" + diff.toFixed(2) + " (" + o.discount.toFixed() + "%)";
                 return o;
             }
         });
@@ -158,22 +176,43 @@ var AllComponent = /** @class */ (function () {
         this.products = searched;
     };
     AllComponent.prototype.removeUnusedProducts = function (products) {
-        var productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll'];
+        // let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
         var filteredProducts = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"])(products, function (o) {
             var name = o.Name.toLowerCase();
-            if (name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false && name.includes('dripper') === false && name.includes('moonrock') === false && name.includes('cartridge') === false && name.includes('cart') === false && name.includes('rso') === false && name.includes('preroll') === false) { // remove names with kief+
+            if (name.includes('kief') === false
+                && name.includes('syringe') === false
+                && name.includes('dabaratus') === false
+                && name.includes('dripper') === false
+                && name.includes('moonrock') === false
+                && name.includes('cartridge') === false
+                && name.includes('cart') === false
+                && name.includes('rso') === false
+                && name.includes('pre-roll') === false
+                && name.includes('preroll') === false) {
                 return o;
             }
         });
         return filteredProducts;
     };
+    // fixAberrations(products) { // remove select items from product list
+    // 	// let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
+    // 	let fixProducts = filter(products, (o) => {
+    // 		let name = o.Name.toLowerCase();
+    // 		console.log('h88 o', o);
+    // 
+    // 	});
+    // 	return filteredProducts
+    // }
     AllComponent.prototype.getConcentrates = function () {
         var _this = this;
         this.providersService.getRequest().subscribe(function (data) {
             var sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["sortBy"])(data, ['Prices[0]']);
             _this.products = _this.removeUnusedProducts(sortedByPrice);
+            // this.products = this.fixAberrations(this.products);
             _this.originalProducts = _this.products;
             _this.productCount = _this.products.length;
+            _this.productsChunks = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["chunk"])(_this.products, _this.pageSize);
+            _this.products = _this.productsChunks[0];
             console.log('h88 prod', _this.products);
         });
     };
