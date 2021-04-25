@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"row header\">\n\t\n\t<div class=\"search col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sortByAll()\">All</button>\n\t\t\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\" >\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\t\t\n\t</div>\n\t\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\t\t\n\t</div>\n\t\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t</div>\n\t\n</header>\n\n<h6>{{ productCount }} total products</h6>\n<section class=\"row\">\n\t\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\t\t\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\t\t\t\t\t\n\t\t\t\t\t<!-- no sale -->\n\t\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t\t<!-- sale -->\n\t\t\t\t\t<h4 class=\"regular-price\"*ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"power\">\n\t\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t\t</div>\n\t\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t\t</div>\n\t\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\t\t\t\t\n\t\t\t\t\n\t\t</div>\n</div>\n\n</section>\n\n"
+module.exports = "<header class=\"row header\">\n\t\n\t<div class=\"search col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sortByAll()\">All</button>\n\t\t\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\" >\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\t\t\n\t</div>\n\t\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\t\t\n\t</div>\n\t\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t\t<button mat-button (click)=\"sort('cheese')\">Cheese</button>\n\t\t<button mat-button (click)=\"sort('cherry')\">Cherry</button>\n\t\t<button mat-button (click)=\"sort('blue')\">Blue</button>\n\t\t<button mat-button (click)=\"sort('kush')\">Kush</button>\n\t</div>\n\t\n</header>\n\n<h6>{{ productCount }} total products</h6>\n<section class=\"row\">\n\t\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\t\t\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\t\t\t\t\t\n\t\t\t\t\t<!-- no sale -->\n\t\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t\t<!-- sale -->\n\t\t\t\t\t<h4 class=\"regular-price\"*ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"power\">\n\t\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t\t</div>\n\t\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t\t</div>\n\t\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\t\t\t\t\n\t\t\t\t\n\t\t</div>\n</div>\n\n</section>\n\n"
 
 /***/ }),
 
@@ -86,7 +86,10 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
             { 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05' },
             { 'name': 'ElectricLettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
-            { 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' }
+            { 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
+            { 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
+            { 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
+            { 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
         ];
         this.formSearch = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({});
     }
@@ -536,10 +539,19 @@ var DispensaryPipe = /** @class */ (function () {
                 return 'Broadway-Beaverton';
                 break;
             case '5e7b8dfe49f75e00bbdb7b9e':
-                return 'ElectricLettuce-CedarHills';
+                return 'Electric Lettuce - CedarHills';
                 break;
             case 'OregonBudBeaverton':
-                return 'OregonBud-Beaverton';
+                return 'Oregon Bud - Beaverton';
+                break;
+            case 'CDCMetzger':
+                return 'CDC - Metzger';
+                break;
+            case '5e7b9f3bdbf9cc0b3d2e3ff2':
+                return 'Cola Cova - Tigard';
+                break;
+            case 'ChaliceTigard':
+                return 'Chalice - Tigard';
                 break;
             default:
                 return '';

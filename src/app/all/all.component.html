@@ -32,6 +32,11 @@
 		<button mat-button (click)="sort('diesel')">Diesel</button>
 		<button mat-button (click)="sort('dawg')">Dawg</button>
 		<button mat-button (click)="sort('bio diesel')">Bio Diesel</button>
+		<button mat-button (click)="sort('cheese')">Cheese</button>
+		<button mat-button (click)="sort('cherry')">Cherry</button>
+		<button mat-button (click)="sort('blue')">Blue</button>
+		<button mat-button (click)="sort('kush')">Kush</button>
+		<button mat-button (click)="sort('rosin')">Rosin</button>
 	</div>
 	
 </header>
@@ -51,7 +56,7 @@
 					<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>
 					<h4 class="percentoff" *ngIf="product.recSpecialPrices.length >= 1"><span>Save:</span> {{ product.discount }}</h4>
 					<!-- sale -->
-					<h4 class="regular-price"*ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
+					<h4 class="regular-price" *ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
 					
 					<div class="power">
 						<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>

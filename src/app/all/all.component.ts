@@ -35,6 +35,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Oregon Bud Comp-Beaverton', 'value':'OregonBudBeaverton' },
 		{ 'name': 'CDC-Metzger', 'value':'CDCMetzger' },
 		{ 'name': 'Cola Cove-Tigard', 'value':'5e7b9f3bdbf9cc0b3d2e3ff2' },
+		{ 'name': 'Chalice-Tigard', 'value':'ChaliceTigard' },
 	];
 	formSearch: FormGroup = new FormGroup({});
 
@@ -52,7 +53,7 @@ export class AllComponent implements OnInit {
 	doSearch(e) {
 		if(e.keyCode === 13) {
 			let query = this.search.toLowerCase();
-			let searched = filter(this.originalProducts, function(o){
+			let searched = filter(this.originalProducts, (o) => {
 				let name = o.Name.toLowerCase();
 				if(name.includes(query)){
 					return o;
@@ -65,31 +66,34 @@ export class AllComponent implements OnInit {
 	//sort by dispensary
 	sortByDispensary(o) {
 		let dispensary;
-		if(o.value.length === 1) {
+		if(o.value.length === 1) { // one selection
 			dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
-		} else {
-			dispensary = filter(this.originalProducts, function(e){
+			this.products = dispensary;
+		} else if(o.value.length === 0) { // no selection, show all
+			this.products = this.originalProducts;
+		} else { // multi select
+			dispensary = filter(this.originalProducts, (e) => {
 				for (let i = 0; i < o.value.length; i++) {
 					if(e.DispensaryID === o.value[i]) {
 						return o
 					}
 				}
 			});
+			this.products = dispensary;
 		}
-		this.products = dispensary;
 	}
 
 	// show sales
 	sortBySale() {
 		this.products = this.originalProducts;
-		let filteredForSale = filter(this.products, function(o){
+		let filteredForSale = filter(this.products, (o) =>{
 			if(o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) { 
 				console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
 				o.discount = o.discount * 100;
-				o.discount = '$'+diff.toFixed(2)+ '('+o.discount.toFixed()+'%)';
+				o.discount = `$${diff.toFixed(2)} (${o.discount.toFixed()}%)`;
 				return o
 			}
 		});
@@ -104,7 +108,7 @@ export class AllComponent implements OnInit {
 	
 	sort(name) {
 		let query = name.toLowerCase();
-		let searched = filter(this.originalProducts, function(o){
+		let searched = filter(this.originalProducts, (o) => {
 			let name = o.Name.toLowerCase();
 			if(name.includes(query)){
 				return o;
@@ -114,8 +118,8 @@ export class AllComponent implements OnInit {
 	}
 	
 	removeUnusedProducts(products){
-		let productsToRemove = ['kief','syringe','dabaratus','dripper','moonrock','cartridge','cart','rso','preroll'];
-		let filteredProducts = filter(products, function(o){
+		let productsToRemove = ['kief','syringe','dabaratus','dripper','moonrock','cartridge','cart','rso','preroll','pre-roll'];
+		let filteredProducts = filter(products, (o) =>{
 			let name = o.Name.toLowerCase();
 			if(name.includes('kief') === false && name.includes('syringe') === false && name.includes('dabaratus') === false && name.includes('dripper') === false && name.includes('moonrock') === false && name.includes('cartridge') === false && name.includes('cart') === false && name.includes('rso') === false && name.includes('preroll') === false){ // remove names with kief+
 				return o;
@@ -126,6 +130,7 @@ export class AllComponent implements OnInit {
 
 	getConcentrates() {
 		this.providersService.getRequest().subscribe((data: Products) => {
+			console.log('h88 products', data);
 			let sortedByPrice = sortBy(data, ['Prices[0]']);
 			this.products = this.removeUnusedProducts(sortedByPrice);
 			this.originalProducts = this.products;
