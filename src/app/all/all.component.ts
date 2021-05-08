@@ -46,6 +46,8 @@ export class AllComponent implements OnInit {
 		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
 		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
+		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
+		{ 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
 	];
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
@@ -124,7 +126,7 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
-		this.products = this.originalProducts;
+		this.products = this.productsChunks[0];
 	}
 
 	sort(name) {

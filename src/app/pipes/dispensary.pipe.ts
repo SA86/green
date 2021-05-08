@@ -49,6 +49,12 @@ export class DispensaryPipe implements PipeTransform {
 			case 'ChaliceTigard':
 				return 'Chalice - Tigard'
 				break;
+			case 'HXg4iybZrq6wRbZMb':
+				return 'The Vth - Hillsboro'
+				break;
+			case 85676:
+				return 'Green Goddess Remedies - SW.Portland'
+				break;
 		
 			default:
 				return ''
