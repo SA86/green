@@ -58,11 +58,12 @@ export default StyleSheet.create({
     color: '#fff !important',
     backgroundColor: '#673ab7'
   },
-  'header col': {
-    height: [{ unit: 'px', value: 80 }]
-  },
   'header search': {
     display: 'flex'
+  },
+  'header #quick-filters button': {
+    border: [{ unit: 'px', value: 1 }, { unit: 'string', value: 'solid' }, { unit: 'string', value: '#814ae3' }],
+    margin: [{ unit: 'px', value: 0 }, { unit: 'px', value: 2 }, { unit: 'px', value: 2 }, { unit: 'px', value: 0 }]
   },
   img: {
     height: [{ unit: 'px', value: 150 }]

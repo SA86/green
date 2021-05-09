@@ -1,9 +1,25 @@
 <header class="row header">
 
-	<div class="search col s12 m12 l6 xl4">
-		<button mat-button (click)="sortBySale()">Sales</button>
-		<button mat-button (click)="sortByAll()">All</button>
 
+	<div id="quick-filters" class="col s12 m12 l6 xl6">
+		<button mat-button (click)="sortByAll()">All</button>		
+		<button mat-button (click)="sortBySale()">Sales</button>
+		<button mat-button (click)="sort('purple')">Purple</button>
+		<button mat-button (click)="sort('phk')">PHK</button>
+		<button mat-button (click)="sort('gdp')">GDP</button>
+		<button mat-button (click)="sort('gmo')">GMO</button>
+		<button mat-button (click)="sort('blue')">Blue</button>
+		<button mat-button (click)="sort('diesel')">Diesel</button>
+		<button mat-button (click)="sort('dawg')">Dawg</button>
+		<button mat-button (click)="sort('bio diesel')">Bio Diesel</button>
+		<button mat-button (click)="sort('cheese')">Cheese</button>
+		<button mat-button (click)="sort('cherry')">Cherry</button>
+		<button mat-button (click)="sort('kush')">Kush</button>
+		<button mat-button (click)="sort('strawberry')">Strawberry</button>
+		<button mat-button (click)="sort('rosin')">Rosin</button>
+	</div>
+	
+	<div class="search col s12 m12 l6 xl3">
 		<div>
 			<mat-form-field class="search-form-field">
 				<!-- <mat-label>Search</mat-label> -->
@@ -17,7 +33,7 @@
 
 	</div>
 
-	<div class="col s12 m12 l6 xl4">
+	<div class="col s12 m12 l6 xl3">
 		<mat-form-field id="select-dispensary" appearance="fill">
 			<mat-label>Location...</mat-label>
 			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
@@ -27,20 +43,7 @@
 
 	</div>
 
-	<div class="col s12 m12 l6 xl4">
-		<button mat-button (click)="sort('purple')">Purple</button>
-		<button mat-button (click)="sort('phk')">PHK</button>
-		<button mat-button (click)="sort('gdp')">GDP</button>
-		<button mat-button (click)="sort('blue')">Blue</button>
-		<button mat-button (click)="sort('diesel')">Diesel</button>
-		<button mat-button (click)="sort('dawg')">Dawg</button>
-		<button mat-button (click)="sort('bio diesel')">Bio Diesel</button>
-		<button mat-button (click)="sort('cheese')">Cheese</button>
-		<button mat-button (click)="sort('cherry')">Cherry</button>
-		<button mat-button (click)="sort('kush')">Kush</button>
-		<button mat-button (click)="sort('strawberry')">Strawberry</button>
-		<button mat-button (click)="sort('rosin')">Rosin</button>
-	</div>
+
 
 </header>
 

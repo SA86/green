@@ -79,11 +79,14 @@
 header {
 	color: #fff !important;
 	background-color: #673ab7;
-	.col {
-		height:80px;
-	}
 	.search {
 		display:flex;
+	}
+	#quick-filters {
+		button {
+			border:1px solid #814ae3;;
+			margin:0 2px 2px 0;
+		}
 	}
 }
 

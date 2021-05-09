@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"row header\">\n\n\t<div class=\"search col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sortByAll()\">All</button>\n\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\">\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl4\">\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t\t<button mat-button (click)=\"sort('cheese')\">Cheese</button>\n\t\t<button mat-button (click)=\"sort('cherry')\">Cherry</button>\n\t\t<button mat-button (click)=\"sort('blue')\">Blue</button>\n\t\t<button mat-button (click)=\"sort('kush')\">Kush</button>\n\t\t<button mat-button (click)=\"sort('rosin')\">Rosin</button>\n\t</div>\n\n</header>\n\n<h6>{{ productCount }} total products</h6>\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n<section class=\"row\">\n\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\n\t\t\t\t<!-- no sale -->\n\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t<!-- sale -->\n\t\t\t\t<h4 class=\"regular-price\" *ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\n\t\t\t\t<div class=\"power\">\n\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t</div>\n\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t</div>\n\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\n\n\t\t</div>\n\t</div>\n\n</section>"
+module.exports = "<header class=\"row header\">\n\n\n\t<div id=\"quick-filters\" class=\"col s12 m12 l6 xl6\">\n\t\t<button mat-button (click)=\"sortByAll()\">All</button>\t\t\n\t\t<button mat-button (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('phk')\">PHK</button>\n\t\t<button mat-button (click)=\"sort('gdp')\">GDP</button>\n\t\t<button mat-button (click)=\"sort('gmo')\">GMO</button>\n\t\t<button mat-button (click)=\"sort('blue')\">Blue</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t\t<button mat-button (click)=\"sort('cheese')\">Cheese</button>\n\t\t<button mat-button (click)=\"sort('cherry')\">Cherry</button>\n\t\t<button mat-button (click)=\"sort('kush')\">Kush</button>\n\t\t<button mat-button (click)=\"sort('strawberry')\">Strawberry</button>\n\t\t<button mat-button (click)=\"sort('rosin')\">Rosin</button>\n\t</div>\n\t\n\t<div class=\"search col s12 m12 l6 xl3\">\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\">\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl3\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\n\t</div>\n\n\n\n</header>\n\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n<section class=\"row\">\n\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\n\t\t\t\t<!-- no sale -->\n\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t<!-- sale -->\n\t\t\t\t<h4 class=\"regular-price\" *ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\n\t\t\t\t<div class=\"power\">\n\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t</div>\n\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t</div>\n\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\n\n\t\t</div>\n\t</div>\n\n</section>"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<header class=\"row header\">\n\n\t<div class=\"search col s12
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".product {\n  height: 130px;\n  padding: 1rem;\n  background: #fff;\n  border-radius: 8px;\n  overflow: hidden;\n  background-size: 50%;\n  background-repeat: no-repeat;\n  background-position: right bottom; }\n\n.mat-card {\n  padding: 1rem !important;\n  background: #e3e3e3; }\n\n.sale-price {\n  color: #d00ea0; }\n\n.sale-price strong {\n    font-size: 1rem;\n    font-weight: normal;\n    color: #222; }\n\n.regular-price {\n  color: #777;\n  text-decoration: line-through;\n  font-size: 0.76rem; }\n\n.power h5 {\n  display: inline; }\n\n.percentoff {\n  color: #a42873;\n  font-weight: normal;\n  font-size: 0.76rem; }\n\n.percentoff span {\n    color: #222; }\n\n.search-cont {\n  display: flex; }\n\n@media screen and (min-width: 576px) {\n    .search-cont input {\n      width: 125px; } }\n\n@media screen and (min-width: 768px) {\n    .search-cont input {\n      width: 350px; } }\n\n.details-column {\n  overflow: hidden;\n  text-align: right; }\n\n.btn-search {\n  position: relative;\n  z-index: 2; }\n\n#select-dispensary {\n  width: 300px;\n  padding-top: 8px; }\n\nheader {\n  color: #fff !important;\n  background-color: #673ab7; }\n\nheader .col {\n    height: 80px; }\n\nheader .search {\n    display: flex; }\n\nimg {\n  height: 150px; }\n\nmat-card {\n  height: 250px;\n  background: #e3e3e3; }\n\nmat-card-content {\n  margin: 1rem;\n  background: #fff;\n  border-radius: 8px; }\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.25rem; }\n\nh1 {\n  font-size: 1rem; }\n\nh4 {\n  font-weight: normal; }\n\nh5 {\n  font-weight: normal; }\n\nh6 {\n  font-weight: normal; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NhZmFyaS9TQS9XV1cvZ3JlZW4vc3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsYUFBYTtFQUNiLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixvQkFBb0I7RUFDcEIsNEJBQTRCO0VBQzVCLGlDQUFpQyxFQUFBOztBQUdsQztFQUNDLHdCQUF3QjtFQUN4QixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxjQUFjLEVBQUE7O0FBRGY7SUFJRSxlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLFdBQVcsRUFBQTs7QUFJYjtFQUNDLFdBQVc7RUFDWCw2QkFBNkI7RUFDN0Isa0JBQWtCLEVBQUE7O0FBR25CO0VBQ0MsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsa0JBQWtCLEVBQUE7O0FBSG5CO0lBTUUsV0FBVyxFQUFBOztBQU9iO0VBQ0MsYUFBYSxFQUFBOztBQUNiO0lBRkQ7TUFJRyxZQUFXLEVBQUEsRUFDWDs7QUFFRjtJQVBEO01BU0csWUFBVyxFQUFBLEVBQ1g7O0FBSUg7RUFDQyxnQkFBZ0I7RUFDaEIsaUJBQWlCLEVBQUE7O0FBR2xCO0VBQ0Msa0JBQWtCO0VBQ2xCLFVBQVUsRUFBQTs7QUFHWDtFQUNDLFlBQVk7RUFDWixnQkFBZ0IsRUFBQTs7QUFHakI7RUFDQyxzQkFBc0I7RUFDdEIseUJBQXlCLEVBQUE7O0FBRjFCO0lBSUUsWUFBVyxFQUFBOztBQUpiO0lBT0UsYUFBWSxFQUFBOztBQUtkO0VBQ0MsYUFBYSxFQUFBOztBQUdkO0VBQ0MsYUFBYTtFQUNiLG1CQUFtQixFQUFBOztBQUdwQjtFQUNDLFlBQVk7RUFDWixnQkFBZ0I7RUFDaEIsa0JBQWtCLEVBQUE7O0FBR25COzs7Ozs7RUFNQyxlQUFlLEVBQUE7O0FBR2hCO0VBQ0MsZUFBZSxFQUFBOztBQUdoQjtFQUNDLG1CQUFtQixFQUFBOztBQUdwQjtFQUNDLG1CQUFtQixFQUFBOztBQUdwQjtFQUNDLG1CQUFtQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvYWxsL2FsbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wcm9kdWN0IHtcblx0aGVpZ2h0OiAxMzBweDtcblx0cGFkZGluZzogMXJlbTtcblx0YmFja2dyb3VuZDogI2ZmZjtcblx0Ym9yZGVyLXJhZGl1czogOHB4O1xuXHRvdmVyZmxvdzogaGlkZGVuO1xuXHRiYWNrZ3JvdW5kLXNpemU6IDUwJTtcblx0YmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcblx0YmFja2dyb3VuZC1wb3NpdGlvbjogcmlnaHQgYm90dG9tO1xufVxuXG4ubWF0LWNhcmQge1xuXHRwYWRkaW5nOiAxcmVtICFpbXBvcnRhbnQ7XG5cdGJhY2tncm91bmQ6ICNlM2UzZTM7XG59XG5cbi5zYWxlLXByaWNlIHtcblx0Y29sb3I6ICNkMDBlYTA7XG5cblx0c3Ryb25nIHtcblx0XHRmb250LXNpemU6IDFyZW07XG5cdFx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcblx0XHRjb2xvcjogIzIyMjtcblx0fVxufVxuXG4ucmVndWxhci1wcmljZSB7XG5cdGNvbG9yOiAjNzc3O1xuXHR0ZXh0LWRlY29yYXRpb246IGxpbmUtdGhyb3VnaDtcblx0Zm9udC1zaXplOiAwLjc2cmVtO1xufVxuXG4ucG93ZXIgaDUge1xuXHRkaXNwbGF5OiBpbmxpbmU7XG59XG5cbi5wZXJjZW50b2ZmIHtcblx0Y29sb3I6ICNhNDI4NzM7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG5cdGZvbnQtc2l6ZTogMC43NnJlbTtcblxuXHRzcGFuIHtcblx0XHRjb2xvcjogIzIyMjtcblx0fVxufVxuXG4uc2VhcmNoLWZvcm0tZmllbGQge1xufVxuXG4uc2VhcmNoLWNvbnQge1xuXHRkaXNwbGF5OiBmbGV4O1xuXHRAbWVkaWEgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA1NzZweCkge1xuXHRcdGlucHV0IHtcblx0XHRcdHdpZHRoOjEyNXB4O1xuXHRcdH1cblx0fVxuXHRAbWVkaWEgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA3NjhweCkge1xuXHRcdGlucHV0IHtcblx0XHRcdHdpZHRoOjM1MHB4O1xuXHRcdH1cblx0fVxufVxuXG4uZGV0YWlscy1jb2x1bW4ge1xuXHRvdmVyZmxvdzogaGlkZGVuO1xuXHR0ZXh0LWFsaWduOiByaWdodDtcbn1cblxuLmJ0bi1zZWFyY2gge1xuXHRwb3NpdGlvbjogcmVsYXRpdmU7XG5cdHotaW5kZXg6IDI7XG59XG5cbiNzZWxlY3QtZGlzcGVuc2FyeSB7XG5cdHdpZHRoOiAzMDBweDtcblx0cGFkZGluZy10b3A6IDhweDtcbn1cblxuaGVhZGVyIHtcblx0Y29sb3I6ICNmZmYgIWltcG9ydGFudDtcblx0YmFja2dyb3VuZC1jb2xvcjogIzY3M2FiNztcblx0LmNvbCB7XG5cdFx0aGVpZ2h0OjgwcHg7XG5cdH1cblx0LnNlYXJjaCB7XG5cdFx0ZGlzcGxheTpmbGV4O1xuXHR9XG59XG5cblxuaW1nIHtcblx0aGVpZ2h0OiAxNTBweDtcbn1cblxubWF0LWNhcmQge1xuXHRoZWlnaHQ6IDI1MHB4O1xuXHRiYWNrZ3JvdW5kOiAjZTNlM2UzO1xufVxuXG5tYXQtY2FyZC1jb250ZW50IHtcblx0bWFyZ2luOiAxcmVtO1xuXHRiYWNrZ3JvdW5kOiAjZmZmO1xuXHRib3JkZXItcmFkaXVzOiA4cHg7XG59XG5cbmgxLFxuaDIsXG5oMyxcbmg0LFxuaDUsXG5oNiB7XG5cdG1hcmdpbjogMC4yNXJlbTtcbn1cblxuaDEge1xuXHRmb250LXNpemU6IDFyZW07XG59XG5cbmg0IHtcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuaDUge1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xufVxuXG5oNiB7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59Il19 */"
+module.exports = ".product {\n  height: 130px;\n  padding: 1rem;\n  background: #fff;\n  border-radius: 8px;\n  overflow: hidden;\n  background-size: 50%;\n  background-repeat: no-repeat;\n  background-position: right bottom; }\n\n.mat-card {\n  padding: 1rem !important;\n  background: #e3e3e3; }\n\n.sale-price {\n  color: #d00ea0; }\n\n.sale-price strong {\n    font-size: 1rem;\n    font-weight: normal;\n    color: #222; }\n\n.regular-price {\n  color: #777;\n  text-decoration: line-through;\n  font-size: 0.76rem; }\n\n.power h5 {\n  display: inline; }\n\n.percentoff {\n  color: #a42873;\n  font-weight: normal;\n  font-size: 0.76rem; }\n\n.percentoff span {\n    color: #222; }\n\n.search-cont {\n  display: flex; }\n\n@media screen and (min-width: 576px) {\n    .search-cont input {\n      width: 125px; } }\n\n@media screen and (min-width: 768px) {\n    .search-cont input {\n      width: 350px; } }\n\n.details-column {\n  overflow: hidden;\n  text-align: right; }\n\n.btn-search {\n  position: relative;\n  z-index: 2; }\n\n#select-dispensary {\n  width: 300px;\n  padding-top: 8px; }\n\nheader {\n  color: #fff !important;\n  background-color: #673ab7; }\n\nheader .search {\n    display: flex; }\n\nheader #quick-filters button {\n    border: 1px solid #814ae3;\n    margin: 0 2px 2px 0; }\n\nimg {\n  height: 150px; }\n\nmat-card {\n  height: 250px;\n  background: #e3e3e3; }\n\nmat-card-content {\n  margin: 1rem;\n  background: #fff;\n  border-radius: 8px; }\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.25rem; }\n\nh1 {\n  font-size: 1rem; }\n\nh4 {\n  font-weight: normal; }\n\nh5 {\n  font-weight: normal; }\n\nh6 {\n  font-weight: normal; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NhZmFyaS9TQS9XV1cvZ3JlZW4vc3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsYUFBYTtFQUNiLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixvQkFBb0I7RUFDcEIsNEJBQTRCO0VBQzVCLGlDQUFpQyxFQUFBOztBQUdsQztFQUNDLHdCQUF3QjtFQUN4QixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxjQUFjLEVBQUE7O0FBRGY7SUFJRSxlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLFdBQVcsRUFBQTs7QUFJYjtFQUNDLFdBQVc7RUFDWCw2QkFBNkI7RUFDN0Isa0JBQWtCLEVBQUE7O0FBR25CO0VBQ0MsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsa0JBQWtCLEVBQUE7O0FBSG5CO0lBTUUsV0FBVyxFQUFBOztBQU9iO0VBQ0MsYUFBYSxFQUFBOztBQUNiO0lBRkQ7TUFJRyxZQUFXLEVBQUEsRUFDWDs7QUFFRjtJQVBEO01BU0csWUFBVyxFQUFBLEVBQ1g7O0FBSUg7RUFDQyxnQkFBZ0I7RUFDaEIsaUJBQWlCLEVBQUE7O0FBR2xCO0VBQ0Msa0JBQWtCO0VBQ2xCLFVBQVUsRUFBQTs7QUFHWDtFQUNDLFlBQVk7RUFDWixnQkFBZ0IsRUFBQTs7QUFHakI7RUFDQyxzQkFBc0I7RUFDdEIseUJBQXlCLEVBQUE7O0FBRjFCO0lBSUUsYUFBWSxFQUFBOztBQUpkO0lBUUcseUJBQXdCO0lBQ3hCLG1CQUFrQixFQUFBOztBQU1yQjtFQUNDLGFBQWEsRUFBQTs7QUFHZDtFQUNDLGFBQWE7RUFDYixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGtCQUFrQixFQUFBOztBQUduQjs7Ozs7O0VBTUMsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGVBQWUsRUFBQTs7QUFHaEI7RUFDQyxtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxtQkFBbUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FsbC9hbGwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucHJvZHVjdCB7XG5cdGhlaWdodDogMTMwcHg7XG5cdHBhZGRpbmc6IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcblx0b3ZlcmZsb3c6IGhpZGRlbjtcblx0YmFja2dyb3VuZC1zaXplOiA1MCU7XG5cdGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG5cdGJhY2tncm91bmQtcG9zaXRpb246IHJpZ2h0IGJvdHRvbTtcbn1cblxuLm1hdC1jYXJkIHtcblx0cGFkZGluZzogMXJlbSAhaW1wb3J0YW50O1xuXHRiYWNrZ3JvdW5kOiAjZTNlM2UzO1xufVxuXG4uc2FsZS1wcmljZSB7XG5cdGNvbG9yOiAjZDAwZWEwO1xuXG5cdHN0cm9uZyB7XG5cdFx0Zm9udC1zaXplOiAxcmVtO1xuXHRcdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG5cdFx0Y29sb3I6ICMyMjI7XG5cdH1cbn1cblxuLnJlZ3VsYXItcHJpY2Uge1xuXHRjb2xvcjogIzc3Nztcblx0dGV4dC1kZWNvcmF0aW9uOiBsaW5lLXRocm91Z2g7XG5cdGZvbnQtc2l6ZTogMC43NnJlbTtcbn1cblxuLnBvd2VyIGg1IHtcblx0ZGlzcGxheTogaW5saW5lO1xufVxuXG4ucGVyY2VudG9mZiB7XG5cdGNvbG9yOiAjYTQyODczO1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xuXHRmb250LXNpemU6IDAuNzZyZW07XG5cblx0c3BhbiB7XG5cdFx0Y29sb3I6ICMyMjI7XG5cdH1cbn1cblxuLnNlYXJjaC1mb3JtLWZpZWxkIHtcbn1cblxuLnNlYXJjaC1jb250IHtcblx0ZGlzcGxheTogZmxleDtcblx0QG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNTc2cHgpIHtcblx0XHRpbnB1dCB7XG5cdFx0XHR3aWR0aDoxMjVweDtcblx0XHR9XG5cdH1cblx0QG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNzY4cHgpIHtcblx0XHRpbnB1dCB7XG5cdFx0XHR3aWR0aDozNTBweDtcblx0XHR9XG5cdH1cbn1cblxuLmRldGFpbHMtY29sdW1uIHtcblx0b3ZlcmZsb3c6IGhpZGRlbjtcblx0dGV4dC1hbGlnbjogcmlnaHQ7XG59XG5cbi5idG4tc2VhcmNoIHtcblx0cG9zaXRpb246IHJlbGF0aXZlO1xuXHR6LWluZGV4OiAyO1xufVxuXG4jc2VsZWN0LWRpc3BlbnNhcnkge1xuXHR3aWR0aDogMzAwcHg7XG5cdHBhZGRpbmctdG9wOiA4cHg7XG59XG5cbmhlYWRlciB7XG5cdGNvbG9yOiAjZmZmICFpbXBvcnRhbnQ7XG5cdGJhY2tncm91bmQtY29sb3I6ICM2NzNhYjc7XG5cdC5zZWFyY2gge1xuXHRcdGRpc3BsYXk6ZmxleDtcblx0fVxuXHQjcXVpY2stZmlsdGVycyB7XG5cdFx0YnV0dG9uIHtcblx0XHRcdGJvcmRlcjoxcHggc29saWQgIzgxNGFlMzs7XG5cdFx0XHRtYXJnaW46MCAycHggMnB4IDA7XG5cdFx0fVxuXHR9XG59XG5cblxuaW1nIHtcblx0aGVpZ2h0OiAxNTBweDtcbn1cblxubWF0LWNhcmQge1xuXHRoZWlnaHQ6IDI1MHB4O1xuXHRiYWNrZ3JvdW5kOiAjZTNlM2UzO1xufVxuXG5tYXQtY2FyZC1jb250ZW50IHtcblx0bWFyZ2luOiAxcmVtO1xuXHRiYWNrZ3JvdW5kOiAjZmZmO1xuXHRib3JkZXItcmFkaXVzOiA4cHg7XG59XG5cbmgxLFxuaDIsXG5oMyxcbmg0LFxuaDUsXG5oNiB7XG5cdG1hcmdpbjogMC4yNXJlbTtcbn1cblxuaDEge1xuXHRmb250LXNpemU6IDFyZW07XG59XG5cbmg0IHtcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuaDUge1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xufVxuXG5oNiB7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59Il19 */"
 
 /***/ }),
 
@@ -84,15 +84,24 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Nectar-Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6' },
             { 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A' },
             { 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea' },
-            { 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
+            { 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
             { 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton' },
             { 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
             { 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05' },
-            { 'name': 'ElectricLettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
+            { 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
+            { 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
+            { 'name': 'Green Mart-CedarHills', 'value': 143818 },
+            { 'name': 'Western Oregon-CedarHills', 'value': 301745 },
+            { 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
             { 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
             { 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
             { 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
             { 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
+            { 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
+            { 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
+            { 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv' },
+            { 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED' },
+            { 'name': 'Brothers-Oswego', 'value': 328152 },
         ];
     }
     AllComponent.prototype.ngOnInit = function () {
@@ -163,7 +172,7 @@ var AllComponent = /** @class */ (function () {
     };
     // show all
     AllComponent.prototype.sortByAll = function () {
-        this.products = this.originalProducts;
+        this.products = this.productsChunks[0];
     };
     AllComponent.prototype.sort = function (name) {
         var query = name.toLowerCase();
@@ -187,6 +196,7 @@ var AllComponent = /** @class */ (function () {
                 && name.includes('cartridge') === false
                 && name.includes('cart') === false
                 && name.includes('rso') === false
+                && name.includes('feco') === false
                 && name.includes('pre-roll') === false
                 && name.includes('preroll') === false) {
                 return o;
@@ -550,8 +560,8 @@ var DispensaryPipe = /** @class */ (function () {
     }
     DispensaryPipe.prototype.transform = function (value, args) {
         switch (value) {
-            case 'oJN2QYZJHAxvBDWrL':
-                return 'La Mota - Beaverton';
+            case 'acMFAfbvyQ9CKsrNy':
+                return 'Cannabis Nation - Beaverton';
                 break;
             case 'YbTHoLFPigH4scErj':
                 return 'Nectar - Aloha';
@@ -559,14 +569,14 @@ var DispensaryPipe = /** @class */ (function () {
             case '5f6bdb8157c27500f22d66ea':
                 return 'Nectar - Regatta';
                 break;
-            case 'acMFAfbvyQ9CKsrNy':
-                return 'Cannabis Nation - Beaverton';
-                break;
             case 'CAcMm4qtR9t29dzg6':
                 return 'Nectar - Beaverton-Allen';
                 break;
             case 'cynASLBsrjDueyH3A':
                 return 'Nectar - Beaverton-Hall';
+                break;
+            case '4oiKwdDJgmPecXMek':
+                return 'Nectar - Barbur';
                 break;
             case 'KaleafaBeaverton':
                 return 'Kaleafa-Beaverton';
@@ -580,6 +590,9 @@ var DispensaryPipe = /** @class */ (function () {
             case '5e7b8dfe49f75e00bbdb7b9e':
                 return 'Electric Lettuce - CedarHills';
                 break;
+            case 'oJN2QYZJHAxvBDWrL':
+                return 'La Mota - Beaverton';
+                break;
             case 'OregonBudBeaverton':
                 return 'Oregon Bud - Beaverton';
                 break;
@@ -591,6 +604,30 @@ var DispensaryPipe = /** @class */ (function () {
                 break;
             case 'ChaliceTigard':
                 return 'Chalice - Tigard';
+                break;
+            case 'HXg4iybZrq6wRbZMb':
+                return 'The Vth - Hillsboro';
+                break;
+            case 85676:
+                return 'Green Goddess Remedies - SW.Portland';
+                break;
+            case 'AYYz8RrZ62Zqme9fv':
+                return 'Parlour - E.Beaverton';
+                break;
+            case 'zBKaBM3hTpspDwMED':
+                return 'Natural Remedies - Barbur';
+                break;
+            case 328152:
+                return 'Brothers - Oswego';
+                break;
+            case 300136:
+                return 'Speedy Janes - Hillsboro';
+                break;
+            case 143818:
+                return 'Green Mart - Cedar Mills';
+                break;
+            case 301745:
+                return 'Western Oregon - Cedar Mills';
                 break;
             default:
                 return '';
