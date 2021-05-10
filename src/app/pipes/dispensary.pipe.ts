@@ -37,6 +37,9 @@ export class DispensaryPipe implements PipeTransform {
 			case '5e7b8dfe49f75e00bbdb7b9e':
 				return 'Electric Lettuce - CedarHills'
 				break;
+			case '5f19ecdfa7db3b01086e24fa':
+				return 'Electric Lettuce - Tigard'
+				break;
 			case 'oJN2QYZJHAxvBDWrL':
 				return 'La Mota - Beaverton'
 				break;
@@ -75,6 +78,15 @@ export class DispensaryPipe implements PipeTransform {
 				break;
 			case 301745:
 				return 'Western Oregon - Cedar Mills'
+				break;
+			case 115818:
+				return 'Growing Releaf - Beaverton'
+				break;
+			case 107819:
+				return 'Green Planet - Beaverton'
+				break;
+			case 319881:
+				return 'Western Oregon - Hillsboro'
 				break;
 		
 			default:

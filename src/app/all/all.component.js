@@ -65,6 +65,9 @@ export default StyleSheet.create({
     border: [{ unit: 'px', value: 1 }, { unit: 'string', value: 'solid' }, { unit: 'string', value: '#814ae3' }],
     margin: [{ unit: 'px', value: 0 }, { unit: 'px', value: 2 }, { unit: 'px', value: 2 }, { unit: 'px', value: 0 }]
   },
+  'header #quick-filters main-btn': {
+    border: [{ unit: 'string', value: 'none' }]
+  },
   img: {
     height: [{ unit: 'px', value: 150 }]
   },

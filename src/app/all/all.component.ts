@@ -37,20 +37,24 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Nectar-Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6' },
 		{ 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A' },
 		{ 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea' },
-		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
 		{ 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton' },
-		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
+		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
 		{ 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05' },
-		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
+		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818 },
+		{ 'name': 'Green Planet-Beaverton', 'value': 107819 },
+		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
 		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
 		{ 'name': 'Green Mart-CedarHills', 'value': 143818 },
 		{ 'name': 'Western Oregon-CedarHills', 'value': 301745 },
-		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
-		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
+		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
+		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
+		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
+		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881 },
 		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
 		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
-		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
+		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
+		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
 		{ 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
 		{ 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv' },
 		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED' },
@@ -161,6 +165,7 @@ export class AllComponent implements OnInit {
 				&& name.includes('cart') === false 
 				&& name.includes('rso') === false 
 				&& name.includes('feco') === false 
+				&& name.includes('drink') === false 
 				&& name.includes('pre-roll') === false 
 				&& name.includes('preroll') === false) { 
 				return o;
