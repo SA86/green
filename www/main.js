@@ -41,7 +41,7 @@ module.exports = "<header class=\"row header\">\n\n\n\t<div id=\"quick-filters\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".product {\n  height: 130px;\n  padding: 1rem;\n  background: #fff;\n  border-radius: 8px;\n  overflow: hidden;\n  background-size: 50%;\n  background-repeat: no-repeat;\n  background-position: right bottom; }\n\n.mat-card {\n  padding: 1rem !important;\n  background: #e3e3e3; }\n\n.sale-price {\n  color: #d00ea0; }\n\n.sale-price strong {\n    font-size: 1rem;\n    font-weight: normal;\n    color: #222; }\n\n.regular-price {\n  color: #777;\n  text-decoration: line-through;\n  font-size: 0.76rem; }\n\n.power h5 {\n  display: inline; }\n\n.percentoff {\n  color: #a42873;\n  font-weight: normal;\n  font-size: 0.76rem; }\n\n.percentoff span {\n    color: #222; }\n\n.search-cont {\n  display: flex; }\n\n@media screen and (min-width: 576px) {\n    .search-cont input {\n      width: 125px; } }\n\n@media screen and (min-width: 768px) {\n    .search-cont input {\n      width: 350px; } }\n\n.details-column {\n  overflow: hidden;\n  text-align: right; }\n\n.btn-search {\n  position: relative;\n  z-index: 2; }\n\n#select-dispensary {\n  width: 300px;\n  padding-top: 8px; }\n\nheader {\n  color: #fff !important;\n  background-color: #673ab7; }\n\nheader .search {\n    display: flex; }\n\nheader #quick-filters button {\n    border: 1px solid #814ae3;\n    margin: 0 2px 2px 0; }\n\nheader #quick-filters .main-btn {\n    border: none; }\n\nimg {\n  height: 150px; }\n\nmat-card {\n  height: 250px;\n  background: #e3e3e3; }\n\nmat-card-content {\n  margin: 1rem;\n  background: #fff;\n  border-radius: 8px; }\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.25rem; }\n\nh1 {\n  font-size: 1rem; }\n\nh4 {\n  font-weight: normal; }\n\nh5 {\n  font-weight: normal; }\n\nh6 {\n  font-weight: normal; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NhZmFyaS9TQS9XV1cvZ3JlZW4vc3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsYUFBYTtFQUNiLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixvQkFBb0I7RUFDcEIsNEJBQTRCO0VBQzVCLGlDQUFpQyxFQUFBOztBQUdsQztFQUNDLHdCQUF3QjtFQUN4QixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxjQUFjLEVBQUE7O0FBRGY7SUFJRSxlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLFdBQVcsRUFBQTs7QUFJYjtFQUNDLFdBQVc7RUFDWCw2QkFBNkI7RUFDN0Isa0JBQWtCLEVBQUE7O0FBR25CO0VBQ0MsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsa0JBQWtCLEVBQUE7O0FBSG5CO0lBTUUsV0FBVyxFQUFBOztBQU9iO0VBQ0MsYUFBYSxFQUFBOztBQUNiO0lBRkQ7TUFJRyxZQUFXLEVBQUEsRUFDWDs7QUFFRjtJQVBEO01BU0csWUFBVyxFQUFBLEVBQ1g7O0FBSUg7RUFDQyxnQkFBZ0I7RUFDaEIsaUJBQWlCLEVBQUE7O0FBR2xCO0VBQ0Msa0JBQWtCO0VBQ2xCLFVBQVUsRUFBQTs7QUFHWDtFQUNDLFlBQVk7RUFDWixnQkFBZ0IsRUFBQTs7QUFHakI7RUFDQyxzQkFBc0I7RUFDdEIseUJBQXlCLEVBQUE7O0FBRjFCO0lBSUUsYUFBWSxFQUFBOztBQUpkO0lBUUcseUJBQXdCO0lBQ3hCLG1CQUFrQixFQUFBOztBQVRyQjtJQVlHLFlBQVcsRUFBQTs7QUFPZDtFQUNDLGFBQWEsRUFBQTs7QUFHZDtFQUNDLGFBQWE7RUFDYixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGtCQUFrQixFQUFBOztBQUduQjs7Ozs7O0VBTUMsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGVBQWUsRUFBQTs7QUFHaEI7RUFDQyxtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxtQkFBbUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FsbC9hbGwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucHJvZHVjdCB7XG5cdGhlaWdodDogMTMwcHg7XG5cdHBhZGRpbmc6IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcblx0b3ZlcmZsb3c6IGhpZGRlbjtcblx0YmFja2dyb3VuZC1zaXplOiA1MCU7XG5cdGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG5cdGJhY2tncm91bmQtcG9zaXRpb246IHJpZ2h0IGJvdHRvbTtcbn1cblxuLm1hdC1jYXJkIHtcblx0cGFkZGluZzogMXJlbSAhaW1wb3J0YW50O1xuXHRiYWNrZ3JvdW5kOiAjZTNlM2UzO1xufVxuXG4uc2FsZS1wcmljZSB7XG5cdGNvbG9yOiAjZDAwZWEwO1xuXG5cdHN0cm9uZyB7XG5cdFx0Zm9udC1zaXplOiAxcmVtO1xuXHRcdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG5cdFx0Y29sb3I6ICMyMjI7XG5cdH1cbn1cblxuLnJlZ3VsYXItcHJpY2Uge1xuXHRjb2xvcjogIzc3Nztcblx0dGV4dC1kZWNvcmF0aW9uOiBsaW5lLXRocm91Z2g7XG5cdGZvbnQtc2l6ZTogMC43NnJlbTtcbn1cblxuLnBvd2VyIGg1IHtcblx0ZGlzcGxheTogaW5saW5lO1xufVxuXG4ucGVyY2VudG9mZiB7XG5cdGNvbG9yOiAjYTQyODczO1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xuXHRmb250LXNpemU6IDAuNzZyZW07XG5cblx0c3BhbiB7XG5cdFx0Y29sb3I6ICMyMjI7XG5cdH1cbn1cblxuLnNlYXJjaC1mb3JtLWZpZWxkIHtcbn1cblxuLnNlYXJjaC1jb250IHtcblx0ZGlzcGxheTogZmxleDtcblx0QG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNTc2cHgpIHtcblx0XHRpbnB1dCB7XG5cdFx0XHR3aWR0aDoxMjVweDtcblx0XHR9XG5cdH1cblx0QG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNzY4cHgpIHtcblx0XHRpbnB1dCB7XG5cdFx0XHR3aWR0aDozNTBweDtcblx0XHR9XG5cdH1cbn1cblxuLmRldGFpbHMtY29sdW1uIHtcblx0b3ZlcmZsb3c6IGhpZGRlbjtcblx0dGV4dC1hbGlnbjogcmlnaHQ7XG59XG5cbi5idG4tc2VhcmNoIHtcblx0cG9zaXRpb246IHJlbGF0aXZlO1xuXHR6LWluZGV4OiAyO1xufVxuXG4jc2VsZWN0LWRpc3BlbnNhcnkge1xuXHR3aWR0aDogMzAwcHg7XG5cdHBhZGRpbmctdG9wOiA4cHg7XG59XG5cbmhlYWRlciB7XG5cdGNvbG9yOiAjZmZmICFpbXBvcnRhbnQ7XG5cdGJhY2tncm91bmQtY29sb3I6ICM2NzNhYjc7XG5cdC5zZWFyY2gge1xuXHRcdGRpc3BsYXk6ZmxleDtcblx0fVxuXHQjcXVpY2stZmlsdGVycyB7XG5cdFx0YnV0dG9uIHtcblx0XHRcdGJvcmRlcjoxcHggc29saWQgIzgxNGFlMzs7XG5cdFx0XHRtYXJnaW46MCAycHggMnB4IDA7XG5cdFx0fVxuXHRcdC5tYWluLWJ0biB7XG5cdFx0XHRib3JkZXI6bm9uZTtcblx0XHRcdFxuXHRcdH1cblx0fVxufVxuXG5cbmltZyB7XG5cdGhlaWdodDogMTUwcHg7XG59XG5cbm1hdC1jYXJkIHtcblx0aGVpZ2h0OiAyNTBweDtcblx0YmFja2dyb3VuZDogI2UzZTNlMztcbn1cblxubWF0LWNhcmQtY29udGVudCB7XG5cdG1hcmdpbjogMXJlbTtcblx0YmFja2dyb3VuZDogI2ZmZjtcblx0Ym9yZGVyLXJhZGl1czogOHB4O1xufVxuXG5oMSxcbmgyLFxuaDMsXG5oNCxcbmg1LFxuaDYge1xuXHRtYXJnaW46IDAuMjVyZW07XG59XG5cbmgxIHtcblx0Zm9udC1zaXplOiAxcmVtO1xufVxuXG5oNCB7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59XG5cbmg1IHtcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuaDYge1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xufSJdfQ== */"
+module.exports = ".product {\n  height: 130px;\n  padding: 1rem;\n  background: #fff;\n  border-radius: 8px;\n  overflow: hidden;\n  background-size: 50%;\n  background-repeat: no-repeat;\n  background-position: right bottom; }\n\n.mat-card {\n  padding: 1rem !important;\n  background: #e3e3e3; }\n\n.sale-price {\n  color: #d00ea0; }\n\n.sale-price strong {\n    font-size: 1rem;\n    font-weight: normal;\n    color: #222; }\n\n.regular-price {\n  color: #777;\n  text-decoration: line-through;\n  font-size: 0.76rem; }\n\n.power h5 {\n  display: inline; }\n\n.percentoff {\n  color: #a42873;\n  font-weight: normal;\n  font-size: 0.76rem; }\n\n.percentoff span {\n    color: #222; }\n\n.search-cont {\n  display: flex; }\n\n@media screen and (min-width: 576px) {\n    .search-cont input {\n      width: 125px; } }\n\n@media screen and (min-width: 768px) {\n    .search-cont input {\n      width: 350px; } }\n\n.details-column {\n  overflow: hidden;\n  text-align: right; }\n\n.btn-search {\n  position: relative;\n  z-index: 2; }\n\n#select-dispensary {\n  width: 300px;\n  padding-top: 8px; }\n\nheader {\n  color: #fff !important;\n  background-color: #673ab7; }\n\nheader .search {\n    display: flex; }\n\nheader #quick-filters button {\n    border: 1px solid #814ae3;\n    margin: 0 2px 2px 0; }\n\nheader #quick-filters .main-btn {\n    border: none; }\n\nimg {\n  height: 150px; }\n\nmat-card {\n  height: 250px;\n  background: #e3e3e3; }\n\nmat-card-content {\n  margin: 1rem;\n  background: #fff;\n  border-radius: 8px; }\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.25rem; }\n\nh1 {\n  font-size: 1rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  padding: 0 1px;\n  background-color: #fff; }\n\nh4 {\n  font-weight: normal; }\n\nh5 {\n  font-weight: normal; }\n\nh6 {\n  font-weight: normal; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NhZmFyaS9TQS9XV1cvZ3JlZW4vc3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsYUFBYTtFQUNiLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixvQkFBb0I7RUFDcEIsNEJBQTRCO0VBQzVCLGlDQUFpQyxFQUFBOztBQUdsQztFQUNDLHdCQUF3QjtFQUN4QixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxjQUFjLEVBQUE7O0FBRGY7SUFJRSxlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLFdBQVcsRUFBQTs7QUFJYjtFQUNDLFdBQVc7RUFDWCw2QkFBNkI7RUFDN0Isa0JBQWtCLEVBQUE7O0FBR25CO0VBQ0MsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsa0JBQWtCLEVBQUE7O0FBSG5CO0lBTUUsV0FBVyxFQUFBOztBQU9iO0VBQ0MsYUFBYSxFQUFBOztBQUNiO0lBRkQ7TUFJRyxZQUFXLEVBQUEsRUFDWDs7QUFFRjtJQVBEO01BU0csWUFBVyxFQUFBLEVBQ1g7O0FBSUg7RUFDQyxnQkFBZ0I7RUFDaEIsaUJBQWlCLEVBQUE7O0FBR2xCO0VBQ0Msa0JBQWtCO0VBQ2xCLFVBQVUsRUFBQTs7QUFHWDtFQUNDLFlBQVk7RUFDWixnQkFBZ0IsRUFBQTs7QUFHakI7RUFDQyxzQkFBc0I7RUFDdEIseUJBQXlCLEVBQUE7O0FBRjFCO0lBSUUsYUFBWSxFQUFBOztBQUpkO0lBUUcseUJBQXdCO0lBQ3hCLG1CQUFrQixFQUFBOztBQVRyQjtJQVlHLFlBQVcsRUFBQTs7QUFPZDtFQUNDLGFBQWEsRUFBQTs7QUFHZDtFQUNDLGFBQWE7RUFDYixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDQyxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGtCQUFrQixFQUFBOztBQUduQjs7Ozs7O0VBTUMsZUFBZSxFQUFBOztBQUdoQjtFQUNDLGVBQWU7RUFDZiwwQkFBa0I7RUFBbEIsdUJBQWtCO0VBQWxCLGtCQUFrQjtFQUNsQixjQUFhO0VBQ2Isc0JBQXNCLEVBQUE7O0FBR3ZCO0VBQ0MsbUJBQW1CLEVBQUE7O0FBR3BCO0VBQ0MsbUJBQW1CLEVBQUE7O0FBR3BCO0VBQ0MsbUJBQW1CLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2R1Y3Qge1xuXHRoZWlnaHQ6IDEzMHB4O1xuXHRwYWRkaW5nOiAxcmVtO1xuXHRiYWNrZ3JvdW5kOiAjZmZmO1xuXHRib3JkZXItcmFkaXVzOiA4cHg7XG5cdG92ZXJmbG93OiBoaWRkZW47XG5cdGJhY2tncm91bmQtc2l6ZTogNTAlO1xuXHRiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuXHRiYWNrZ3JvdW5kLXBvc2l0aW9uOiByaWdodCBib3R0b207XG59XG5cbi5tYXQtY2FyZCB7XG5cdHBhZGRpbmc6IDFyZW0gIWltcG9ydGFudDtcblx0YmFja2dyb3VuZDogI2UzZTNlMztcbn1cblxuLnNhbGUtcHJpY2Uge1xuXHRjb2xvcjogI2QwMGVhMDtcblxuXHRzdHJvbmcge1xuXHRcdGZvbnQtc2l6ZTogMXJlbTtcblx0XHRmb250LXdlaWdodDogbm9ybWFsO1xuXHRcdGNvbG9yOiAjMjIyO1xuXHR9XG59XG5cbi5yZWd1bGFyLXByaWNlIHtcblx0Y29sb3I6ICM3Nzc7XG5cdHRleHQtZGVjb3JhdGlvbjogbGluZS10aHJvdWdoO1xuXHRmb250LXNpemU6IDAuNzZyZW07XG59XG5cbi5wb3dlciBoNSB7XG5cdGRpc3BsYXk6IGlubGluZTtcbn1cblxuLnBlcmNlbnRvZmYge1xuXHRjb2xvcjogI2E0Mjg3Mztcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcblx0Zm9udC1zaXplOiAwLjc2cmVtO1xuXG5cdHNwYW4ge1xuXHRcdGNvbG9yOiAjMjIyO1xuXHR9XG59XG5cbi5zZWFyY2gtZm9ybS1maWVsZCB7XG59XG5cbi5zZWFyY2gtY29udCB7XG5cdGRpc3BsYXk6IGZsZXg7XG5cdEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDU3NnB4KSB7XG5cdFx0aW5wdXQge1xuXHRcdFx0d2lkdGg6MTI1cHg7XG5cdFx0fVxuXHR9XG5cdEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KSB7XG5cdFx0aW5wdXQge1xuXHRcdFx0d2lkdGg6MzUwcHg7XG5cdFx0fVxuXHR9XG59XG5cbi5kZXRhaWxzLWNvbHVtbiB7XG5cdG92ZXJmbG93OiBoaWRkZW47XG5cdHRleHQtYWxpZ246IHJpZ2h0O1xufVxuXG4uYnRuLXNlYXJjaCB7XG5cdHBvc2l0aW9uOiByZWxhdGl2ZTtcblx0ei1pbmRleDogMjtcbn1cblxuI3NlbGVjdC1kaXNwZW5zYXJ5IHtcblx0d2lkdGg6IDMwMHB4O1xuXHRwYWRkaW5nLXRvcDogOHB4O1xufVxuXG5oZWFkZXIge1xuXHRjb2xvcjogI2ZmZiAhaW1wb3J0YW50O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjNjczYWI3O1xuXHQuc2VhcmNoIHtcblx0XHRkaXNwbGF5OmZsZXg7XG5cdH1cblx0I3F1aWNrLWZpbHRlcnMge1xuXHRcdGJ1dHRvbiB7XG5cdFx0XHRib3JkZXI6MXB4IHNvbGlkICM4MTRhZTM7O1xuXHRcdFx0bWFyZ2luOjAgMnB4IDJweCAwO1xuXHRcdH1cblx0XHQubWFpbi1idG4ge1xuXHRcdFx0Ym9yZGVyOm5vbmU7XG5cdFx0XHRcblx0XHR9XG5cdH1cbn1cblxuXG5pbWcge1xuXHRoZWlnaHQ6IDE1MHB4O1xufVxuXG5tYXQtY2FyZCB7XG5cdGhlaWdodDogMjUwcHg7XG5cdGJhY2tncm91bmQ6ICNlM2UzZTM7XG59XG5cbm1hdC1jYXJkLWNvbnRlbnQge1xuXHRtYXJnaW46IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcbn1cblxuaDEsXG5oMixcbmgzLFxuaDQsXG5oNSxcbmg2IHtcblx0bWFyZ2luOiAwLjI1cmVtO1xufVxuXG5oMSB7XG5cdGZvbnQtc2l6ZTogMXJlbTtcblx0d2lkdGg6IG1heC1jb250ZW50O1xuXHRwYWRkaW5nOjAgMXB4O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xufVxuXG5oNCB7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59XG5cbmg1IHtcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuaDYge1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -85,15 +85,18 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A' },
             { 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea' },
             { 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton' },
-            { 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
             { 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05' },
+            { 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30' },
             { 'name': 'Growing Releaf-Beaverton', 'value': 115818 },
             { 'name': 'Green Planet-Beaverton', 'value': 107819 },
+            { 'name': 'Stone Age-Beaverton', 'value': 319881 },
             { 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
+            { 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
             { 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
             { 'name': 'Green Mart-CedarHills', 'value': 143818 },
             { 'name': 'Western Oregon-CedarHills', 'value': 301745 },
             { 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
+            { 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g' },
             { 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
             { 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
             { 'name': 'Western Oregon-Hillsboro', 'value': 319881 },
@@ -102,6 +105,7 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
             { 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
             { 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
+            { 'name': 'Green Planet-KingCity', 'value': 196138 },
             { 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
             { 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv' },
             { 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED' },
@@ -202,6 +206,12 @@ var AllComponent = /** @class */ (function () {
                 && name.includes('rso') === false
                 && name.includes('feco') === false
                 && name.includes('drink') === false
+                && name.includes('soaking salts') === false
+                && name.includes('spray') === false
+                && name.includes('floz') === false
+                && name.includes('moon dust') === false
+                && name.includes('tincture') === false
+                && name.includes('no strain') === false
                 && name.includes('pre-roll') === false
                 && name.includes('preroll') === false) {
                 return o;
@@ -598,11 +608,17 @@ var DispensaryPipe = /** @class */ (function () {
             case '5f19ecdfa7db3b01086e24fa':
                 return 'Electric Lettuce - Tigard';
                 break;
+            case '5e7b8808bf130d00a8f6bd30':
+                return 'Electric Lettuce - Beaverton';
+                break;
             case 'oJN2QYZJHAxvBDWrL':
                 return 'La Mota - Beaverton';
                 break;
             case 'OregonBudBeaverton':
                 return 'Oregon Bud - Beaverton';
+                break;
+            case 319881:
+                return 'Stone Age - Beaverton';
                 break;
             case 'CDCMetzger':
                 return 'CDC - Metzger';
@@ -643,8 +659,14 @@ var DispensaryPipe = /** @class */ (function () {
             case 107819:
                 return 'Green Planet - Beaverton';
                 break;
+            case 196138:
+                return 'Green Planet - King City';
+                break;
             case 319881:
                 return 'Western Oregon - Hillsboro';
+                break;
+            case '6YskMw5YxzjN3AP3g':
+                return 'Mr NiceGuy - Hillsboro';
                 break;
             default:
                 return '';

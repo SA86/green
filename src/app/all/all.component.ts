@@ -38,15 +38,18 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A' },
 		{ 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea' },
 		{ 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton' },
-		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
 		{ 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05' },
+		{ 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30' },
 		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818 },
 		{ 'name': 'Green Planet-Beaverton', 'value': 107819 },
+		{ 'name': 'Stone Age-Beaverton', 'value': 319881 },
 		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
+		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
 		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
 		{ 'name': 'Green Mart-CedarHills', 'value': 143818 },
 		{ 'name': 'Western Oregon-CedarHills', 'value': 301745 },
 		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
+		{ 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g' },
 		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
 		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
 		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881 },
@@ -55,6 +58,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
 		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
 		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
+		{ 'name': 'Green Planet-KingCity', 'value': 196138 },
 		{ 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
 		{ 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv' },
 		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED' },
@@ -166,6 +170,12 @@ export class AllComponent implements OnInit {
 				&& name.includes('rso') === false 
 				&& name.includes('feco') === false 
 				&& name.includes('drink') === false 
+				&& name.includes('soaking salts') === false 
+				&& name.includes('spray') === false 
+				&& name.includes('floz') === false 
+				&& name.includes('moon dust') === false 
+				&& name.includes('tincture') === false 
+				&& name.includes('no strain') === false 
 				&& name.includes('pre-roll') === false 
 				&& name.includes('preroll') === false) { 
 				return o;

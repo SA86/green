@@ -99,7 +99,10 @@ export default StyleSheet.create({
     margin: [{ unit: 'rem', value: 0.25 }, { unit: 'rem', value: 0.25 }, { unit: 'rem', value: 0.25 }, { unit: 'rem', value: 0.25 }]
   },
   h1: {
-    fontSize: [{ unit: 'rem', value: 1 }]
+    fontSize: [{ unit: 'rem', value: 1 }],
+    width: [{ unit: 'string', value: 'max-content' }],
+    padding: [{ unit: 'px', value: 0 }, { unit: 'px', value: 1 }, { unit: 'px', value: 0 }, { unit: 'px', value: 1 }],
+    backgroundColor: '#fff'
   },
   h4: {
     fontWeight: 'normal'
