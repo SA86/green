@@ -49,11 +49,14 @@ export class DispensaryPipe implements PipeTransform {
 			case 'OregonBudBeaverton':
 				return 'Oregon Bud - Beaverton'
 				break;
-			case 319881:
+			case 123946:
 				return 'Stone Age - Beaverton'
 				break;
 			case 'CDCMetzger':
 				return 'CDC - Metzger'
+				break;
+			case 130410:
+				return 'Lemonnade - Metzger'
 				break;
 			case '5e7b9f3bdbf9cc0b3d2e3ff2':
 				return 'Cola Cova - Tigard'

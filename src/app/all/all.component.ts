@@ -30,6 +30,7 @@ export class AllComponent implements OnInit {
 	products: any;
 	productsChunks: any;
 	productCount: number;
+	loading:boolean = true;
 	
 	dispensaryList: any[] = [
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
@@ -42,7 +43,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30' },
 		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818 },
 		{ 'name': 'Green Planet-Beaverton', 'value': 107819 },
-		{ 'name': 'Stone Age-Beaverton', 'value': 319881 },
+		{ 'name': 'Stone Age-Beaverton', 'value': 123946 },
 		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
 		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
 		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
@@ -52,8 +53,9 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g' },
 		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
 		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
-		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881 },
+		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881 }, // dup
 		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
+		{ 'name': 'Lemonnade-Metzger', 'value': 130410 },
 		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
 		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
@@ -203,6 +205,7 @@ export class AllComponent implements OnInit {
 			this.productCount = this.products.length
 			this.productsChunks = chunk(this.products, this.pageSize);
 			this.products = this.productsChunks[0];			
+			this.loading = false;
 			console.log('h88 prod', this.products);
 		});
 	}

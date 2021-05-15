@@ -10,11 +10,18 @@ export class UnitPipe implements PipeTransform {
 			case 'PERCENTAGE':
 				return '%'
 				break;
+			case 'percent':
+				return '%'
+				break;
 			case 'MILLIGRAMS':
+				return 'mg'
+				break;
+			case 'mg':
 				return 'mg'
 				break;
 		
 			default:
+				console.log('h88 value pipe', value);
 				return ''
 				break;
 		}
