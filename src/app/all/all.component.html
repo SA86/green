@@ -4,19 +4,7 @@
 	<div id="quick-filters" class="col s12 m12 l6 xl6">
 		<button class="main-btn" mat-raised-button color="accent" (click)="sortByAll()">All</button>		
 		<button class="main-btn" mat-raised-button color="warn" (click)="sortBySale()">Sales</button>
-		<button mat-button (click)="sort('purple')">Purple</button>
-		<button mat-button (click)="sort('phk')">PHK</button>
-		<button mat-button (click)="sort('gdp')">GDP</button>
-		<button mat-button (click)="sort('gmo')">GMO</button>
-		<button mat-button (click)="sort('blue')">Blue</button>
-		<button mat-button (click)="sort('diesel')">Diesel</button>
-		<button mat-button (click)="sort('dawg')">Dawg</button>
-		<button mat-button (click)="sort('bio diesel')">Bio Diesel</button>
-		<button mat-button (click)="sort('cheese')">Cheese</button>
-		<button mat-button (click)="sort('cherry')">Cherry</button>
-		<button mat-button (click)="sort('kush')">Kush</button>
-		<button mat-button (click)="sort('strawberry')">Strawberry</button>
-		<button mat-button (click)="sort('rosin')">Rosin</button>
+		<button *ngFor='let item of sortMap' mat-button (click)="sort(item.name)">{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 	</div>
 	
 	<div class="search col s12 m12 l6 xl3">

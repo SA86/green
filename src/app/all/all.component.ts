@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material';
 import { catchError, retry } from 'rxjs/operators';
-import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk } from 'lodash';
+import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy } from 'lodash';
 
 interface Products {
 	products: any;
@@ -31,6 +31,8 @@ export class AllComponent implements OnInit {
 	productsChunks: any;
 	productCount: number;
 	loading:boolean = true;
+	quickSorts: any = ['Purple','PHK','GDP','GMO','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Rosin','Strawberry'];
+	sortMap: any;
 	
 	dispensaryList: any[] = [
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
@@ -56,6 +58,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881 }, // dup
 		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
 		{ 'name': 'Lemonnade-Metzger', 'value': 130410 },
+		{ 'name': 'Local Leaf-Metzger', 'value': 144011 },
 		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
 		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
@@ -86,6 +89,7 @@ export class AllComponent implements OnInit {
 		const start = this.currentPage * this.pageSize;
 		const part = this.originalProducts.slice(start, end);
 		this.products = part;		
+		this.productCount = this.products.length;
 	}
 
 
@@ -100,7 +104,20 @@ export class AllComponent implements OnInit {
 				}
 			});
 			this.products = searched;
+			this.productCount = this.products.length;
 		}
+	}
+	
+	gatherQuickSorts() { // build quicksorts
+		this.sortMap = this.quickSorts.map((item) => {
+			let searched = filter(this.originalProducts, (o) => {
+				let name = o.Name.toLowerCase();
+				if (name.includes(item.toLowerCase())) {
+					return o;
+				}
+			});			
+			return { 'name': item, 'count': searched.length, 'items': searched}
+		});
 	}
 
 	//sort by dispensary
@@ -120,6 +137,7 @@ export class AllComponent implements OnInit {
 				}
 			});
 			this.products = dispensary;
+			this.productCount = this.products.length;
 		}
 	}
 
@@ -128,7 +146,7 @@ export class AllComponent implements OnInit {
 		this.products = this.originalProducts;
 		let filteredForSale = filter(this.products, (o) => {
 			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
-				console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
+				// console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
@@ -139,11 +157,13 @@ export class AllComponent implements OnInit {
 		});
 		let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
 		this.products = sortedBySale;
+		this.productCount = this.products.length;
 	}
 
 	// show all
 	sortByAll() {
 		this.products = this.productsChunks[0];
+		this.productCount = this.products.length;
 	}
 
 	sort(name) {
@@ -155,6 +175,7 @@ export class AllComponent implements OnInit {
 			}
 		});
 		this.products = searched;
+		this.productCount = this.products.length;
 	}
 
 	removeUnusedProducts(products) { // remove select items from product list
@@ -202,11 +223,12 @@ export class AllComponent implements OnInit {
 			this.products = this.removeUnusedProducts(sortedByPrice);
 			// this.products = this.fixAberrations(this.products);
 			this.originalProducts = this.products;
-			this.productCount = this.products.length
+			this.productCount = this.products.length;
 			this.productsChunks = chunk(this.products, this.pageSize);
 			this.products = this.productsChunks[0];			
 			this.loading = false;
 			console.log('h88 prod', this.products);
+			this.gatherQuickSorts();
 		});
 	}
 

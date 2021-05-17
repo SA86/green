@@ -83,22 +83,26 @@
 header {
 	color: #fff !important;
 	background-color: #673ab7;
+	margin-bottom:0 !important;
 	.search {
 		display:flex;
 	}
 	#quick-filters {
+		padding-top: 5px !important;
 		button {
 			border:1px solid #814ae3;;
 			margin:0 2px 2px 0;
+			padding:0 4px !important;
 		}
 		.main-btn {
 			border:none;
-			
+		}
+		.sort-count {
+			font-size: 0.65rem;
+			color: #e19696;			
 		}
 	}
 }
-
-
 img {
 	height: 150px;
 }

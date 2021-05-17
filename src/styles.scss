@@ -7,3 +7,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 label {
 	color:#fff !important;
 }
+.mat-paginator-container {
+	justify-content: center !important;
+	button {
+		border: 1px solid #aeacb3;
+	}
+	.mat-paginator-navigation-previous {
+		margin-right:5px;
+	}
+}

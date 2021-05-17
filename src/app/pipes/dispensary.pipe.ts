@@ -58,6 +58,9 @@ export class DispensaryPipe implements PipeTransform {
 			case 130410:
 				return 'Lemonnade - Metzger'
 				break;
+			case 144011:
+				return 'Local Leaf - Metzger'
+				break;
 			case '5e7b9f3bdbf9cc0b3d2e3ff2':
 				return 'Cola Cova - Tigard'
 				break;
