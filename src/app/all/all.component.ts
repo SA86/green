@@ -32,7 +32,8 @@ export class AllComponent implements OnInit {
 	productCount: number;
 	loading:boolean = true;
 	quickSorts: any = ['Purple','PHK','GDP','GMO','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Rosin','Strawberry'];
-	sortMap: any;
+	sortMap: any = [];
+	saleItems: any;
 	
 	dispensaryList: any[] = [
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
@@ -62,6 +63,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
 		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
+		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard' },
 		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
 		{ 'name': 'Green Planet-KingCity', 'value': 196138 },
 		{ 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
@@ -118,6 +120,15 @@ export class AllComponent implements OnInit {
 			});			
 			return { 'name': item, 'count': searched.length, 'items': searched}
 		});
+		// this.saleItems = this.sortSales;
+		this.sortSales();
+		this.sortMap.push({
+			'name': 'sales',
+			'count': this.saleItems.length,
+			'items': this.saleItems
+		});
+		console.log('h88 this.sortMap', this.sortMap);
+
 	}
 
 	//sort by dispensary
@@ -143,8 +154,14 @@ export class AllComponent implements OnInit {
 
 	// show sales
 	sortBySale() {
-		this.products = this.originalProducts;
-		let filteredForSale = filter(this.products, (o) => {
+		this.products = this.saleItems;
+		this.productCount = this.products.length;
+	}
+
+	// filter sales
+	sortSales(): any {
+		// this.products = this.originalProducts;
+		let filteredForSale = filter(this.originalProducts, (o) => {
 			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
 				// console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
@@ -156,8 +173,8 @@ export class AllComponent implements OnInit {
 			}
 		});
 		let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
-		this.products = sortedBySale;
-		this.productCount = this.products.length;
+		this.saleItems = sortedBySale;
+		return sortedBySale
 	}
 
 	// show all
@@ -199,6 +216,7 @@ export class AllComponent implements OnInit {
 				&& name.includes('moon dust') === false 
 				&& name.includes('tincture') === false 
 				&& name.includes('no strain') === false 
+				&& name.includes('pax') === false 
 				&& name.includes('pre-roll') === false 
 				&& name.includes('preroll') === false) { 
 				return o;

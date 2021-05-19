@@ -3,7 +3,7 @@
 
 	<div id="quick-filters" class="col s12 m12 l6 xl6">
 		<button class="main-btn" mat-raised-button color="accent" (click)="sortByAll()">All</button>		
-		<button class="main-btn" mat-raised-button color="warn" (click)="sortBySale()">Sales</button>
+		<button class="main-btn" mat-raised-button color="warn" (click)="sortBySale()">Sales <span class="sort-count">({{this.saleItems.length}})</span></button>
 		<button *ngFor='let item of sortMap' mat-button (click)="sort(item.name)">{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 	</div>
 	

@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"row header\">\n\n\n\t<div id=\"quick-filters\" class=\"col s12 m12 l6 xl6\">\n\t\t<button class=\"main-btn\" mat-raised-button color=\"accent\" (click)=\"sortByAll()\">All</button>\t\t\n\t\t<button class=\"main-btn\" mat-raised-button color=\"warn\" (click)=\"sortBySale()\">Sales</button>\n\t\t<button mat-button (click)=\"sort('purple')\">Purple</button>\n\t\t<button mat-button (click)=\"sort('phk')\">PHK</button>\n\t\t<button mat-button (click)=\"sort('gdp')\">GDP</button>\n\t\t<button mat-button (click)=\"sort('gmo')\">GMO</button>\n\t\t<button mat-button (click)=\"sort('blue')\">Blue</button>\n\t\t<button mat-button (click)=\"sort('diesel')\">Diesel</button>\n\t\t<button mat-button (click)=\"sort('dawg')\">Dawg</button>\n\t\t<button mat-button (click)=\"sort('bio diesel')\">Bio Diesel</button>\n\t\t<button mat-button (click)=\"sort('cheese')\">Cheese</button>\n\t\t<button mat-button (click)=\"sort('cherry')\">Cherry</button>\n\t\t<button mat-button (click)=\"sort('kush')\">Kush</button>\n\t\t<button mat-button (click)=\"sort('strawberry')\">Strawberry</button>\n\t\t<button mat-button (click)=\"sort('rosin')\">Rosin</button>\n\t</div>\n\t\n\t<div class=\"search col s12 m12 l6 xl3\">\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\">\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl3\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\n\t</div>\n\n\n\n</header>\n\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n\n<section class=\"row\">\n\t<div id=\"loading\" *ngIf='loading'><h1>Loading...</h1></div>\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 *ngIf='product.apiRoot != \"kaleafa\"' class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t<h1 *ngIf='product.apiRoot == \"kaleafa\"' class=\"product-name\">{{ product.Name }} <span class=\"product-type\" > - {{ product.type }}/{{ product.brand }} </span> </h1>\n\t\t\t\n\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\n\t\t\t\t<!-- no sale -->\n\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t<!-- sale -->\n\t\t\t\t<h4 class=\"regular-price\" *ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\n\t\t\t\t<div class=\"power\">\n\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t</div>\n\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t</div>\n\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\n\n\t\t</div>\n\t</div>\n</section>\n\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n"
+module.exports = "<header class=\"row header\">\n\n\n\t<div id=\"quick-filters\" class=\"col s12 m12 l6 xl6\">\n\t\t<button class=\"main-btn\" mat-raised-button color=\"accent\" (click)=\"sortByAll()\">All</button>\t\t\n\t\t<button class=\"main-btn\" mat-raised-button color=\"warn\" (click)=\"sortBySale()\">Sales <span class=\"sort-count\">({{this.saleItems.length}})</span></button>\n\t\t<button *ngFor='let item of sortMap' mat-button (click)=\"sort(item.name)\">{{item.name}} <span class=\"sort-count\">({{item.count}})</span></button>\n\t</div>\n\t\n\t<div class=\"search col s12 m12 l6 xl3\">\n\t\t<div>\n\t\t\t<mat-form-field class=\"search-form-field\">\n\t\t\t\t<!-- <mat-label>Search</mat-label> -->\n\t\t\t\t<div class=\"search-cont\">\n\t\t\t\t\t<input matInput type=\"text\" [(ngModel)]='search' (keyup)=\"doSearch($event)\">\n\t\t\t\t\t<button mat-button matSuffix mat-icon-button aria-label=\"Clear\" (click)=\"search='';sortByAll()\"><mat-icon>close</mat-icon></button>\n\t\t\t\t\t<button class=\"btn-search\" mat-button (click)=\"doSearch($event)\"><mat-icon>search</mat-icon></button>\n\t\t\t\t</div>\n\t\t\t</mat-form-field>\n\t\t</div>\n\n\t</div>\n\n\t<div class=\"col s12 m12 l6 xl3\">\n\t\t<mat-form-field id=\"select-dispensary\" appearance=\"fill\">\n\t\t\t<mat-label>Location...</mat-label>\n\t\t\t<mat-select [formControl]=\"dispensary\" multiple (selectionChange)=\"sortByDispensary($event)\">\n\t\t\t\t<mat-option *ngFor=\"let dispensary of dispensaryList\" [value]=\"dispensary.value\">{{dispensary.name}}</mat-option>\n\t\t\t</mat-select>\n\t\t</mat-form-field>\n\n\t</div>\n\n\n\n</header>\n\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n\n<section class=\"row\">\n\t<div id=\"loading\" *ngIf='loading'><h1>Loading...</h1></div>\n\t<div class=\"mat-card col s12 m6 l4 xl3\" *ngFor=\"let product of products\">\n\n\t\t<div class=\"product\" [style.background-image]=\"'url('+product.Image+')'\">\n\t\t\t<h1 *ngIf='product.apiRoot != \"kaleafa\"' class=\"product-name\">{{ product.Name }}</h1>\n\t\t\t<h1 *ngIf='product.apiRoot == \"kaleafa\"' class=\"product-name\">{{ product.Name }} <span class=\"product-type\" > - {{ product.type }}/{{ product.brand }} </span> </h1>\n\t\t\t\n\t\t\t<div class=\"col s6 m6 l6\">\n\t\t\t\t<h6>{{ product.DispensaryID | dispensary }}</h6>\n\n\t\t\t\t<!-- no sale -->\n\t\t\t\t<h2 *ngIf=\"product.recSpecialPrices[0] == null\"><strong>${{ product.Prices[0] }}</strong></h2>\n\t\t\t\t<h3 class=\"sale-price\" *ngIf=\"product.recSpecialPrices.length >= 1\"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>\n\t\t\t\t<h4 class=\"percentoff\" *ngIf=\"product.recSpecialPrices.length >= 1\"><span>Save:</span> {{ product.discount }}</h4>\n\t\t\t\t<!-- sale -->\n\t\t\t\t<h4 class=\"regular-price\" *ngIf=\"product.recSpecialPrices[0] != null\">Was: ${{ product.Prices[0] }}</h4>\n\n\t\t\t\t<div class=\"power\">\n\t\t\t\t\t<h5 *ngIf=\"product.THCContent?.value\">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>\n\t\t\t\t\t<h5 *ngIf=\"product.CBDContent?.value\">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>\n\t\t\t\t</div>\n\t\t\t\t<h5 class=\"cart-quantity\" *ngIf=\"product.maxCartQuantity\"><strong>{{ product.maxCartQuantity }}</strong> available</h5>\n\t\t\t</div>\n\t\t\t<!-- <div class=\"details-column col s6 m6 l6\"></div> -->\n\n\n\t\t</div>\n\t</div>\n</section>\n\n<mat-paginator [length]=\"productCount\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\" (page)=\"pageEvent = handlePage($event)\">\n</mat-paginator>\n"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<header class=\"row header\">\n\n\n\t<div id=\"quick-filters\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".product {\n  height: 130px;\n  padding: 1rem;\n  background: #fff;\n  border-radius: 8px;\n  overflow: hidden;\n  background-size: 50%;\n  background-repeat: no-repeat;\n  background-position: right bottom; }\n  .product .product-type {\n    font-size: 0.75rem;\n    font-weight: normal; }\n  .mat-card {\n  padding: 1rem !important;\n  background: #e3e3e3; }\n  .sale-price {\n  color: #d00ea0; }\n  .sale-price strong {\n    font-size: 1rem;\n    font-weight: normal;\n    color: #222; }\n  .regular-price {\n  color: #777;\n  text-decoration: line-through;\n  font-size: 0.76rem; }\n  .power h5 {\n  display: inline; }\n  .percentoff {\n  color: #a42873;\n  font-weight: normal;\n  font-size: 0.76rem; }\n  .percentoff span {\n    color: #222; }\n  .search-cont {\n  display: flex; }\n  @media screen and (min-width: 576px) {\n    .search-cont input {\n      width: 125px; } }\n  @media screen and (min-width: 768px) {\n    .search-cont input {\n      width: 350px; } }\n  .details-column {\n  overflow: hidden;\n  text-align: right; }\n  .btn-search {\n  position: relative;\n  z-index: 2; }\n  #select-dispensary {\n  width: 300px;\n  padding-top: 8px; }\n  header {\n  color: #fff !important;\n  background-color: #673ab7; }\n  header .search {\n    display: flex; }\n  header #quick-filters button {\n    border: 1px solid #814ae3;\n    margin: 0 2px 2px 0; }\n  header #quick-filters .main-btn {\n    border: none; }\n  img {\n  height: 150px; }\n  mat-card {\n  height: 250px;\n  background: #e3e3e3; }\n  mat-card-content {\n  margin: 1rem;\n  background: #fff;\n  border-radius: 8px; }\n  h1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.25rem; }\n  h1 {\n  font-size: 1rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  padding: 0 1px;\n  background-color: #fff; }\n  h4 {\n  font-weight: normal; }\n  h5 {\n  font-weight: normal; }\n  h6 {\n  font-weight: normal; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NhZmFyaS9TQS9XV1cvZ3JlZW4vc3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsYUFBYTtFQUNiLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixvQkFBb0I7RUFDcEIsNEJBQTRCO0VBQzVCLGlDQUFpQyxFQUFBO0VBUmxDO0lBVUUsa0JBQWlCO0lBQ2pCLG1CQUFrQixFQUFBO0VBSXBCO0VBQ0Msd0JBQXdCO0VBQ3hCLG1CQUFtQixFQUFBO0VBR3BCO0VBQ0MsY0FBYyxFQUFBO0VBRGY7SUFJRSxlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLFdBQVcsRUFBQTtFQUliO0VBQ0MsV0FBVztFQUNYLDZCQUE2QjtFQUM3QixrQkFBa0IsRUFBQTtFQUduQjtFQUNDLGVBQWUsRUFBQTtFQUdoQjtFQUNDLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsa0JBQWtCLEVBQUE7RUFIbkI7SUFNRSxXQUFXLEVBQUE7RUFPYjtFQUNDLGFBQWEsRUFBQTtFQUNiO0lBRkQ7TUFJRyxZQUFXLEVBQUEsRUFDWDtFQUVGO0lBUEQ7TUFTRyxZQUFXLEVBQUEsRUFDWDtFQUlIO0VBQ0MsZ0JBQWdCO0VBQ2hCLGlCQUFpQixFQUFBO0VBR2xCO0VBQ0Msa0JBQWtCO0VBQ2xCLFVBQVUsRUFBQTtFQUdYO0VBQ0MsWUFBWTtFQUNaLGdCQUFnQixFQUFBO0VBR2pCO0VBQ0Msc0JBQXNCO0VBQ3RCLHlCQUF5QixFQUFBO0VBRjFCO0lBSUUsYUFBWSxFQUFBO0VBSmQ7SUFRRyx5QkFBd0I7SUFDeEIsbUJBQWtCLEVBQUE7RUFUckI7SUFZRyxZQUFXLEVBQUE7RUFPZDtFQUNDLGFBQWEsRUFBQTtFQUdkO0VBQ0MsYUFBYTtFQUNiLG1CQUFtQixFQUFBO0VBR3BCO0VBQ0MsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixrQkFBa0IsRUFBQTtFQUduQjs7Ozs7O0VBTUMsZUFBZSxFQUFBO0VBR2hCO0VBQ0MsZUFBZTtFQUNmLDBCQUFrQjtFQUFsQix1QkFBa0I7RUFBbEIsa0JBQWtCO0VBQ2xCLGNBQWE7RUFDYixzQkFBc0IsRUFBQTtFQUd2QjtFQUNDLG1CQUFtQixFQUFBO0VBR3BCO0VBQ0MsbUJBQW1CLEVBQUE7RUFHcEI7RUFDQyxtQkFBbUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FsbC9hbGwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucHJvZHVjdCB7XG5cdGhlaWdodDogMTMwcHg7XG5cdHBhZGRpbmc6IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcblx0b3ZlcmZsb3c6IGhpZGRlbjtcblx0YmFja2dyb3VuZC1zaXplOiA1MCU7XG5cdGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG5cdGJhY2tncm91bmQtcG9zaXRpb246IHJpZ2h0IGJvdHRvbTtcblx0LnByb2R1Y3QtdHlwZSB7XG5cdFx0Zm9udC1zaXplOjAuNzVyZW07XG5cdFx0Zm9udC13ZWlnaHQ6bm9ybWFsO1xuXHR9XG59XG5cbi5tYXQtY2FyZCB7XG5cdHBhZGRpbmc6IDFyZW0gIWltcG9ydGFudDtcblx0YmFja2dyb3VuZDogI2UzZTNlMztcbn1cblxuLnNhbGUtcHJpY2Uge1xuXHRjb2xvcjogI2QwMGVhMDtcblxuXHRzdHJvbmcge1xuXHRcdGZvbnQtc2l6ZTogMXJlbTtcblx0XHRmb250LXdlaWdodDogbm9ybWFsO1xuXHRcdGNvbG9yOiAjMjIyO1xuXHR9XG59XG5cbi5yZWd1bGFyLXByaWNlIHtcblx0Y29sb3I6ICM3Nzc7XG5cdHRleHQtZGVjb3JhdGlvbjogbGluZS10aHJvdWdoO1xuXHRmb250LXNpemU6IDAuNzZyZW07XG59XG5cbi5wb3dlciBoNSB7XG5cdGRpc3BsYXk6IGlubGluZTtcbn1cblxuLnBlcmNlbnRvZmYge1xuXHRjb2xvcjogI2E0Mjg3Mztcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcblx0Zm9udC1zaXplOiAwLjc2cmVtO1xuXG5cdHNwYW4ge1xuXHRcdGNvbG9yOiAjMjIyO1xuXHR9XG59XG5cbi5zZWFyY2gtZm9ybS1maWVsZCB7XG59XG5cbi5zZWFyY2gtY29udCB7XG5cdGRpc3BsYXk6IGZsZXg7XG5cdEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDU3NnB4KSB7XG5cdFx0aW5wdXQge1xuXHRcdFx0d2lkdGg6MTI1cHg7XG5cdFx0fVxuXHR9XG5cdEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KSB7XG5cdFx0aW5wdXQge1xuXHRcdFx0d2lkdGg6MzUwcHg7XG5cdFx0fVxuXHR9XG59XG5cbi5kZXRhaWxzLWNvbHVtbiB7XG5cdG92ZXJmbG93OiBoaWRkZW47XG5cdHRleHQtYWxpZ246IHJpZ2h0O1xufVxuXG4uYnRuLXNlYXJjaCB7XG5cdHBvc2l0aW9uOiByZWxhdGl2ZTtcblx0ei1pbmRleDogMjtcbn1cblxuI3NlbGVjdC1kaXNwZW5zYXJ5IHtcblx0d2lkdGg6IDMwMHB4O1xuXHRwYWRkaW5nLXRvcDogOHB4O1xufVxuXG5oZWFkZXIge1xuXHRjb2xvcjogI2ZmZiAhaW1wb3J0YW50O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjNjczYWI3O1xuXHQuc2VhcmNoIHtcblx0XHRkaXNwbGF5OmZsZXg7XG5cdH1cblx0I3F1aWNrLWZpbHRlcnMge1xuXHRcdGJ1dHRvbiB7XG5cdFx0XHRib3JkZXI6MXB4IHNvbGlkICM4MTRhZTM7O1xuXHRcdFx0bWFyZ2luOjAgMnB4IDJweCAwO1xuXHRcdH1cblx0XHQubWFpbi1idG4ge1xuXHRcdFx0Ym9yZGVyOm5vbmU7XG5cdFx0XHRcblx0XHR9XG5cdH1cbn1cblxuXG5pbWcge1xuXHRoZWlnaHQ6IDE1MHB4O1xufVxuXG5tYXQtY2FyZCB7XG5cdGhlaWdodDogMjUwcHg7XG5cdGJhY2tncm91bmQ6ICNlM2UzZTM7XG59XG5cbm1hdC1jYXJkLWNvbnRlbnQge1xuXHRtYXJnaW46IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcbn1cblxuaDEsXG5oMixcbmgzLFxuaDQsXG5oNSxcbmg2IHtcblx0bWFyZ2luOiAwLjI1cmVtO1xufVxuXG5oMSB7XG5cdGZvbnQtc2l6ZTogMXJlbTtcblx0d2lkdGg6IG1heC1jb250ZW50O1xuXHRwYWRkaW5nOjAgMXB4O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xufVxuXG5oNCB7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59XG5cbmg1IHtcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuaDYge1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xufSJdfQ== */"
+module.exports = ".product {\n  height: 130px;\n  padding: 1rem;\n  background: #fff;\n  border-radius: 8px;\n  overflow: hidden;\n  background-size: 50%;\n  background-repeat: no-repeat;\n  background-position: right bottom; }\n  .product .product-type {\n    font-size: 0.75rem;\n    font-weight: normal; }\n  .mat-card {\n  padding: 1rem !important;\n  background: #e3e3e3; }\n  .sale-price {\n  color: #d00ea0; }\n  .sale-price strong {\n    font-size: 1rem;\n    font-weight: normal;\n    color: #222; }\n  .regular-price {\n  color: #777;\n  text-decoration: line-through;\n  font-size: 0.76rem; }\n  .power h5 {\n  display: inline; }\n  .percentoff {\n  color: #a42873;\n  font-weight: normal;\n  font-size: 0.76rem; }\n  .percentoff span {\n    color: #222; }\n  .search-cont {\n  display: flex; }\n  @media screen and (min-width: 576px) {\n    .search-cont input {\n      width: 125px; } }\n  @media screen and (min-width: 768px) {\n    .search-cont input {\n      width: 350px; } }\n  .details-column {\n  overflow: hidden;\n  text-align: right; }\n  .btn-search {\n  position: relative;\n  z-index: 2; }\n  #select-dispensary {\n  width: 300px;\n  padding-top: 8px; }\n  header {\n  color: #fff !important;\n  background-color: #673ab7;\n  margin-bottom: 0 !important; }\n  header .search {\n    display: flex; }\n  header #quick-filters {\n    padding-top: 5px !important; }\n  header #quick-filters button {\n      border: 1px solid #814ae3;\n      margin: 0 2px 2px 0;\n      padding: 0 4px !important; }\n  header #quick-filters .main-btn {\n      border: none; }\n  header #quick-filters .sort-count {\n      font-size: 0.65rem;\n      color: #e19696; }\n  img {\n  height: 150px; }\n  mat-card {\n  height: 250px;\n  background: #e3e3e3; }\n  mat-card-content {\n  margin: 1rem;\n  background: #fff;\n  border-radius: 8px; }\n  h1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.25rem; }\n  h1 {\n  font-size: 1rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  padding: 0 1px;\n  background-color: #fff; }\n  h4 {\n  font-weight: normal; }\n  h5 {\n  font-weight: normal; }\n  h6 {\n  font-weight: normal; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3NhZmFyaS9TQS9XV1cvZ3JlZW4vc3JjL2FwcC9hbGwvYWxsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsYUFBYTtFQUNiLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixvQkFBb0I7RUFDcEIsNEJBQTRCO0VBQzVCLGlDQUFpQyxFQUFBO0VBUmxDO0lBVUUsa0JBQWlCO0lBQ2pCLG1CQUFrQixFQUFBO0VBSXBCO0VBQ0Msd0JBQXdCO0VBQ3hCLG1CQUFtQixFQUFBO0VBR3BCO0VBQ0MsY0FBYyxFQUFBO0VBRGY7SUFJRSxlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLFdBQVcsRUFBQTtFQUliO0VBQ0MsV0FBVztFQUNYLDZCQUE2QjtFQUM3QixrQkFBa0IsRUFBQTtFQUduQjtFQUNDLGVBQWUsRUFBQTtFQUdoQjtFQUNDLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsa0JBQWtCLEVBQUE7RUFIbkI7SUFNRSxXQUFXLEVBQUE7RUFPYjtFQUNDLGFBQWEsRUFBQTtFQUNiO0lBRkQ7TUFJRyxZQUFXLEVBQUEsRUFDWDtFQUVGO0lBUEQ7TUFTRyxZQUFXLEVBQUEsRUFDWDtFQUlIO0VBQ0MsZ0JBQWdCO0VBQ2hCLGlCQUFpQixFQUFBO0VBR2xCO0VBQ0Msa0JBQWtCO0VBQ2xCLFVBQVUsRUFBQTtFQUdYO0VBQ0MsWUFBWTtFQUNaLGdCQUFnQixFQUFBO0VBR2pCO0VBQ0Msc0JBQXNCO0VBQ3RCLHlCQUF5QjtFQUN6QiwyQkFBMEIsRUFBQTtFQUgzQjtJQUtFLGFBQVksRUFBQTtFQUxkO0lBUUUsMkJBQTJCLEVBQUE7RUFSN0I7TUFVRyx5QkFBd0I7TUFDeEIsbUJBQWtCO01BQ2xCLHlCQUF3QixFQUFBO0VBWjNCO01BZUcsWUFBVyxFQUFBO0VBZmQ7TUFrQkcsa0JBQWtCO01BQ2xCLGNBQWMsRUFBQTtFQUlqQjtFQUNDLGFBQWEsRUFBQTtFQUdkO0VBQ0MsYUFBYTtFQUNiLG1CQUFtQixFQUFBO0VBR3BCO0VBQ0MsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixrQkFBa0IsRUFBQTtFQUduQjs7Ozs7O0VBTUMsZUFBZSxFQUFBO0VBR2hCO0VBQ0MsZUFBZTtFQUNmLDBCQUFrQjtFQUFsQix1QkFBa0I7RUFBbEIsa0JBQWtCO0VBQ2xCLGNBQWE7RUFDYixzQkFBc0IsRUFBQTtFQUd2QjtFQUNDLG1CQUFtQixFQUFBO0VBR3BCO0VBQ0MsbUJBQW1CLEVBQUE7RUFHcEI7RUFDQyxtQkFBbUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FsbC9hbGwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucHJvZHVjdCB7XG5cdGhlaWdodDogMTMwcHg7XG5cdHBhZGRpbmc6IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcblx0b3ZlcmZsb3c6IGhpZGRlbjtcblx0YmFja2dyb3VuZC1zaXplOiA1MCU7XG5cdGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG5cdGJhY2tncm91bmQtcG9zaXRpb246IHJpZ2h0IGJvdHRvbTtcblx0LnByb2R1Y3QtdHlwZSB7XG5cdFx0Zm9udC1zaXplOjAuNzVyZW07XG5cdFx0Zm9udC13ZWlnaHQ6bm9ybWFsO1xuXHR9XG59XG5cbi5tYXQtY2FyZCB7XG5cdHBhZGRpbmc6IDFyZW0gIWltcG9ydGFudDtcblx0YmFja2dyb3VuZDogI2UzZTNlMztcbn1cblxuLnNhbGUtcHJpY2Uge1xuXHRjb2xvcjogI2QwMGVhMDtcblxuXHRzdHJvbmcge1xuXHRcdGZvbnQtc2l6ZTogMXJlbTtcblx0XHRmb250LXdlaWdodDogbm9ybWFsO1xuXHRcdGNvbG9yOiAjMjIyO1xuXHR9XG59XG5cbi5yZWd1bGFyLXByaWNlIHtcblx0Y29sb3I6ICM3Nzc7XG5cdHRleHQtZGVjb3JhdGlvbjogbGluZS10aHJvdWdoO1xuXHRmb250LXNpemU6IDAuNzZyZW07XG59XG5cbi5wb3dlciBoNSB7XG5cdGRpc3BsYXk6IGlubGluZTtcbn1cblxuLnBlcmNlbnRvZmYge1xuXHRjb2xvcjogI2E0Mjg3Mztcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcblx0Zm9udC1zaXplOiAwLjc2cmVtO1xuXG5cdHNwYW4ge1xuXHRcdGNvbG9yOiAjMjIyO1xuXHR9XG59XG5cbi5zZWFyY2gtZm9ybS1maWVsZCB7XG59XG5cbi5zZWFyY2gtY29udCB7XG5cdGRpc3BsYXk6IGZsZXg7XG5cdEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDU3NnB4KSB7XG5cdFx0aW5wdXQge1xuXHRcdFx0d2lkdGg6MTI1cHg7XG5cdFx0fVxuXHR9XG5cdEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KSB7XG5cdFx0aW5wdXQge1xuXHRcdFx0d2lkdGg6MzUwcHg7XG5cdFx0fVxuXHR9XG59XG5cbi5kZXRhaWxzLWNvbHVtbiB7XG5cdG92ZXJmbG93OiBoaWRkZW47XG5cdHRleHQtYWxpZ246IHJpZ2h0O1xufVxuXG4uYnRuLXNlYXJjaCB7XG5cdHBvc2l0aW9uOiByZWxhdGl2ZTtcblx0ei1pbmRleDogMjtcbn1cblxuI3NlbGVjdC1kaXNwZW5zYXJ5IHtcblx0d2lkdGg6IDMwMHB4O1xuXHRwYWRkaW5nLXRvcDogOHB4O1xufVxuXG5oZWFkZXIge1xuXHRjb2xvcjogI2ZmZiAhaW1wb3J0YW50O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjNjczYWI3O1xuXHRtYXJnaW4tYm90dG9tOjAgIWltcG9ydGFudDtcblx0LnNlYXJjaCB7XG5cdFx0ZGlzcGxheTpmbGV4O1xuXHR9XG5cdCNxdWljay1maWx0ZXJzIHtcblx0XHRwYWRkaW5nLXRvcDogNXB4ICFpbXBvcnRhbnQ7XG5cdFx0YnV0dG9uIHtcblx0XHRcdGJvcmRlcjoxcHggc29saWQgIzgxNGFlMzs7XG5cdFx0XHRtYXJnaW46MCAycHggMnB4IDA7XG5cdFx0XHRwYWRkaW5nOjAgNHB4ICFpbXBvcnRhbnQ7XG5cdFx0fVxuXHRcdC5tYWluLWJ0biB7XG5cdFx0XHRib3JkZXI6bm9uZTtcblx0XHR9XG5cdFx0LnNvcnQtY291bnQge1xuXHRcdFx0Zm9udC1zaXplOiAwLjY1cmVtO1xuXHRcdFx0Y29sb3I6ICNlMTk2OTY7XHRcdFx0XG5cdFx0fVxuXHR9XG59XG5pbWcge1xuXHRoZWlnaHQ6IDE1MHB4O1xufVxuXG5tYXQtY2FyZCB7XG5cdGhlaWdodDogMjUwcHg7XG5cdGJhY2tncm91bmQ6ICNlM2UzZTM7XG59XG5cbm1hdC1jYXJkLWNvbnRlbnQge1xuXHRtYXJnaW46IDFyZW07XG5cdGJhY2tncm91bmQ6ICNmZmY7XG5cdGJvcmRlci1yYWRpdXM6IDhweDtcbn1cblxuaDEsXG5oMixcbmgzLFxuaDQsXG5oNSxcbmg2IHtcblx0bWFyZ2luOiAwLjI1cmVtO1xufVxuXG5oMSB7XG5cdGZvbnQtc2l6ZTogMXJlbTtcblx0d2lkdGg6IG1heC1jb250ZW50O1xuXHRwYWRkaW5nOjAgMXB4O1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xufVxuXG5oNCB7XG5cdGZvbnQtd2VpZ2h0OiBub3JtYWw7XG59XG5cbmg1IHtcblx0Zm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuaDYge1xuXHRmb250LXdlaWdodDogbm9ybWFsO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -79,6 +79,8 @@ var AllComponent = /** @class */ (function () {
         this.pageSizeOptions = [5, 10, 25, 100, 125, 200, 500, 1000];
         this.currentPage = 0;
         this.loading = true;
+        this.quickSorts = ['Purple', 'PHK', 'GDP', 'GMO', 'Bio Diesel', 'Blue', 'Cheese', 'Cherry', 'Cookies', 'Cooks', 'Dawg', 'Diesel', 'Grape', 'Kush', 'Rosin', 'Strawberry'];
+        this.sortMap = [];
         this.dispensaryList = [
             { 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
             { 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj' },
@@ -103,6 +105,7 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Western Oregon-Hillsboro', 'value': 319881 },
             { 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
             { 'name': 'Lemonnade-Metzger', 'value': 130410 },
+            { 'name': 'Local Leaf-Metzger', 'value': 144011 },
             { 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
             { 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
             { 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
@@ -128,6 +131,7 @@ var AllComponent = /** @class */ (function () {
         var start = this.currentPage * this.pageSize;
         var part = this.originalProducts.slice(start, end);
         this.products = part;
+        this.productCount = this.products.length;
     };
     // search by query
     AllComponent.prototype.doSearch = function (e) {
@@ -140,7 +144,28 @@ var AllComponent = /** @class */ (function () {
                 }
             });
             this.products = searched;
+            this.productCount = this.products.length;
         }
+    };
+    AllComponent.prototype.gatherQuickSorts = function () {
+        var _this = this;
+        this.sortMap = this.quickSorts.map(function (item) {
+            var searched = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"])(_this.originalProducts, function (o) {
+                var name = o.Name.toLowerCase();
+                if (name.includes(item.toLowerCase())) {
+                    return o;
+                }
+            });
+            return { 'name': item, 'count': searched.length, 'items': searched };
+        });
+        // this.saleItems = this.sortSales;
+        this.sortSales();
+        this.sortMap.push({
+            'name': 'sales',
+            'count': this.saleItems.length,
+            'items': this.saleItems
+        });
+        console.log('h88 this.sortMap', this.sortMap);
     };
     //sort by dispensary
     AllComponent.prototype.sortByDispensary = function (o) {
@@ -161,14 +186,20 @@ var AllComponent = /** @class */ (function () {
                 }
             });
             this.products = dispensary;
+            this.productCount = this.products.length;
         }
     };
     // show sales
     AllComponent.prototype.sortBySale = function () {
-        this.products = this.originalProducts;
-        var filteredForSale = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"])(this.products, function (o) {
+        this.products = this.saleItems;
+        this.productCount = this.products.length;
+    };
+    // filter sales
+    AllComponent.prototype.sortSales = function () {
+        // this.products = this.originalProducts;
+        var filteredForSale = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"])(this.originalProducts, function (o) {
             if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
-                console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
+                // console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
                 var diff = o.Prices[0] - o.recSpecialPrices[0];
                 var off = diff / o.Prices[0];
                 o.discount = off.toFixed(2);
@@ -178,11 +209,13 @@ var AllComponent = /** @class */ (function () {
             }
         });
         var sortedBySale = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["sortBy"])(filteredForSale, ['recSpecialPrices[0]']);
-        this.products = sortedBySale;
+        this.saleItems = sortedBySale;
+        return sortedBySale;
     };
     // show all
     AllComponent.prototype.sortByAll = function () {
         this.products = this.productsChunks[0];
+        this.productCount = this.products.length;
     };
     AllComponent.prototype.sort = function (name) {
         var query = name.toLowerCase();
@@ -193,6 +226,7 @@ var AllComponent = /** @class */ (function () {
             }
         });
         this.products = searched;
+        this.productCount = this.products.length;
     };
     AllComponent.prototype.removeUnusedProducts = function (products) {
         // let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
@@ -242,6 +276,7 @@ var AllComponent = /** @class */ (function () {
             _this.products = _this.productsChunks[0];
             _this.loading = false;
             console.log('h88 prod', _this.products);
+            _this.gatherQuickSorts();
         });
     };
     AllComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -628,6 +663,9 @@ var DispensaryPipe = /** @class */ (function () {
                 break;
             case 130410:
                 return 'Lemonnade - Metzger';
+                break;
+            case 144011:
+                return 'Local Leaf - Metzger';
                 break;
             case '5e7b9f3bdbf9cc0b3d2e3ff2':
                 return 'Cola Cova - Tigard';

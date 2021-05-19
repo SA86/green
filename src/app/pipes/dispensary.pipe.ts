@@ -31,6 +31,9 @@ export class DispensaryPipe implements PipeTransform {
 			case 'KaleafaHillsboro':
 				return 'Kaleafa-Hillsboro'
 				break;
+			case 'kaleafaTigard':
+				return 'Kaleafa-Tigard'
+				break;
 			case '605b64fa3da35500d1dd9d05':
 				return 'Broadway-Beaverton'
 				break;
