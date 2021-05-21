@@ -82,7 +82,7 @@
 
 header {
 	color: #fff !important;
-	background-color: #673ab7;
+	background-color: #814ae3;
 	margin-bottom:0 !important;
 	.search {
 		display:flex;
@@ -90,16 +90,31 @@ header {
 	#quick-filters {
 		padding-top: 5px !important;
 		button {
-			border:1px solid #814ae3;;
+			border:1px solid #0000002b;
 			margin:0 2px 2px 0;
 			padding:0 4px !important;
+			background-color: #6f3fc6 !important;
+			&.active {
+				background-color: #277703 !important;
+			}
 		}
-		.main-btn {
+		.btn-quick-all {
+			background-color:#ffd740 !important;
+			border:none;
+		}
+		.btn-quick-all {
 			border:none;
 		}
 		.sort-count {
 			font-size: 0.65rem;
 			color: #e19696;			
+		}
+		.quick-query {
+			
+		}
+		.quick-sales {
+			background-color: #9b15418f !important;
+			border:1px solid #9b15418f;
 		}
 	}
 }

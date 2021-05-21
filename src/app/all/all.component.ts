@@ -5,6 +5,8 @@ import { ProvidersService } from '../providers.service';
 import { Observable, throwError } from 'rxjs';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material';
+import {MatChipInputEvent} from '@angular/material';
+import {MatChipsModule} from '@angular/material/chips';
 import { catchError, retry } from 'rxjs/operators';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy } from 'lodash';
 
@@ -34,6 +36,7 @@ export class AllComponent implements OnInit {
 	quickSorts: any = ['Purple','PHK','GDP','GMO','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Rosin','Strawberry'];
 	sortMap: any = [];
 	saleItems: any;
+	removable: boolean = true;
 	
 	dispensaryList: any[] = [
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
@@ -118,15 +121,17 @@ export class AllComponent implements OnInit {
 					return o;
 				}
 			});			
-			return { 'name': item, 'count': searched.length, 'items': searched}
+			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-sort', 'active': false }
 		});
-		// this.saleItems = this.sortSales;
 		this.sortSales();
 		this.sortMap.push({
-			'name': 'sales',
+			'name': 'Sales',
 			'count': this.saleItems.length,
-			'items': this.saleItems
+			'items': this.saleItems,
+			'type': 'quick-sales',
+			'active': false
 		});
+		this.sortMap.splice(0, 0, this.sortMap.splice(this.sortMap.length-1, 1)[0]); // move sales to start of array
 		console.log('h88 this.sortMap', this.sortMap);
 
 	}
@@ -152,18 +157,10 @@ export class AllComponent implements OnInit {
 		}
 	}
 
-	// show sales
-	sortBySale() {
-		this.products = this.saleItems;
-		this.productCount = this.products.length;
-	}
-
 	// filter sales
 	sortSales(): any {
-		// this.products = this.originalProducts;
 		let filteredForSale = filter(this.originalProducts, (o) => {
 			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
-				// console.log('h88 o.o.recSpecialPrices', o.recSpecialPrices, o.Prices[0]);
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
@@ -179,20 +176,44 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
+		this.quickFilterActive(null);
 		this.products = this.productsChunks[0];
 		this.productCount = this.products.length;
 	}
 
 	sort(name) {
 		let query = name.toLowerCase();
-		let searched = filter(this.originalProducts, (o) => {
-			let name = o.Name.toLowerCase();
-			if (name.includes(query)) {
-				return o;
+		if (query === 'sales') {
+			this.quickFilterActive(name);
+			this.products = this.saleItems;
+			this.productCount = this.products.length;
+		} else {
+			let item = find(this.sortMap, { 'name' : name});
+			this.quickFilterActive(name);
+			this.products = item.items;
+			this.productCount = this.products.length;
+		}
+	}
+	
+	// toggles active quick sort 
+	quickFilterActive(name) { 
+		this.sortMap.map((e) => {
+			if(e.name === name) {
+				e.active = !e.active;
+			} else {
+				e.active = false;
 			}
-		});
-		this.products = searched;
-		this.productCount = this.products.length;
+			return e
+		});			
+	}
+	
+	removeSortChip(name){
+		this.sortMap.map((e) => {
+			if(e.name === name) {
+				e.active = !e.active;
+				return e
+			}
+		});		
 	}
 
 	removeUnusedProducts(products) { // remove select items from product list
