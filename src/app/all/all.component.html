@@ -3,6 +3,9 @@
 
 	<div id="quick-filters" class="col s12 m12 l6 xl6">
 		<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">All</button>		
+		<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(1)">D-1</button>		
+		<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(2)">D-2</button>		
+		<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		
 		<!-- <button class="main-btn" mat-raised-button color="warn" (click)="sortBySale()">Sales <span class="sort-count">({{this.saleItems.length}})</span></button> -->
 		<button *ngFor='let item of sortMap' mat-button (click)="sort(item.name)" [ngClass]='{"quick-sales": item.type == "quick-sales", "quick-sort": item.type == "quick-sort", "active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 	</div>
@@ -45,7 +48,10 @@
 			</div>
 		</mat-chip-list>
 	</div> -->
-	<div class="col s12 m12 lm12 xl12">
+	<div class="col s12 m2 l2 xl2">
+		<ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="soptions"></ngx-slider>
+	</div>
+	<div class="col s12 m10 lm10 xl10">
 		<mat-paginator *ngIf='!loading' [length]="productCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlePage($event)"> </mat-paginator>
 	</div>
 </section>
@@ -56,7 +62,9 @@
 
 		<div class="product" [style.background-image]="'url('+product.Image+')'">
 			<h1 *ngIf='product.apiRoot != "kaleafa"' class="product-name">{{ product.Name }}</h1>
-			<h1 *ngIf='product.apiRoot == "kaleafa"' class="product-name">{{ product.Name }} <span class="product-type" > - {{ product.type }}/{{ product.brand }} </span> </h1>
+			<!-- <h4 *ngIf='product.brand'>{{ product.brand.name }}</h4> -->
+			<h4 class="product-type" *ngIf='product.brandName'>{{ product.brandName }}</h4>
+			<h1 *ngIf='product.apiRoot == "kaleafa"' class="product-name">{{ product.Name }} <span class="product-type"> - {{ product.type }}/{{ product.brand }} </span> </h1>
 			
 			<div class="col s6 m6 l6">
 				<h6>{{ product.DispensaryID | dispensary }}</h6>

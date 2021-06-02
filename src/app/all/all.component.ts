@@ -5,14 +5,21 @@ import { ProvidersService } from '../providers.service';
 import { Observable, throwError } from 'rxjs';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material';
-import {MatChipInputEvent} from '@angular/material';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipInputEvent } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
+import { Options, LabelType } from "@angular-slider/ngx-slider";
 import { catchError, retry } from 'rxjs/operators';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy } from 'lodash';
 
 interface Products {
 	products: any;
 	data: any;
+	
+}
+interface DispensaryList {
+	'name' : string;
+	'value': any;
+	'local': number;
 }
 @Component({
 	selector: 'app-all',
@@ -25,54 +32,71 @@ export class AllComponent implements OnInit {
 	dispensary = new FormControl();
 	formSearch: FormGroup = new FormGroup({});
 	search: string = '';
-	pageSize: any = 125;
-	pageSizeOptions: Object = [5, 10, 25, 100, 125, 200, 500, 1000];
+	pageSize: number = 125;
+	pageSizeOptions = [5, 10, 25, 100, 125, 200, 500, 1000];
 	currentPage = 0;
 	originalProducts: any;
 	products: any;
 	productsChunks: any;
 	productCount: number;
+	productBank = [];
 	loading:boolean = true;
-	quickSorts: any = ['Purple','PHK','GDP','GMO','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Rosin','Strawberry'];
-	sortMap: any = [];
+	quickSorts = ['Purple','PHK','GDP','GMO','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush', 'Orange', 'Rosin','Strawberry'];
+	sortMap = [];
 	saleItems: any;
 	removable: boolean = true;
+	minValue: number = 5;
+	maxValue: number = 120;
+	soptions: Options = {
+		floor: 0,
+		ceil: 120,
+		translate: (value: number, label: LabelType): string => {
+			switch (label) {
+				case LabelType.Low:
+					return "<b>Min:</b> $" + value;
+				case LabelType.High:
+					return "<b>Max:</b> $" + value;
+				default:
+					return "$" + value;
+			}
+		}
+	};			
 	
-	dispensaryList: any[] = [
-		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy' },
-		{ 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj' },
-		{ 'name': 'Nectar-Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6' },
-		{ 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A' },
-		{ 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea' },
-		{ 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton' },
-		{ 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05' },
-		{ 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30' },
-		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818 },
-		{ 'name': 'Green Planet-Beaverton', 'value': 107819 },
-		{ 'name': 'Stone Age-Beaverton', 'value': 123946 },
-		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton' },
-		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL' },
-		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e' },
-		{ 'name': 'Green Mart-CedarHills', 'value': 143818 },
-		{ 'name': 'Western Oregon-CedarHills', 'value': 301745 },
-		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro' },
-		{ 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g' },
-		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136 },
-		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb' },
-		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881 }, // dup
-		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger' },
-		{ 'name': 'Lemonnade-Metzger', 'value': 130410 },
-		{ 'name': 'Local Leaf-Metzger', 'value': 144011 },
-		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2' },
-		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard' },
-		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa' },
-		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard' },
-		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek' },
-		{ 'name': 'Green Planet-KingCity', 'value': 196138 },
-		{ 'name': 'Green Goddess-SW.PDX', 'value': 85676 },
-		{ 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv' },
-		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED' },
-		{ 'name': 'Brothers-Oswego', 'value': 328152 },
+	dispensaryList: DispensaryList[] = [
+		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy', 'local': 1 },
+		{ 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj', 'local': 1 },
+		{ 'name': 'Nectar-Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6', 'local': 2 },
+		{ 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A', 'local': 2  },
+		{ 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea', 'local': 1 },
+		{ 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton', 'local': 1 },
+		{ 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05', 'local': 1 },
+		{ 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30', 'local': 2  },
+		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818, 'local': 2  },
+		{ 'name': 'Green Planet-Beaverton', 'value': 107819, 'local': 2  },
+		{ 'name': 'Stone Age-Beaverton', 'value': 123946, 'local': 2  },
+		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton', 'local': 2  },
+		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL', 'local': 1 },
+		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e', 'local': 1 },
+		{ 'name': 'Green Mart-CedarHills', 'value': 143818, 'local': 1 },
+		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'local': 1 },
+		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro', 'local': 2  },
+		{ 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g', 'local': 2  },
+		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136, 'local': 2  },
+		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb', 'local': 2  },
+		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881, 'local': 2  },
+		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger', 'local': 3  },
+		{ 'name': 'Lemonnade-Metzger', 'value': 130410, 'local': 3 },
+		{ 'name': 'Local Leaf-Metzger', 'value': 144011, 'local': 3 },
+		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2', 'local': 3 },
+		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard', 'local': 3 },
+		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa', 'local': 3 },
+		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard', 'local': 3 },
+		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek', 'local': 3 },
+		{ 'name': 'Green Planet-KingCity', 'value': 196138, 'local': 3 },
+		{ 'name': 'Green Goddess-SW.PDX', 'value': 85676, 'local': 3 },
+		{ 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv', 'local': 3 },
+		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'local': 3 },
+		{ 'name': 'Brothers-Oswego', 'value': 328152, 'local': 3 },
 	];
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
@@ -94,7 +118,6 @@ export class AllComponent implements OnInit {
 		const start = this.currentPage * this.pageSize;
 		const part = this.originalProducts.slice(start, end);
 		this.products = part;		
-		this.productCount = this.products.length;
 	}
 
 
@@ -113,9 +136,9 @@ export class AllComponent implements OnInit {
 		}
 	}
 	
-	gatherQuickSorts() { // build quicksorts
+	gatherQuickSorts(products) { // build quicksorts
 		this.sortMap = this.quickSorts.map((item) => {
-			let searched = filter(this.originalProducts, (o) => {
+			let searched = filter(products, (o) => {
 				let name = o.Name.toLowerCase();
 				if (name.includes(item.toLowerCase())) {
 					return o;
@@ -123,7 +146,7 @@ export class AllComponent implements OnInit {
 			});			
 			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-sort', 'active': false }
 		});
-		this.sortSales();
+		this.sortSales(products);
 		this.sortMap.push({
 			'name': 'Sales',
 			'count': this.saleItems.length,
@@ -158,8 +181,8 @@ export class AllComponent implements OnInit {
 	}
 
 	// filter sales
-	sortSales(): any {
-		let filteredForSale = filter(this.originalProducts, (o) => {
+	sortSales(products): any {
+		let filteredForSale = filter(products, (o) => {
 			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
 				let diff = o.Prices[0] - o.recSpecialPrices[0];
 				let off = diff / o.Prices[0];
@@ -176,9 +199,12 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
+		let products = this.originalProducts;
 		this.quickFilterActive(null);
-		this.products = this.productsChunks[0];
-		this.productCount = this.products.length;
+		this.productCount = products.length;
+		this.productsChunks = chunk(products, this.pageSize);
+		this.products = this.productsChunks[0];			
+		this.gatherQuickSorts(products);
 	}
 
 	sort(name) {
@@ -193,6 +219,22 @@ export class AllComponent implements OnInit {
 			this.products = item.items;
 			this.productCount = this.products.length;
 		}
+	}
+	
+	distance(range) {
+		let productsRange = filter(this.originalProducts, (item)=> {
+			let foundLocal = find(this.dispensaryList, { 'value' : item.DispensaryID})
+			if (foundLocal.local === range) {
+				return item
+			}
+		});
+		
+		this.productCount = productsRange.length;
+		this.productsChunks = chunk(productsRange, this.pageSize);
+		this.products = this.productsChunks[0];	
+		this.products = productsRange;	
+		console.log('h88 productsRange', productsRange);	
+		this.gatherQuickSorts(productsRange);		
 	}
 	
 	// toggles active quick sort 
@@ -267,7 +309,7 @@ export class AllComponent implements OnInit {
 			this.products = this.productsChunks[0];			
 			this.loading = false;
 			console.log('h88 prod', this.products);
-			this.gatherQuickSorts();
+			this.gatherQuickSorts(this.originalProducts);
 		});
 	}
 

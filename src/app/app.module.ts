@@ -9,6 +9,7 @@ import { AllComponent } from './all/all.component';
 import { UnitPipe } from './pipes/unit.pipe';
 import { DispensaryPipe } from './pipes/dispensary.pipe';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 		BrowserAnimationsModule,
 		MaterialModule,
 		FormsModule,
-		ReactiveFormsModule		
+		ReactiveFormsModule,
+		NgxSliderModule	
 	],
 	providers: [],
 	bootstrap: [AppComponent],
