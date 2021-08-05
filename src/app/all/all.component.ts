@@ -9,7 +9,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import { catchError, retry } from 'rxjs/operators';
-import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy } from 'lodash';
+import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy } from 'lodash';
 
 interface Products {
 	products: any;
@@ -41,12 +41,21 @@ export class AllComponent implements OnInit {
 	productCount: number;
 	productBank = [];
 	loading:boolean = true;
-	quickSorts = ['Purple','PHK','GDP','GMO','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush', 'Orange', 'Rosin','Strawberry'];
+	// menu display
+	menuQuickFiltersView: boolean = false;
+	menuSearchView: boolean = false;
+	menuLocationView: boolean = false;
+	menuPricingView: boolean = false;
+	menuSortView: boolean = false;
+	quickSorts = ['Purple','PHK','GDP','GMO','GSC','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Orange','Pineapple','Rosin','Strawberry'];
 	sortMap = [];
 	saleItems: any;
+	bestSaleItems: any;
 	removable: boolean = true;
 	minValue: number = 5;
 	maxValue: number = 120;
+	sortCostLow: number = 5;
+	sortCostHigh: number = 120;
 	soptions: Options = {
 		floor: 0,
 		ceil: 120,
@@ -154,9 +163,38 @@ export class AllComponent implements OnInit {
 			'type': 'quick-sales',
 			'active': false
 		});
+		this.sortMap.push({
+				'name': 'Best Deals',
+				'count': this.bestSaleItems.length,
+				'items': this.bestSaleItems,
+				'type': 'quick-sales',
+				'active': false
+				
+		});
 		this.sortMap.splice(0, 0, this.sortMap.splice(this.sortMap.length-1, 1)[0]); // move sales to start of array
+		this.sortMap.splice(0, 0, this.sortMap.splice(this.sortMap.length-1, 1)[0]); // move best sales to start of array
 		console.log('h88 this.sortMap', this.sortMap);
 
+	}
+
+	//sort by cost
+	sortByCost(e) {
+		let filteredbyCost = filter(this.originalProducts, (product) => {
+			if (product.Prices[0] >= this.sortCostLow && product.Prices[0] <= this.sortCostHigh) {
+				return product
+			}
+		});
+		this.productCount = filteredbyCost.length;
+		this.productsChunks = chunk(filteredbyCost, this.pageSize);
+		this.products = this.productsChunks[0];			
+	}
+	//sort by cost
+	sortByCostLow(e) {
+		this.sortCostLow = e;
+	}
+	//sort by cost
+	sortByCostHigh(e) {
+		this.sortCostHigh = e;
 	}
 
 	//sort by dispensary
@@ -188,12 +226,14 @@ export class AllComponent implements OnInit {
 				let off = diff / o.Prices[0];
 				o.discount = off.toFixed(2);
 				o.discount = o.discount * 100;
+				o.discountraw = o.discount * 100;
 				o.discount = `$${diff.toFixed(2)} (${o.discount.toFixed()}%)`;
 				return o
 			}
 		});
 		let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
 		this.saleItems = sortedBySale;
+		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);;
 		return sortedBySale
 	}
 
@@ -213,6 +253,8 @@ export class AllComponent implements OnInit {
 			this.quickFilterActive(name);
 			this.products = this.saleItems;
 			this.productCount = this.products.length;
+		} else if (query === 'best') {
+				
 		} else {
 			let item = find(this.sortMap, { 'name' : name});
 			this.quickFilterActive(name);
