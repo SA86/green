@@ -9,20 +9,26 @@
 	</div>
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button>	
+			<!-- <button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button>	
 			<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales')" >Sales<span class="sort-count">(##)</span></button>		
 			<mat-divider></mat-divider>
 			Location:
 			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(1)">D-1</button>		
 			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(2)">D-2</button>		
 			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		
+			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		 -->
+			
+			
 			<mat-divider ></mat-divider>
+			<p>Filter products by strain names and type. More indept querying capable under search.</p>
+			<mat-divider ></mat-divider>
+			
 			Strains: <button *ngFor='let item of sortStrainMap' mat-button (click)="sort(item.name, 'strain')" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
+			
 			<mat-divider></mat-divider>
+			
 			Types: <button *ngFor='let item of sortTypeMap' mat-button (click)="sort(item.name, 'type')" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
-			<!-- <button mat-button class="quick-sort" mat-raised-button (click)="sort('shatter')" >Shatter<span class="sort-count">(##)</span></button>		
-			<button mat-button class="quick-sort" mat-raised-button (click)="sort('live resin')" >Live Resin<span class="sort-count">(##)</span></button> -->
+			
 	</div>
 	
 	<div id="search" class='row' *ngIf="menuSearchView">
