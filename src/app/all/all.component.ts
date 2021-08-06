@@ -42,13 +42,15 @@ export class AllComponent implements OnInit {
 	productBank = [];
 	loading:boolean = true;
 	// menu display
-	menuQuickFiltersView: boolean = false;
+	menuQuickFiltersView: boolean = true;
 	menuSearchView: boolean = false;
 	menuLocationView: boolean = false;
 	menuPricingView: boolean = false;
 	menuSortView: boolean = false;
-	quickSorts = ['Purple','PHK','GDP','GMO','GSC','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Orange','Pineapple','Rosin','Strawberry'];
-	sortMap = [];
+	quickStrainSorts = ['Purple','PHK','GDP','GMO','GSC','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Orange','Pineapple','Strawberry', 'Zskittle'];
+	quickTypesSorts = [ 'Badder', 'Crumble', 'Diamonds', 'Live Resin', 'Rosin', 'RSO', 'Sauce', 'Shatter', 'Sugar' ];
+	sortStrainMap = []; // strain quick sorts
+	sortTypeMap = []; // type quick sorts
 	saleItems: any;
 	bestSaleItems: any;
 	removable: boolean = true;
@@ -145,36 +147,27 @@ export class AllComponent implements OnInit {
 		}
 	}
 	
-	gatherQuickSorts(products) { // build quicksorts
-		this.sortMap = this.quickSorts.map((item) => {
+	gatherQuickSorts(products) { // build quick sorts
+		this.sortStrainMap = this.quickStrainSorts.map((item) => {
 			let searched = filter(products, (o) => {
 				let name = o.Name.toLowerCase();
 				if (name.includes(item.toLowerCase())) {
 					return o;
 				}
 			});			
-			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-sort', 'active': false }
+			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-strain-sort', 'active': false }
 		});
 		this.sortSales(products);
-		this.sortMap.push({
-			'name': 'Sales',
-			'count': this.saleItems.length,
-			'items': this.saleItems,
-			'type': 'quick-sales',
-			'active': false
+		
+		this.sortTypeMap = this.quickTypesSorts.map((item) => {
+			let searched = filter(products, (o) => {
+				let name = o.Name.toLowerCase();
+				if (name.includes(item.toLowerCase())) {
+					return o;
+				}
+			});			
+			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-type-sort', 'active': false }
 		});
-		this.sortMap.push({
-				'name': 'Best Deals',
-				'count': this.bestSaleItems.length,
-				'items': this.bestSaleItems,
-				'type': 'quick-sales',
-				'active': false
-				
-		});
-		this.sortMap.splice(0, 0, this.sortMap.splice(this.sortMap.length-1, 1)[0]); // move sales to start of array
-		this.sortMap.splice(0, 0, this.sortMap.splice(this.sortMap.length-1, 1)[0]); // move best sales to start of array
-		console.log('h88 this.sortMap', this.sortMap);
-
 	}
 
 	//sort by cost
@@ -218,7 +211,7 @@ export class AllComponent implements OnInit {
 		}
 	}
 
-	// filter sales
+	// builds/filters  sales 
 	sortSales(products): any {
 		let filteredForSale = filter(products, (o) => {
 			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
@@ -240,24 +233,29 @@ export class AllComponent implements OnInit {
 	// show all
 	sortByAll() {
 		let products = this.originalProducts;
-		this.quickFilterActive(null);
+		this.quickFilterActive(null, null);
 		this.productCount = products.length;
 		this.productsChunks = chunk(products, this.pageSize);
 		this.products = this.productsChunks[0];			
 		this.gatherQuickSorts(products);
 	}
 
-	sort(name) {
+	sort(name, selected) {
 		let query = name.toLowerCase();
+		let typeSelected = selected.toLowerCase();
+		
 		if (query === 'sales') {
-			this.quickFilterActive(name);
+			this.quickFilterActive(name, null);
 			this.products = this.saleItems;
 			this.productCount = this.products.length;
-		} else if (query === 'best') {
-				
-		} else {
-			let item = find(this.sortMap, { 'name' : name});
-			this.quickFilterActive(name);
+		} else if(typeSelected === 'strain') { 
+			let item = find(this.sortStrainMap, { 'name' : name});
+			this.quickFilterActive(name, 'strain');
+			this.products = item.items;
+			this.productCount = this.products.length;
+		} else if(typeSelected === 'type') {
+			let item = find(this.sortTypeMap, { 'name' : name});
+			this.quickFilterActive(name, 'type');
 			this.products = item.items;
 			this.productCount = this.products.length;
 		}
@@ -279,9 +277,9 @@ export class AllComponent implements OnInit {
 		this.gatherQuickSorts(productsRange);		
 	}
 	
-	// toggles active quick sort 
-	quickFilterActive(name) { 
-		this.sortMap.map((e) => {
+	// toggles active quick sort class
+	quickFilterActive(name, type) { 
+		this.sortTypeMap.map((e) => {
 			if(e.name === name) {
 				e.active = !e.active;
 			} else {
@@ -289,15 +287,14 @@ export class AllComponent implements OnInit {
 			}
 			return e
 		});			
-	}
-	
-	removeSortChip(name){
-		this.sortMap.map((e) => {
+		this.sortStrainMap.map((e) => {
 			if(e.name === name) {
 				e.active = !e.active;
-				return e
+			} else {
+				e.active = false;
 			}
-		});		
+			return e
+		});			
 	}
 
 	removeUnusedProducts(products) { // remove select items from product list
