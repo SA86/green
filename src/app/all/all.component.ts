@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProvidersService } from '../providers.service';
@@ -24,7 +24,8 @@ interface DispensaryList {
 @Component({
 	selector: 'app-all',
 	templateUrl: './all.component.html',
-	styleUrls: ['./all.component.scss']
+	styleUrls: ['./all.component.scss'],
+	encapsulation: ViewEncapsulation.None
 })
 
 export class AllComponent implements OnInit {
@@ -198,9 +199,8 @@ export class AllComponent implements OnInit {
 				return product
 			}
 		});
-		this.productCount = filteredbyCost.length;
-		this.productsChunks = chunk(filteredbyCost, this.pageSize);
-		this.products = this.productsChunks[0];			
+		this.products = filteredbyCost;
+		this.paginateItems();	
 	}
 	//sort by cost
 	sortByCostLow(e) {
@@ -253,11 +253,9 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
-		let products = this.originalProducts;
+		this.products = this.originalProducts;
+		this.paginateItems();
 		this.quickFilterActive(null, null);
-		this.productCount = products.length;
-		this.productsChunks = chunk(products, this.pageSize);
-		this.products = this.productsChunks[0];			
 		this.gatherQuickSorts(products);
 	}
 
@@ -289,11 +287,8 @@ export class AllComponent implements OnInit {
 				return item
 			}
 		});
-		
-		this.productCount = productsRange.length;
-		this.productsChunks = chunk(productsRange, this.pageSize);
-		this.products = this.productsChunks[0];	
 		this.products = productsRange;	
+		this.paginateItems();		
 		console.log('h88 productsRange', productsRange);	
 		this.gatherQuickSorts(productsRange);		
 	}
@@ -348,29 +343,25 @@ export class AllComponent implements OnInit {
 		return filteredProducts
 	}
 
-	// fixAberrations(products) { // remove select items from product list
-	// 	// let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
-	// 	let fixProducts = filter(products, (o) => {
-	// 		let name = o.Name.toLowerCase();
-	// 		console.log('h88 o', o);
-	// 
-	// 	});
-	// 	return filteredProducts
-	// }
-
 	getConcentrates() {
 		this.providersService.getRequest().subscribe((data: Products) => {
-			let sortedByPrice = sortBy(data, ['Prices[0]']);
-			this.products = this.removeUnusedProducts(sortedByPrice);
-			// this.products = this.fixAberrations(this.products);
-			this.originalProducts = this.products;
-			this.productCount = this.products.length;
-			this.productsChunks = chunk(this.products, this.pageSize);
-			this.products = this.productsChunks[0];			
+			let sortedByPrice = sortBy(data, ['Prices[0]']); // sort by lowest price
+			this.products = this.removeUnusedProducts(sortedByPrice); // remove items from the list
+			this.originalProducts = this.products; // create copy of items
+			this.paginateItems();
+			// this.productCount = this.products.length; 
+			// this.productsChunks = chunk(this.products, this.pageSize);
+			// this.products = this.productsChunks[0];			
 			this.loading = false;
 			console.log('h88 prod', this.products);
 			this.gatherQuickSorts(this.originalProducts);
 		});
+	}
+	
+	paginateItems() {
+		this.productCount = this.products.length; 
+		this.productsChunks = chunk(this.products, this.pageSize);
+		this.products = this.productsChunks[0];			
 	}
 
 }

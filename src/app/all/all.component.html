@@ -2,10 +2,10 @@
 	
 	<div class='row quicks'>
 		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'>Quick Filters</button>
-		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'>Search</button>
+		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'>Query Search</button>
 		<button mat-raised-button (click)='menuLocationView = !menuLocationView' [ngClass]='{"active": menuLocationView}'>Locations</button>
-		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'>Pricing</button>
-		<button mat-raised-button (click)='menuSortView = !menuSortView' [ngClass]='{"active": menuSortView}'>Sort</button>
+		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'>Price Ranges</button>
+		<button mat-raised-button (click)='menuSortView = !menuSortView' [ngClass]='{"active": menuSortView}'>Sort by Cost</button>
 	</div>
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
@@ -21,18 +21,17 @@
 			
 			<mat-divider ></mat-divider>
 			<p>Filter products by strain names and type. More indept querying capable under search.</p>
-			<mat-divider ></mat-divider>
-			
-			
 			<mat-divider></mat-divider>
 			
 			<div class="filter-row">
-				<div class="type-name">Strains: </div>
+				<h2>Strain names</h2>
 				<button *ngFor='let item of sortStrainMap' mat-button (click)="sort(item.name, 'strain')" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
-				
 			</div>
+			
+			<mat-divider  ></mat-divider>
+			
 			<div class="filter-row">
-				<div class="type-name">Types: </div>
+				<h2>Types</h2>
 				<button *ngFor='let item of sortTypeMap' mat-button (click)="sort(item.name, 'type')" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 			</div>
 			
@@ -57,8 +56,10 @@
 		</mat-form-field>		
 	</div>
 	
-	<div id="pricing" class='row col s12 m2 l2 xl2' *ngIf="menuPricingView">
-		<ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="soptions" (valueChange)="sortByCostLow($event)" (highValueChange)="sortByCostHigh($event)" (userChangeEnd)="sortByCost(e)"></ngx-slider>		
+	<div id="pricing" class='row col s12 m6 l4 xl4' *ngIf="menuPricingView">
+		<div class="slider-cont">
+			<ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="soptions" (valueChange)="sortByCostLow($event)" (highValueChange)="sortByCostHigh($event)" (userChangeEnd)="sortByCost(e)"></ngx-slider>		
+		</div>
 	</div>
 	
 	<div id="sort" class='row col s12 m2 l2 xl2' *ngIf="menuSortView">
@@ -101,19 +102,7 @@
 </header>
 
 <section class="row">
-	<!-- <div class="col s1 m1 l1 xl1">
-		<mat-chip-list>
-			<div *ngFor='let item of sortMap'>
-				<mat-chip [selectable]="selectable" [removable]="removable" *ngIf='item.active == true'>{{item.name}}
-					<mat-icon matChipRemove (click)="removeSortChip(item.name)">cancel</mat-icon>
-				</mat-chip>
-			</div>
-		</mat-chip-list>
-	</div> -->
-	<!-- <div class="col s12 m2 l2 xl2">
-		<ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="soptions" (valueChange)="sortByCostLow($event)" (highValueChange)="sortByCostHigh($event)" (userChangeEnd)="sortByCost(e)"></ngx-slider>
-	</div>-->
-	<div class="col s12 m10 lm10 xl10">
+	<div class="col s12">
 		<mat-paginator *ngIf='!loading' [length]="productCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlePage($event)"> </mat-paginator>
 	</div> 
 </section>
