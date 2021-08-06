@@ -47,7 +47,28 @@ export class AllComponent implements OnInit {
 	menuLocationView: boolean = false;
 	menuPricingView: boolean = false;
 	menuSortView: boolean = false;
-	quickStrainSorts = ['Purple','PHK','GDP','GMO','GSC','Bio Diesel','Blue','Cheese','Cherry','Cookies','Cooks','Dawg','Diesel','Grape','Kush','Orange','Pineapple','Strawberry', 'Zskittle'];
+	quickStrainSorts = [
+		'Bio Diesel',
+		'Blue',
+		'Cheese',
+		'Cherry',
+		'Cookies',
+		'Cooks',
+		'Dawg',
+		'Diesel',
+		'GDP',
+		'Grape',
+		'GMO',
+		'GSC',
+		'Kush',
+		'MAC',
+		'Orange',
+		'Pineapple',
+		'PHK',
+		'Purple',
+		'Strawberry',
+		'Zkittles'
+	];
 	quickTypesSorts = [ 'Badder', 'Crumble', 'Diamonds', 'Live Resin', 'Rosin', 'RSO', 'Sauce', 'Shatter', 'Sugar' ];
 	sortStrainMap = []; // strain quick sorts
 	sortTypeMap = []; // type quick sorts

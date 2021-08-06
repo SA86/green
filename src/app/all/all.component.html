@@ -1,11 +1,11 @@
 <header class="row header">
 	
-	<div class='row'>
-		<button mat-raised-button color="primary" (click)='menuQuickFiltersView = !menuQuickFiltersView'>Quick Filters</button>
-		<button mat-raised-button color="primary" (click)='menuSearchView = !menuSearchView'>Search</button>
-		<button mat-raised-button color="primary" (click)='menuLocationView = !menuLocationView'>Locations</button>
-		<button mat-raised-button color="primary" (click)='menuPricingView = !menuPricingView'>Pricing</button>
-		<button mat-raised-button color="primary" (click)='menuSortView = !menuSortView'>Sort</button>
+	<div class='row quicks'>
+		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'>Quick Filters</button>
+		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'>Search</button>
+		<button mat-raised-button (click)='menuLocationView = !menuLocationView' [ngClass]='{"active": menuLocationView}'>Locations</button>
+		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'>Pricing</button>
+		<button mat-raised-button (click)='menuSortView = !menuSortView' [ngClass]='{"active": menuSortView}'>Sort</button>
 	</div>
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
@@ -23,11 +23,18 @@
 			<p>Filter products by strain names and type. More indept querying capable under search.</p>
 			<mat-divider ></mat-divider>
 			
-			Strains: <button *ngFor='let item of sortStrainMap' mat-button (click)="sort(item.name, 'strain')" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 			
 			<mat-divider></mat-divider>
 			
-			Types: <button *ngFor='let item of sortTypeMap' mat-button (click)="sort(item.name, 'type')" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
+			<div class="filter-row">
+				<div class="type-name">Strains: </div>
+				<button *ngFor='let item of sortStrainMap' mat-button (click)="sort(item.name, 'strain')" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
+				
+			</div>
+			<div class="filter-row">
+				<div class="type-name">Types: </div>
+				<button *ngFor='let item of sortTypeMap' mat-button (click)="sort(item.name, 'type')" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
+			</div>
 			
 	</div>
 	

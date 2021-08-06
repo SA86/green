@@ -82,14 +82,33 @@
 
 header {
 	color: #fff !important;
-	background-color: #814ae3;
+	// background-color: #814ae3;
+	background-color: #4a3f5e;
 	margin-bottom:0 !important;
 	.search {
 		display:flex;
 	}
+	.quicks {
+		
+		button {
+			&.active {
+				background-color: #c63f3f !important;
+			}
+		}
+	}
 	#quick-filters {
 		padding:5px 8px 0 8px !important;
 		font-size: 0.75rem;
+		.filter-row {
+			display: flex;
+			justify-content: left;
+			.type-name {
+				width: 43px;
+				text-align: right;
+				padding-right: 5px;
+				line-height: 37px;				
+			}
+		}
 		button {
 			border:1px solid #0000002b;
 			margin:0 2px 2px 0;
