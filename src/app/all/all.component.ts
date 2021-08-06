@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProvidersService } from '../providers.service';
@@ -145,6 +145,7 @@ export class AllComponent implements OnInit {
 
 	// pagination event change
 	handlePage(e: any) { 
+		//& TOTO need to get products rather than originalproducts
 		this.currentPage = e.pageIndex;
 		this.pageSize = e.pageSize;
 		const end = (this.currentPage + 1) * this.pageSize;
