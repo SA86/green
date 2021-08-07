@@ -161,6 +161,23 @@ header {
 			color: #000;			
 		}			
 	}
+	#search {
+		padding: 0 12px 12px 12px !important;
+		.mat-form-field-appearance-legacy .mat-form-field-label {
+			top: 2em;
+			left: 0.6em;
+		}
+		.mat-form-field-infix {
+			width: 270px;
+		}
+		.search-cont {
+			input {
+				border:1px solid black;
+				border-radius: 6px;
+				padding:12px;
+			}
+		}
+	}
 }
 #pricing {
   .slider-cont {

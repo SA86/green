@@ -40,9 +40,9 @@
 	<div id="search" class='row' *ngIf="menuSearchView">
 			<mat-form-field class="search-form-field">
 				<div class="search-cont">
-					<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)">
+					<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)" placeholder="Enter keyword...">
 					<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()"><mat-icon>close</mat-icon></button>
-					<button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button>
+					<!-- <button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button> -->
 				</div>
 			</mat-form-field>
 	</div>
