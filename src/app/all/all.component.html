@@ -20,7 +20,7 @@
 			
 			
 			<mat-divider ></mat-divider>
-			<p>Filter products by strain names and type. More indept querying capable under search.</p>
+			<p>Filter products by strain names and type. More indept querying capable under search. <button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button></p> 
 			<mat-divider></mat-divider>
 			
 			<div class="filter-row">
@@ -62,9 +62,15 @@
 		</div>
 	</div>
 	
-	<div id="sort" class='row col s12 m2 l2 xl2' *ngIf="menuSortView">
-			<button mat-raised-button color="accent" >High</button>	
-			<button mat-raised-button color="accent" >Low</button>	
+	<div id="sort" class='row col s12' *ngIf="menuSortView"  style="display:flex;">
+			<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
+			<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales', '')" >Sales <span class="sort-count">({{saleItems.length}})</span></button>
+			<div style="display:flex;">
+				<span>Sort by price</span>
+				<button mat-raised-button (click)='sortPrice("high")' color="accent" >High</button>	
+				<button mat-raised-button (click)='sortPrice("low")' color="accent" >Low</button>	
+				
+			</div>
 	</div>
 
 	<!-- <div id="quick-filters" class="col s12 m12 l6 xl6">

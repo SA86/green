@@ -85,7 +85,6 @@
 
 header {
 	color: #fff !important;
-	// background-color: #814ae3;
 	background-color: #4a3f5e;
 	margin-bottom:0 !important;
 	.search {
@@ -94,6 +93,7 @@ header {
 	.quicks {
 		padding:12px;
 		button {
+			border: 1px solid #000;
 			margin-right:12px;
 			&.active {
 				background-color: #375df2 !important;
@@ -135,9 +135,6 @@ header {
 			font-size: 0.65rem;
 			color: #e19696;			
 		}
-		.quick-query {
-			
-		}
 		.quick-sales {
 			background-color: #9b15418f !important;
 			border:1px solid #9b15418f;
@@ -145,6 +142,24 @@ header {
 		mat-divider {
 			margin:6px 0;
 		}
+	}
+	#sort {
+		padding: 0 12px 12px 12px !important;
+		font-size: 0.75rem;
+		margin: 0 !important;
+		button {
+			border: 1px solid #000;
+			margin-right:12px;
+			&.active {
+				background-color: #375df2 !important;
+				border: 1px solid #1400ff;
+				color: #fff;
+			}
+		}	
+		.sort-count {
+			font-size: 0.65rem;
+			color: #000;			
+		}			
 	}
 }
 #pricing {

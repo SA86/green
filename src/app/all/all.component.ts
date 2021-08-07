@@ -43,11 +43,11 @@ export class AllComponent implements OnInit {
 	productBank = [];
 	loading:boolean = true;
 	// menu display
-	menuQuickFiltersView: boolean = true;
+	menuQuickFiltersView: boolean = false;
 	menuSearchView: boolean = false;
 	menuLocationView: boolean = false;
 	menuPricingView: boolean = false;
-	menuSortView: boolean = false;
+	menuSortView: boolean = true;
 	quickStrainSorts = [
 		'Bio Diesel',
 		'Blue',
@@ -170,7 +170,7 @@ export class AllComponent implements OnInit {
 		}
 	}
 	
-	gatherQuickSorts(products) { // build quick sorts
+	gatherQuickSorts(products) { // build quick sorts + counts
 		this.sortStrainMap = this.quickStrainSorts.map((item) => {
 			let searched = filter(products, (o) => {
 				let name = o.Name.toLowerCase();
@@ -180,7 +180,6 @@ export class AllComponent implements OnInit {
 			});			
 			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-strain-sort', 'active': false }
 		});
-		this.sortSales(products);
 		
 		this.sortTypeMap = this.quickTypesSorts.map((item) => {
 			let searched = filter(products, (o) => {
@@ -191,6 +190,23 @@ export class AllComponent implements OnInit {
 			});			
 			return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-type-sort', 'active': false }
 		});
+	}
+	
+	gatherSales(products) { // build quick sale sort + counts
+		let filteredForSale = filter(products, (o) => {
+			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
+				let diff = o.Prices[0] - o.recSpecialPrices[0];
+				let off = diff / o.Prices[0];
+				o.discount = off.toFixed(2);
+				o.discount = o.discount * 100;
+				o.discountraw = o.discount * 100;
+				o.discount = `$${diff.toFixed(2)} (${o.discount.toFixed()}%)`;
+				return o
+			}
+		});
+		let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
+		this.saleItems = sortedBySale;
+		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
 
 	//sort by cost
@@ -233,31 +249,43 @@ export class AllComponent implements OnInit {
 		}
 	}
 
-	// builds/filters  sales 
-	sortSales(products): any {
-		let filteredForSale = filter(products, (o) => {
-			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
-				let diff = o.Prices[0] - o.recSpecialPrices[0];
-				let off = diff / o.Prices[0];
-				o.discount = off.toFixed(2);
-				o.discount = o.discount * 100;
-				o.discountraw = o.discount * 100;
-				o.discount = `$${diff.toFixed(2)} (${o.discount.toFixed()}%)`;
-				return o
-			}
-		});
-		let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
-		this.saleItems = sortedBySale;
-		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);;
-		return sortedBySale
-	}
+	// // builds/filters  sales 
+	// sortSales(products): any {
+	// 	let filteredForSale = filter(products, (o) => {
+	// 		if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
+	// 			let diff = o.Prices[0] - o.recSpecialPrices[0];
+	// 			let off = diff / o.Prices[0];
+	// 			o.discount = off.toFixed(2);
+	// 			o.discount = o.discount * 100;
+	// 			o.discountraw = o.discount * 100;
+	// 			o.discount = `$${diff.toFixed(2)} (${o.discount.toFixed()}%)`;
+	// 			return o
+	// 		}
+	// 	});
+	// 	let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
+	// 	this.saleItems = sortedBySale;
+	// 	this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);
+	// 	return sortedBySale
+	// }
 
 	// show all
 	sortByAll() {
 		this.products = this.originalProducts;
 		this.paginateItems();
 		this.quickFilterActive(null, null);
-		this.gatherQuickSorts(products);
+		this.gatherQuickSorts(this.products);
+	}
+	
+	// sorts by low/high price
+	sortPrice(direction) {
+		let sortedByPrice;
+		if (direction === 'high') {
+			sortedByPrice = orderBy(this.originalProducts, ['Prices[0]'], ['desc']); 
+		} else if (direction === 'low') {
+			sortedByPrice = orderBy(this.originalProducts, ['Prices[0]'], ['asc']); 
+		}
+		this.products = sortedByPrice;
+		this.paginateItems();
 	}
 
 	sort(name, selected) {
@@ -290,7 +318,6 @@ export class AllComponent implements OnInit {
 		});
 		this.products = productsRange;	
 		this.paginateItems();		
-		console.log('h88 productsRange', productsRange);	
 		this.gatherQuickSorts(productsRange);		
 	}
 	
@@ -356,6 +383,7 @@ export class AllComponent implements OnInit {
 			this.loading = false;
 			console.log('h88 prod', this.products);
 			this.gatherQuickSorts(this.originalProducts);
+			this.gatherSales(this.originalProducts);
 		});
 	}
 	
