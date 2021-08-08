@@ -6,6 +6,7 @@
 		<button mat-raised-button (click)='menuLocationView = !menuLocationView' [ngClass]='{"active": menuLocationView}'>Locations</button>
 		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'>Price Ranges</button>
 		<button mat-raised-button (click)='menuSortView = !menuSortView' [ngClass]='{"active": menuSortView}'>Sort by Cost</button>
+		<button mat-raised-button (click)='menuDistanceView = !menuDistanceView' [ngClass]='{"active": menuDistanceView}'>Distance</button>
 	</div>
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
@@ -62,7 +63,7 @@
 		</div>
 	</div>
 	
-	<div id="sort" class='row col s12' *ngIf="menuSortView"  style="display:flex;">
+	<div id="sort" class='row col s12' *ngIf="menuSortView">
 			<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
 			<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales', '')" >Sales <span class="sort-count">({{saleItems.length}})</span></button>
 			<div style="display:flex;">
@@ -71,6 +72,27 @@
 				<button mat-raised-button (click)='sortPrice("low")' color="accent" >Low</button>	
 				
 			</div>
+	</div>
+	
+	<div id="distance" class='row col s12' *ngIf="menuDistanceView">
+		<mat-form-field class="search-form-field">
+			<input matInput type="number" [(ngModel)]='postal' (keyup)="doZipSearch($event)" placeholder="Enter Zip Code...">
+			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="postal='';sortByAll()"><mat-icon>close</mat-icon></button>
+		</mat-form-field>	
+		<div>
+			<p>Enter zip code then choose the distance in which to include in your search.</p>	
+			<mat-radio-group [(ngModel)]="range">
+				<mat-radio-button value="1">1 mi</mat-radio-button>
+				<mat-radio-button value="5">5 mi</mat-radio-button>
+				<mat-radio-button value="10">10 mi</mat-radio-button>
+				<mat-radio-button value="15">15 mi</mat-radio-button>
+				<mat-radio-button value="20">20 mi</mat-radio-button>
+				<mat-radio-button value="25">25 mi</mat-radio-button>
+				<mat-radio-button value="30">30 mi</mat-radio-button>
+			</mat-radio-group>
+			
+		</div>
+		
 	</div>
 
 	<!-- <div id="quick-filters" class="col s12 m12 l6 xl6">
@@ -108,6 +130,11 @@
 </header>
 
 <section class="row">
+	<div class="col s12" style="display:flex;">
+		<div *ngFor="let dispensary of distanceDispensaryResults">
+			{{dispensary.name}} |
+		</div>
+	</div>
 	<div class="col s12">
 		<mat-paginator *ngIf='!loading' [length]="productCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlePage($event)"> </mat-paginator>
 	</div> 

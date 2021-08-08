@@ -144,6 +144,7 @@ header {
 		}
 	}
 	#sort {
+		display:flex;
 		padding: 0 12px 12px 12px !important;
 		font-size: 0.75rem;
 		margin: 0 !important;
@@ -175,18 +176,38 @@ header {
 				border:1px solid black;
 				border-radius: 6px;
 				padding:12px;
+				background-color: #151515;
 			}
 		}
 	}
-}
-#pricing {
-  .slider-cont {
-		.ngx-slider {
-			.ngx-slider-bubble {
-				color:#fff !important;
+	#pricing {
+		.slider-cont {
+			.ngx-slider {
+				.ngx-slider-bubble {
+					color:#fff !important;
+				}
 			}
+			padding:18px;
 		}
-		padding:18px;
+	}
+	#distance {
+		display:flex;
+		padding: 0 12px 12px 12px !important;
+		.mat-form-field-appearance-legacy .mat-form-field-label {
+			top: 2em;
+			left: 0.6em;
+		}		
+		input {
+			width:110px;
+			color:#fff;
+			border:1px solid black;
+			border-radius: 6px;
+			padding:12px;
+			background-color: #151515;
+		}	
+		.mat-radio-button{
+			padding-right: 16px;
+		}	
 	}
 }
 img {
