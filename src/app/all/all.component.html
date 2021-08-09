@@ -10,16 +10,6 @@
 	</div>
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
-			<!-- <button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button>	
-			<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales')" >Sales<span class="sort-count">(##)</span></button>		
-			<mat-divider></mat-divider>
-			Location:
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(1)">D-1</button>		
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(2)">D-2</button>		
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		 -->
-			
-			
 			<mat-divider ></mat-divider>
 			<p>Filter products by strain names and type. More indept querying capable under search. <button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button></p> 
 			<mat-divider></mat-divider>
@@ -76,57 +66,22 @@
 	
 	<div id="distance" class='row col s12' *ngIf="menuDistanceView">
 		<mat-form-field class="search-form-field">
-			<input matInput type="number" [(ngModel)]='postal' (keyup)="doZipSearch($event)" placeholder="Enter Zip Code...">
+			<input matInput type="number" [(ngModel)]='postal' (keyup)="doZipSearch($event)" placeholder="Enter Zip Code">
 			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="postal='';sortByAll()"><mat-icon>close</mat-icon></button>
 		</mat-form-field>	
 		<div>
 			<p>Enter zip code then choose the distance in which to include in your search.</p>	
-			<mat-radio-group [(ngModel)]="range">
+			<mat-radio-group [(ngModel)]="range" (change)="setDistanceRange()">
 				<mat-radio-button value="1">1 mi</mat-radio-button>
-				<mat-radio-button value="5">5 mi</mat-radio-button>
+				<mat-radio-button value="5" checked="true">5 mi</mat-radio-button>
 				<mat-radio-button value="10">10 mi</mat-radio-button>
 				<mat-radio-button value="15">15 mi</mat-radio-button>
 				<mat-radio-button value="20">20 mi</mat-radio-button>
 				<mat-radio-button value="25">25 mi</mat-radio-button>
 				<mat-radio-button value="30">30 mi</mat-radio-button>
 			</mat-radio-group>
-			
 		</div>
-		
 	</div>
-
-	<!-- <div id="quick-filters" class="col s12 m12 l6 xl6">
-		<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">All</button>		
-		<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(1)">D-1</button>		
-		<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(2)">D-2</button>		
-		<button class="btn-quick-all" mat-raised-button color="accent" (click)="distance(3)">D-3</button>		
-		<button *ngFor='let item of sortMap' mat-button (click)="sort(item.name)" [ngClass]='{"quick-sales": item.type == "quick-sales", "quick-sort": item.type == "quick-sort", "active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
-	</div>
-	 -->
-	<!-- <div class="search col s12 m12 l6 xl3">
-		<div>
-			<mat-form-field class="search-form-field">
-				<div class="search-cont">
-					<input matInput type="text" [(ngModel)]='search' (keyup)="doSearch($event)">
-					<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search='';sortByAll()"><mat-icon>close</mat-icon></button>
-					<button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button>
-				</div>
-			</mat-form-field>
-		</div>
-	</div> -->
-
-	<!-- <div class="col s12 m12 l6 xl3">
-		<mat-form-field id="select-dispensary" appearance="fill">
-			<mat-label>Location...</mat-label>
-			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
-				<mat-option *ngFor="let dispensary of dispensaryList" [value]="dispensary.value">{{dispensary.name}}</mat-option>
-			</mat-select>
-		</mat-form-field>
-
-	</div> -->
-
-
-
 </header>
 
 <section class="row">
