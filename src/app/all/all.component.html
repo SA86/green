@@ -85,7 +85,7 @@
 </header>
 
 <section class="row">
-	<div class="col s12" style="display:flex;flex-wrap:wrap;">
+	<div class="col s12" style="display:flex;flex-wrap:wrap;" *ngIf="productFilters.distance.length > 0">
 		<div *ngFor="let dispensary of productFilters.distance">
 			{{dispensary.name}} |
 		</div><span>( {{this.productFilters.distance.length }})</span>

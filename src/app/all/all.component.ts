@@ -147,15 +147,20 @@ export class AllComponent implements OnInit {
 	}
 	
 	processSorting(type) {
-		//take originalProducts and process through the productFilters
 		switch (type) {
-			case 'pricerange':
+			case 'quick':
+				this.filterProducts(type);
+				break;
+			case 'query':
 				this.filterProducts(type);
 				break;
 			case 'locations':
 				this.filterProducts(type);
 				break;
-			case 'query':
+			case 'pricerange':
+				this.filterProducts(type);
+				break;
+			case 'distance':
 				this.filterProducts(type);
 				break;
 		
@@ -176,37 +181,41 @@ export class AllComponent implements OnInit {
 					(inRange || this.productFilters.distance.length === 0 || type === 'locations') // distance // bypass on locations
 						&&
 					(name.includes(this.productFilters.query))	// QUERY search				
+							
 			) {
+				console.log('h88 producttt', product);
 				return product
 			}
 		});
 		this.products = filtered;
 		this.paginateItems();			
 	}
-
-	// filterByDispensaryLoc(): void {
-		// console.log('h88 filterByDispensaryLoc');
-		// //quick, query, pricerange
-		// let filtered = filter(this.originalProducts, (product) => {
-		// 
-		// 	let inDispensary = this.productFilters.locations.indexOf(product.DispensaryID);
-		// 	let name = product.Name.toLowerCase();
-		// 
-		// 	// let inRange = find(this.productFilters.distance, { 'value' : product.DispensaryID});
-		// 	console.log('h88 00', name.includes(this.productFilters.query));
-		// 
-		// 	if ((product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) // 0-120
-		// 				&&
-		// 			(inDispensary > -1 || this.productFilters.locations.length === 0) // products is in our location array
-		// 				&&
-		// 			(name.includes(this.productFilters.query))
-		// 	) {
-		// 		return product
-		// 	}
-		// });
-		// this.products = filtered;		
-	// }
 	
+	sort(name, selected) {
+		this.productFilters.query = name.toLowerCase();
+		this.processSorting('query');
+		// let query = name.toLowerCase();
+		// let typeSelected = selected.toLowerCase();
+		// this.productFilters.quick.strain = query;
+		// if (query === 'sales') {
+		// 	this.quickFilterActive(name, null);
+		// 	this.products = this.saleItems;
+		// 	this.productCount = this.products.length;
+		// } else if(typeSelected === 'strain') { 
+		// 	let item = find(this.sortStrainMap, { 'name' : name});
+		// 	this.quickFilterActive(name, 'strain');
+		// 	this.productFilters.quick.strain = name;
+		// 	this.products = item.items;
+		// 	this.productCount = this.products.length;
+		// } else if(typeSelected === 'type') {
+		// 	let item = find(this.sortTypeMap, { 'name' : name});
+		// 	this.quickFilterActive(name, 'type');
+		// 	this.productFilters.quick.type = name;
+		// 	this.products = item.items;
+		// 	this.productCount = this.products.length;
+		// }
+	}	
+
 	//sort by dispensary
 	sortByDispensary(o) {
 		this.productFilters.locations = o.value;
@@ -236,24 +245,15 @@ export class AllComponent implements OnInit {
 			let query = this.productFilters.query.toLowerCase();
 			this.productFilters.query = query;
 			this.processSorting('query');
-			// let searched = filter(this.originalProducts, (o) => {
-			// 	let name = o.Name.toLowerCase();
-			// 	if (name.includes(query)) {
-			// 		return o;
-			// 	}
-			// });
-			// this.products = searched;
-			// this.productCount = this.products.length;
 		}
 	}
 	
-	// search zip query
+	// search zip query // handle hard return
 	doZipSearch(e) {
 		if (e.keyCode === 13) {
 			this.getGeo();
 		}
 	}
-	
 	
 	// gathers dispensary in range
 	getGeo() { 
@@ -265,7 +265,7 @@ export class AllComponent implements OnInit {
 				return item
 			}			
 		}));
-		console.log('h88 productFilters.distance', this.productFilters.distance);
+		this.processSorting('distance');
 	}
 
 	//calculates range between host and all dispensaries
@@ -347,8 +347,6 @@ export class AllComponent implements OnInit {
 		this.productFilters.pricerange[1] = e;
 	}
 
-
-
 	// show all
 	sortByAll() {
 		this.products = this.originalProducts;
@@ -369,28 +367,7 @@ export class AllComponent implements OnInit {
 		this.paginateItems();
 	}
 
-	sort(name, selected) {
-		let query = name.toLowerCase();
-		let typeSelected = selected.toLowerCase();
-		
-		if (query === 'sales') {
-			this.quickFilterActive(name, null);
-			this.products = this.saleItems;
-			this.productCount = this.products.length;
-		} else if(typeSelected === 'strain') { 
-			let item = find(this.sortStrainMap, { 'name' : name});
-			this.quickFilterActive(name, 'strain');
-			this.productFilters.quick.strain = name;
-			this.products = item.items;
-			this.productCount = this.products.length;
-		} else if(typeSelected === 'type') {
-			let item = find(this.sortTypeMap, { 'name' : name});
-			this.quickFilterActive(name, 'type');
-			this.productFilters.quick.type = name;
-			this.products = item.items;
-			this.productCount = this.products.length;
-		}
-	}
+
 	
 
 	
