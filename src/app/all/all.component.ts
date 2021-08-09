@@ -59,30 +59,9 @@ export class AllComponent implements OnInit {
 	menuLocationView: boolean = false;
 	menuPricingView: boolean = false;
 	menuSortView: boolean = false;
-	menuDistanceView: boolean = true;
+	menuDistanceView: boolean = false;
 	distanceDispensaryResults: object = [];
-	quickStrainSorts = [
-		'Bio Diesel',
-		'Blue',
-		'Cheese',
-		'Cherry',
-		'Cookies',
-		'Cooks',
-		'Dawg',
-		'Diesel',
-		'GDP',
-		'Grape',
-		'GMO',
-		'GSC',
-		'Kush',
-		'MAC',
-		'Orange',
-		'Pineapple',
-		'PHK',
-		'Purple',
-		'Strawberry',
-		'Zkittles'
-	];
+	quickStrainSorts = [ 'Bio Diesel', 'Blue', 'Cheese', 'Cherry', 'Cookies', 'Cooks', 'Dawg', 'Diesel', 'GDP', 'Grape', 'GMO', 'GSC', 'Kush', 'MAC', 'Orange', 'Pineapple', 'PHK', 'Purple', 'Strawberry', 'Zkittles' ];
 	quickTypesSorts = [ 'Badder', 'Crumble', 'Diamonds', 'Live Resin', 'Rosin', 'RSO', 'Sauce', 'Shatter', 'Sugar' ];
 	sortStrainMap = []; // strain quick sorts
 	sortTypeMap = []; // type quick sorts
@@ -106,7 +85,10 @@ export class AllComponent implements OnInit {
 		}
 	};	
 	productFilters: any = {
-		'quick': ['strain', 'types'],
+		'quick': {
+			'strain': [],
+			'types': [],
+		},
 		// 
 		'query': '',
 		// locations, pricerange, distance
@@ -163,6 +145,44 @@ export class AllComponent implements OnInit {
 	ngOnInit() {
 		this.getConcentrates();
 	}
+	
+	processSorting(type) {
+		//take originalProducts and process through the productFilters
+		switch (type) {
+			case 'pricerange':
+				this.filterByPriceRange();
+				break;
+			case 'locations':
+				
+				break;
+		
+			default:
+				break;
+		}
+	}	
+	
+	filterByPriceRange() {
+		console.log('h88 filterByPriceRange');
+		let filteredbyCost = filter(this.originalProducts, (product) => {
+			let inDispensary = this.productFilters.locations.indexOf(product.DispensaryID);
+			let inRange = find(this.productFilters.distance, { 'value' : product.DispensaryID});
+			if(product.DispensaryID === '5f6bdb8157c27500f22d66ea') {
+				console.log('h88 ', inDispensary, inRange);
+			}
+			if ((product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) // 0-120
+						&&
+					(inDispensary > -1 || this.productFilters.locations.length === 0) // products is in our location array
+						&&
+					(inRange || this.productFilters.distance.length === 0) // distance
+			) {
+				return product
+			}
+		});
+		this.products = filteredbyCost;
+		this.paginateItems();			
+	}
+
+
 
 	setPageSizeOptions(setPageSizeOptionsInput: string) {
 		this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
@@ -275,20 +295,22 @@ export class AllComponent implements OnInit {
 		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
 
-	//sort by cost
-	sortByCost(e) {
-		let filteredbyCost = filter(this.originalProducts, (product) => {
-			if (product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) {
-				return product
-			}
-		});
-		this.products = filteredbyCost;
-		this.paginateItems();	
-	}
+	// //sort by cost
+	// sortByCost(e) {
+	// 	let filteredbyCost = filter(this.originalProducts, (product) => {
+	// 		if (product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) {
+	// 			return product
+	// 		}
+	// 	});
+	// 	this.products = filteredbyCost;
+	// 	this.paginateItems();	
+	// }
+	
 	//sort by cost
 	sortByCostLow(e) {
 		this.productFilters.pricerange[0] = e;
 	}
+	
 	//sort by cost
 	sortByCostHigh(e) {
 		this.productFilters.pricerange[1] = e;
@@ -351,15 +373,19 @@ export class AllComponent implements OnInit {
 		} else if(typeSelected === 'strain') { 
 			let item = find(this.sortStrainMap, { 'name' : name});
 			this.quickFilterActive(name, 'strain');
+			this.productFilters.quick.strain = name;
 			this.products = item.items;
 			this.productCount = this.products.length;
 		} else if(typeSelected === 'type') {
 			let item = find(this.sortTypeMap, { 'name' : name});
 			this.quickFilterActive(name, 'type');
+			this.productFilters.quick.type = name;
 			this.products = item.items;
 			this.productCount = this.products.length;
 		}
 	}
+	
+
 	
 	// toggles active quick sort class
 	quickFilterActive(name, type) { 
