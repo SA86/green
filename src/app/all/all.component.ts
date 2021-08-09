@@ -108,9 +108,9 @@ export class AllComponent implements OnInit {
 	productFilters: any = {
 		'quick': ['strain', 'types'],
 		// 
-		'query': '%string%',
+		'query': '',
 		// locations, pricerange, distance
-		'locations': '',
+		'locations': [],
 		// quick, pricerange
 		'pricerange': [1,120],
 		// quick, locations, distance
@@ -183,7 +183,8 @@ export class AllComponent implements OnInit {
 	// search by query
 	doSearch(e) {
 		if (e.keyCode === 13) {
-			let query = this.search.toLowerCase();
+			let query = this.productFilters.query.toLowerCase();
+			this.productFilters.query = query;
 			let searched = filter(this.originalProducts, (o) => {
 				let name = o.Name.toLowerCase();
 				if (name.includes(query)) {
@@ -308,22 +309,12 @@ export class AllComponent implements OnInit {
 			dispensary = filter(this.originalProducts, (e) => {
 				for (let i = 0; i < o.value.length; i++) {
 					if (e.DispensaryID === o.value[i]) {
-						// this.productFilters.locations.push(e.DispensaryID);
 						d.push(e.DispensaryID);
 						return o
 					}
 				}
 			});
-			// for (let i = 0; i < o.value.length; i++) {
-			// 	console.log('h88 o.value', o.value);
-			// 	// if (e.DispensaryID === o.value[i]) {
-			// 	// 	// this.productFilters.locations.push(e.DispensaryID);
-			// 	// 	d.push(e.DispensaryID);
-			// 	// 	return o
-			// 	// }
-			// }			
 			this.productFilters.locations = o.value;
-			console.log('h88 this.productFilters.locations', this.productFilters.locations);
 			this.products = dispensary;
 			this.productCount = this.products.length;
 		}

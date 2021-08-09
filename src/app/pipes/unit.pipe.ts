@@ -21,7 +21,6 @@ export class UnitPipe implements PipeTransform {
 				break;
 		
 			default:
-				console.log('h88 value pipe', value);
 				return ''
 				break;
 		}
