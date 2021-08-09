@@ -71,7 +71,7 @@
 		</mat-form-field>	
 		<div>
 			<p>Enter zip code then choose the distance in which to include in your search.</p>	
-			<mat-radio-group [(ngModel)]="range" (change)="getGeo()">
+			<mat-radio-group [(ngModel)]="productFilters.range" (change)="getGeo()">
 				<mat-radio-button value="1">1 mi</mat-radio-button>
 				<mat-radio-button value="5" checked="true">5 mi</mat-radio-button>
 				<mat-radio-button value="10">10 mi</mat-radio-button>
@@ -81,26 +81,42 @@
 				<mat-radio-button value="30">30 mi</mat-radio-button>
 			</mat-radio-group>
 		</div>
+		<div style="flex-basis:100%">Products from these dispensaries are being show in the results. Change the distance radius to effect.</div>
+		<div style="display:flex;flex-wrap:wrap;font-size:0.75rem;color:#adaece;" *ngIf="productFilters.distance.length > 0">
+			<div *ngFor="let dispensary of productFilters.distance">
+				{{dispensary.name}},&nbsp;&nbsp;
+			</div>
+			<span>( {{this.productFilters.distance.length }})</span>
+		</div>		
 	</div>
 </header>
 
 <section class="row">
 	<div class="col s12" style="display:flex;flex-wrap:wrap;">
-		
+		<!-- CHIPS -->
 		<mat-chip-list>
-			<div *ngIf='productFilters.query'>
-				<mat-chip [selectable]="selectable" [removable]="removable">{{productFilters.query}}
+			<div>
+				<mat-chip *ngIf="productFilters.query" [selectable]="selectable" [removable]="removable">{{productFilters.query}}
 					<mat-icon matChipRemove (click)="removeSortChip('query')">cancel</mat-icon>
+				</mat-chip>
+				<mat-chip *ngIf="productFilters.pricerange[0] != 1 || productFilters.pricerange[1] != 120" [selectable]="selectable" [removable]="removable">${{productFilters.pricerange[0]}}-{{productFilters.pricerange[1]}}
+					<mat-icon matChipRemove (click)="removeSortChip('pricerange')">cancel</mat-icon>
+				</mat-chip>
+				<mat-chip  [selectable]="selectable" [removable]="removable">{{productFilters.range}} mile radius
+					<mat-icon matChipRemove (click)="removeSortChip('distance')">cancel</mat-icon>
+				</mat-chip>
+				<mat-chip *ngIf="productFilters.locations.length > 0"  [selectable]="selectable" [removable]="removable">Location Filters
+					<mat-icon matChipRemove (click)="removeSortChip('locations')">cancel</mat-icon>
 				</mat-chip>
 			</div>
 		</mat-chip-list>		
 			
 	</div>
-	<div class="col s12" style="display:flex;flex-wrap:wrap;" *ngIf="productFilters.distance.length > 0">
+	<!-- <div class="col s12" style="display:flex;flex-wrap:wrap;" *ngIf="productFilters.distance.length > 0">
 		<div *ngFor="let dispensary of productFilters.distance">
 			{{dispensary.name}} |
 		</div><span>( {{this.productFilters.distance.length }})</span>
-	</div>
+	</div> -->
 	<div class="col s12">
 		<mat-paginator *ngIf='!loading' [length]="productCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = handlePage($event)"> </mat-paginator>
 	</div> 

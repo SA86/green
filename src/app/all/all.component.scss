@@ -191,6 +191,13 @@ header {
 		display:flex;
 		flex-wrap:wrap;
 		padding: 0 12px 12px 12px !important;
+		.mat-form-field-wrapper {
+			border: 1px solid #000;
+			border-radius: 6px;
+		}
+		.mat-select-value-text {
+			color:#fff;
+		 }
 	}
 	
 	#distance {

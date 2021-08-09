@@ -43,7 +43,6 @@ export class AllComponent implements OnInit {
 	formSearch: FormGroup = new FormGroup({});
 	search: string = '';
 	postal: number = 97006;
-	range: number = 5;
 	pageSize: number = 125;
 	pageSizeOptions = [5, 10, 25, 100, 125, 200, 500, 1000];
 	currentPage = 0;
@@ -98,7 +97,8 @@ export class AllComponent implements OnInit {
 		// quick, locations, distance
 		'cost': ['sales', 'low/high'],
 		// locations, pricesrange, distance
-		'distance': []
+		'distance': [],
+		'range': 5
 		// pricesrange
 	};			
 	
@@ -161,6 +161,8 @@ export class AllComponent implements OnInit {
 				this.filterProducts(type);
 				break;
 			case 'distance':
+				this.dispensary.setValue(''); // clear location select
+				this.productFilters.locations = []; // clear locations
 				this.filterProducts(type);
 				break;
 		
@@ -195,6 +197,21 @@ export class AllComponent implements OnInit {
 		if (type === 'query') {
 			this.productFilters.query = '';
 			this.processSorting('query');
+			
+		}
+		if (type === 'distance') {
+			this.productFilters.range = 30;
+			this.getGeo();
+		}
+		if (type === 'locations') {
+			this.productFilters.locations = [];
+			this.dispensary.setValue('');
+			this.processSorting('locations');
+		}
+		if (type === 'pricerange') {
+			this.productFilters.pricerange[0] = 1;
+			this.productFilters.pricerange[1] = 120;
+			this.processSorting('pricerange');
 			
 		}
 	}
@@ -249,7 +266,7 @@ export class AllComponent implements OnInit {
 		let long = this.postalCodes[this.postal].long;
 		this.productFilters.distance = filter(this.dispensaryList, ((item)=> {
 			let distance = this.calculateDistance(lat, long, item.geo[0],  item.geo[1]);
-			if(this.range >= distance) {
+			if(this.productFilters.range >= distance) {
 				return item
 			}			
 		}));
@@ -356,9 +373,6 @@ export class AllComponent implements OnInit {
 		this.paginateItems();
 	}
 
-
-	
-
 	
 	// toggles active quick sort class
 	quickFilterActive(name, type) { 
@@ -415,6 +429,7 @@ export class AllComponent implements OnInit {
 			let sortedByPrice = sortBy(data, ['Prices[0]']); // sort by lowest price
 			this.products = this.removeUnusedProducts(sortedByPrice); // remove items from the list
 			this.originalProducts = this.products; // create copy of items
+			this.getGeo();
 			this.paginateItems();
 			this.loading = false;
 			console.log('h88 prod', this.products);
