@@ -137,12 +137,12 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard', 'postal': 97224, 'geo':[45.3989266,-122.8014775], 'url':'https://www.chalicefarms.com/locations/tigard-cannabis-dispensary'  },
 		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa', 'postal': 97223, 'geo':[45.4380797,-122.7564607], 'url':'https://electriclettuce.com/location/tigard-dispensary?utm_source=google&utm_medium=local&utm_campaign=website_button' },
 		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard', 'postal': 97223, 'geo':[45.4404432,-122.7514242], 'url':'http://kaleafa.com/' },
-		// { 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek', 'postal': 97006, 'geo':[66666], 'url':'dat' },
-		// { 'name': 'Green Planet-KingCity', 'value': 196138, 'postal': 97006, 'geo':[66666], 'url':'dat' },
-		// { 'name': 'Green Goddess-SW.PDX', 'value': 85676, 'postal': 97006, 'geo':[66666], 'url':'dat' },
-		// { 'name': 'Parlour-E.Beaverton', 'value': 'AYYz8RrZ62Zqme9fv', 'postal': 97006, 'geo':[66666], 'url':'dat' },
-		// { 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97006, 'geo':[66666], 'url':'dat' },
-		// { 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97006, 'geo':[66666], 'url':'dat' },
+		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek', 'postal': 97216, 'geo':[45.4462891,-122.7334938], 'url':'https://nectar.store/barbur/' },
+		{ 'name': 'Green Planet-KingCity', 'value': 196138, 'postal': 97224, 'geo':[45.4085658,-122.7974766], 'url':'https://www.thegreenplanet.net/' },
+		{ 'name': 'Green Goddess Remedies', 'value': 85676, 'postal': 97215, 'geo':[45.4549689,-122.7353912], 'url':'https://greengoddesspdx.com/' },
+		{ 'name': 'Parlour-Beaverton', 'value': 'AYYz8RrZ62Zqme9fv', 'postal': 97225, 'geo':[45.4927978,-122.8394032], 'url':'http://www.parlourcannabis.com/' },
+		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97219, 'geo':[45.4615768,-122.7055526], 'url':'https://naturalremediespdx.com/' },
+		{ 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo':[45.5048869,-122.6283683], 'url':'https://brothers-cannabis.com/' },
 	];
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) { }
