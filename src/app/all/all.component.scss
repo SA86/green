@@ -222,6 +222,8 @@ header {
 	}
 }
 #utility-bar {
+	display:flex;
+	flex-wrap:wrap;
 	#chips {
 		padding:12px !important;
 	}
