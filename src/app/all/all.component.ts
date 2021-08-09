@@ -154,7 +154,9 @@ export class AllComponent implements OnInit {
 				break;
 			case 'locations':
 				this.filterProducts(type);
-				// this.filterByDispensaryLoc();
+				break;
+			case 'query':
+				this.filterProducts(type);
 				break;
 		
 			default:
@@ -173,7 +175,7 @@ export class AllComponent implements OnInit {
 						&&
 					(inRange || this.productFilters.distance.length === 0 || type === 'locations') // distance // bypass on locations
 						&&
-					(name.includes(this.productFilters.query))						
+					(name.includes(this.productFilters.query))	// QUERY search				
 			) {
 				return product
 			}
@@ -207,29 +209,8 @@ export class AllComponent implements OnInit {
 	
 	//sort by dispensary
 	sortByDispensary(o) {
-		// let dispensary;
-		// let d = [];
-		// if (o.value.length === 1) { // one selection
-		// 	dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
-		// 	this.products = dispensary;
-		// 	this.productFilters.locations = o.value[0];
-		// } else if (o.value.length === 0) { // no selection, show all
-		// 	this.products = this.originalProducts;
-		// 	this.productFilters.locations = [];
-		// } else { // multi select
-		// 	dispensary = filter(this.originalProducts, (e) => {
-		// 		for (let i = 0; i < o.value.length; i++) {
-		// 			if (e.DispensaryID === o.value[i]) {
-		// 				d.push(e.DispensaryID);
-		// 				return o
-		// 			}
-		// 		}
-		// 	});
-			this.productFilters.locations = o.value;
-			this.processSorting('locations');
-			// this.products = dispensary;
-			// this.productCount = this.products.length;
-		// }
+		this.productFilters.locations = o.value;
+		this.processSorting('locations');
 	}	
 
 
@@ -254,14 +235,15 @@ export class AllComponent implements OnInit {
 		if (e.keyCode === 13) {
 			let query = this.productFilters.query.toLowerCase();
 			this.productFilters.query = query;
-			let searched = filter(this.originalProducts, (o) => {
-				let name = o.Name.toLowerCase();
-				if (name.includes(query)) {
-					return o;
-				}
-			});
-			this.products = searched;
-			this.productCount = this.products.length;
+			this.processSorting('query');
+			// let searched = filter(this.originalProducts, (o) => {
+			// 	let name = o.Name.toLowerCase();
+			// 	if (name.includes(query)) {
+			// 		return o;
+			// 	}
+			// });
+			// this.products = searched;
+			// this.productCount = this.products.length;
 		}
 	}
 	
