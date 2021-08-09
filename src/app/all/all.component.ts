@@ -89,10 +89,8 @@ export class AllComponent implements OnInit {
 	saleItems: any;
 	bestSaleItems: any;
 	removable: boolean = true;
-	minValue: number = 5;
+	minValue: number = 1;
 	maxValue: number = 120;
-	sortCostLow: number = 5;
-	sortCostHigh: number = 120;
 	soptions: Options = {
 		floor: 0,
 		ceil: 120,
@@ -106,6 +104,20 @@ export class AllComponent implements OnInit {
 					return "$" + value;
 			}
 		}
+	};	
+	productFilters: any = {
+		'quick': ['strain', 'types'],
+		// 
+		'query': '%string%',
+		// locations, pricerange, distance
+		'locations': '',
+		// quick, pricerange
+		'pricerange': [1,120],
+		// quick, locations, distance
+		'cost': ['sales', 'low/high'],
+		// locations, pricesrange, distance
+		'distance': []
+		// pricesrange
 	};			
 	
 	dispensaryList: DispensaryList[] = [
@@ -186,27 +198,25 @@ export class AllComponent implements OnInit {
 	// search zip query
 	doZipSearch(e) {
 		if (e.keyCode === 13) {
-			this.getGeo(this.postal);
+			this.getGeo();
 		}
 	}
 	
-	// calculates range between host and all dispensaries, return those in range
-	getGeo(code) { 
-		let lat = this.postalCodes[code].lat;
-		let long = this.postalCodes[code].long;
-		this.distanceDispensaryResults = filter(this.dispensaryList, ((item)=> {
+	
+	// gathers dispensary in range
+	getGeo() { 
+		let lat = this.postalCodes[this.postal].lat;
+		let long = this.postalCodes[this.postal].long;
+		this.productFilters.distance = filter(this.dispensaryList, ((item)=> {
 			let distance = this.calculateDistance(lat, long, item.geo[0],  item.geo[1]);
 			if(this.range >= distance) {
 				return item
 			}			
 		}));
-	}
-	
-	setDistanceRange(): void {
-		console.log('h88 range', this.range);
-		this.getGeo(this.postal);
+		console.log('h88 productFilters.distance', this.productFilters.distance);
 	}
 
+	//calculates range between host and all dispensaries
 	calculateDistance(lat1, lon1, lat2, lon2) {
 		let unit = '';
 		var radlat1 = Math.PI * lat1/180;
@@ -267,7 +277,7 @@ export class AllComponent implements OnInit {
 	//sort by cost
 	sortByCost(e) {
 		let filteredbyCost = filter(this.originalProducts, (product) => {
-			if (product.Prices[0] >= this.sortCostLow && product.Prices[0] <= this.sortCostHigh) {
+			if (product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) {
 				return product
 			}
 		});
@@ -276,52 +286,48 @@ export class AllComponent implements OnInit {
 	}
 	//sort by cost
 	sortByCostLow(e) {
-		this.sortCostLow = e;
+		this.productFilters.pricerange[0] = e;
 	}
 	//sort by cost
 	sortByCostHigh(e) {
-		this.sortCostHigh = e;
+		this.productFilters.pricerange[1] = e;
 	}
 
 	//sort by dispensary
 	sortByDispensary(o) {
 		let dispensary;
+		let d = [];
 		if (o.value.length === 1) { // one selection
 			dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
 			this.products = dispensary;
+			this.productFilters.locations = o.value[0];
 		} else if (o.value.length === 0) { // no selection, show all
 			this.products = this.originalProducts;
+			this.productFilters.locations = [];
 		} else { // multi select
 			dispensary = filter(this.originalProducts, (e) => {
 				for (let i = 0; i < o.value.length; i++) {
 					if (e.DispensaryID === o.value[i]) {
+						// this.productFilters.locations.push(e.DispensaryID);
+						d.push(e.DispensaryID);
 						return o
 					}
 				}
 			});
+			// for (let i = 0; i < o.value.length; i++) {
+			// 	console.log('h88 o.value', o.value);
+			// 	// if (e.DispensaryID === o.value[i]) {
+			// 	// 	// this.productFilters.locations.push(e.DispensaryID);
+			// 	// 	d.push(e.DispensaryID);
+			// 	// 	return o
+			// 	// }
+			// }			
+			this.productFilters.locations = o.value;
+			console.log('h88 this.productFilters.locations', this.productFilters.locations);
 			this.products = dispensary;
 			this.productCount = this.products.length;
 		}
 	}
-
-	// // builds/filters  sales 
-	// sortSales(products): any {
-	// 	let filteredForSale = filter(products, (o) => {
-	// 		if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
-	// 			let diff = o.Prices[0] - o.recSpecialPrices[0];
-	// 			let off = diff / o.Prices[0];
-	// 			o.discount = off.toFixed(2);
-	// 			o.discount = o.discount * 100;
-	// 			o.discountraw = o.discount * 100;
-	// 			o.discount = `$${diff.toFixed(2)} (${o.discount.toFixed()}%)`;
-	// 			return o
-	// 		}
-	// 	});
-	// 	let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
-	// 	this.saleItems = sortedBySale;
-	// 	this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);
-	// 	return sortedBySale
-	// }
 
 	// show all
 	sortByAll() {
@@ -420,12 +426,8 @@ export class AllComponent implements OnInit {
 			this.products = this.removeUnusedProducts(sortedByPrice); // remove items from the list
 			this.originalProducts = this.products; // create copy of items
 			this.paginateItems();
-			// this.productCount = this.products.length; 
-			// this.productsChunks = chunk(this.products, this.pageSize);
-			// this.products = this.productsChunks[0];			
 			this.loading = false;
 			console.log('h88 prod', this.products);
-			console.log('h88 postal', PostalCodeData[97006]);
 			this.gatherQuickSorts(this.originalProducts);
 			this.gatherSales(this.originalProducts);
 		});
