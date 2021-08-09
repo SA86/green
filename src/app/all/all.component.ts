@@ -93,7 +93,7 @@ export class AllComponent implements OnInit {
 		'query': '',
 		// locations, pricerange, distance
 		'locations': [],
-		// quick, pricerange
+		// quick, query, pricerange
 		'pricerange': [1,120],
 		// quick, locations, distance
 		'cost': ['sales', 'low/high'],
@@ -150,10 +150,11 @@ export class AllComponent implements OnInit {
 		//take originalProducts and process through the productFilters
 		switch (type) {
 			case 'pricerange':
-				this.filterByPriceRange();
+				this.filterProducts(type);
 				break;
 			case 'locations':
-				
+				this.filterProducts(type);
+				// this.filterByDispensaryLoc();
 				break;
 		
 			default:
@@ -161,27 +162,75 @@ export class AllComponent implements OnInit {
 		}
 	}	
 	
-	filterByPriceRange() {
-		console.log('h88 filterByPriceRange');
-		let filteredbyCost = filter(this.originalProducts, (product) => {
+	filterProducts(type:string): void {
+		let filtered = filter(this.originalProducts, (product) => {
 			let inDispensary = this.productFilters.locations.indexOf(product.DispensaryID);
 			let inRange = find(this.productFilters.distance, { 'value' : product.DispensaryID});
-			if(product.DispensaryID === '5f6bdb8157c27500f22d66ea') {
-				console.log('h88 ', inDispensary, inRange);
-			}
+			let name = product.Name.toLowerCase();
 			if ((product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) // 0-120
 						&&
 					(inDispensary > -1 || this.productFilters.locations.length === 0) // products is in our location array
 						&&
-					(inRange || this.productFilters.distance.length === 0) // distance
+					(inRange || this.productFilters.distance.length === 0 || type === 'locations') // distance // bypass on locations
+						&&
+					(name.includes(this.productFilters.query))						
 			) {
 				return product
 			}
 		});
-		this.products = filteredbyCost;
+		this.products = filtered;
 		this.paginateItems();			
 	}
 
+	// filterByDispensaryLoc(): void {
+		// console.log('h88 filterByDispensaryLoc');
+		// //quick, query, pricerange
+		// let filtered = filter(this.originalProducts, (product) => {
+		// 
+		// 	let inDispensary = this.productFilters.locations.indexOf(product.DispensaryID);
+		// 	let name = product.Name.toLowerCase();
+		// 
+		// 	// let inRange = find(this.productFilters.distance, { 'value' : product.DispensaryID});
+		// 	console.log('h88 00', name.includes(this.productFilters.query));
+		// 
+		// 	if ((product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) // 0-120
+		// 				&&
+		// 			(inDispensary > -1 || this.productFilters.locations.length === 0) // products is in our location array
+		// 				&&
+		// 			(name.includes(this.productFilters.query))
+		// 	) {
+		// 		return product
+		// 	}
+		// });
+		// this.products = filtered;		
+	// }
+	
+	//sort by dispensary
+	sortByDispensary(o) {
+		// let dispensary;
+		// let d = [];
+		// if (o.value.length === 1) { // one selection
+		// 	dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
+		// 	this.products = dispensary;
+		// 	this.productFilters.locations = o.value[0];
+		// } else if (o.value.length === 0) { // no selection, show all
+		// 	this.products = this.originalProducts;
+		// 	this.productFilters.locations = [];
+		// } else { // multi select
+		// 	dispensary = filter(this.originalProducts, (e) => {
+		// 		for (let i = 0; i < o.value.length; i++) {
+		// 			if (e.DispensaryID === o.value[i]) {
+		// 				d.push(e.DispensaryID);
+		// 				return o
+		// 			}
+		// 		}
+		// 	});
+			this.productFilters.locations = o.value;
+			this.processSorting('locations');
+			// this.products = dispensary;
+			// this.productCount = this.products.length;
+		// }
+	}	
 
 
 	setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -316,31 +365,7 @@ export class AllComponent implements OnInit {
 		this.productFilters.pricerange[1] = e;
 	}
 
-	//sort by dispensary
-	sortByDispensary(o) {
-		let dispensary;
-		let d = [];
-		if (o.value.length === 1) { // one selection
-			dispensary = filter(this.originalProducts, ['DispensaryID', o.value[0]]);
-			this.products = dispensary;
-			this.productFilters.locations = o.value[0];
-		} else if (o.value.length === 0) { // no selection, show all
-			this.products = this.originalProducts;
-			this.productFilters.locations = [];
-		} else { // multi select
-			dispensary = filter(this.originalProducts, (e) => {
-				for (let i = 0; i < o.value.length; i++) {
-					if (e.DispensaryID === o.value[i]) {
-						d.push(e.DispensaryID);
-						return o
-					}
-				}
-			});
-			this.productFilters.locations = o.value;
-			this.products = dispensary;
-			this.productCount = this.products.length;
-		}
-	}
+
 
 	// show all
 	sortByAll() {
