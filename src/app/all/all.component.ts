@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 // import * as PostalCodeData from "./postal-codes.json";
 import PostalCodeData from "./postal-codes.json";
+// import DispensaryListData from "./dispensary-list.json";
 import { catchError, retry } from 'rxjs/operators';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy } from 'lodash';
 
@@ -53,7 +54,7 @@ export class AllComponent implements OnInit {
 	menuSearchView: boolean = false;
 	menuLocationView: boolean = false;
 	menuPricingView: boolean = false;
-	menuSortView: boolean = false;
+	menuAboutView: boolean = false;
 	menuDistanceView: boolean = false;
 	distanceDispensaryResults: object = [];
 	quickStrainSorts = [ 'Bio Diesel', 'Blue', 'Cheese', 'Cherry', 'Cookies', 'Cooks', 'Dawg', 'Diesel', 'GDP', 'Grape', 'GMO', 'GSC', 'Kush', 'MAC', 'Orange', 'Pineapple', 'PHK', 'Purple', 'Strawberry', 'Zkittles' ];
@@ -98,6 +99,7 @@ export class AllComponent implements OnInit {
 		// pricesrange
 	};			
 	
+	// dispensaryList: DispensaryList[] = DispensaryListData;
 	dispensaryList: DispensaryList[] = [
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy', 'postal': 97006, 'geo':[45.5203821,-122.8431368], 'url':'dat'  },
 		{ 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj', 'postal': 97006, 'geo':[45.4966407,-122.8912542], 'url':'dat'  },
@@ -137,6 +139,7 @@ export class AllComponent implements OnInit {
 
 	constructor(private httpClient: HttpClient, private providersService: ProvidersService) {
 		this.postalCodes = PostalCodeData;
+		// this.dispensaryListData = DispensaryListData;
 	}
 
 	ngOnInit() {
@@ -182,7 +185,6 @@ export class AllComponent implements OnInit {
 					(name.includes(this.productFilters.query))	// QUERY search				
 							
 			) {
-				// console.log('h88 producttt', product);
 				return product
 			}
 		});
@@ -327,17 +329,6 @@ export class AllComponent implements OnInit {
 		this.saleItems = sortedBySale;
 		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
-
-	// //sort by cost
-	// sortByCost(e) {
-	// 	let filteredbyCost = filter(this.originalProducts, (product) => {
-	// 		if (product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) {
-	// 			return product
-	// 		}
-	// 	});
-	// 	this.products = filteredbyCost;
-	// 	this.paginateItems();	
-	// }
 	
 	//sort by cost
 	sortByCostLow(e) {

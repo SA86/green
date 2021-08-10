@@ -1,17 +1,28 @@
 <header class="row header">
 	<!-- <h1 class="title">Green Eighty Six</h1> -->
 	<div class='row quicks'>
-		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'>Quick Filters</button>
-		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'>Query Search</button>
-		<button mat-raised-button (click)='menuLocationView = !menuLocationView' [ngClass]='{"active": menuLocationView}'>Locations</button>
-		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'>Price Ranges</button>
-		<button mat-raised-button (click)='menuSortView = !menuSortView' [ngClass]='{"active": menuSortView}'>Sort by Cost</button>
-		<button mat-raised-button (click)='menuDistanceView = !menuDistanceView' [ngClass]='{"active": menuDistanceView}'>Distance</button>
+		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'><span class="material-icons">filter_list</span>Quick Filters</button>
+		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'><span class="material-icons">search</span> Search</button>
+		<button mat-raised-button (click)='menuLocationView = !menuLocationView' [ngClass]='{"active": menuLocationView}'><span class="material-icons">location_on</span>Locations</button>
+		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'><span class="material-icons">attach_money</span>Prices</button>
+		<button mat-raised-button (click)='menuDistanceView = !menuDistanceView' [ngClass]='{"active": menuDistanceView}'><span class="material-icons">my_location</span>Distance</button>
+		<button mat-raised-button (click)='menuAboutView = !menuAboutView' [ngClass]='{"active": menuAboutView}'><span class="material-icons">help_outline</span>About</button>
 	</div>
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
 			<mat-divider ></mat-divider>
-			<p>Filter products by strain names and type. More indept querying capable under search. <button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button></p> 
+			<p>Filter products by strain names and type. More indept querying capable under search.</p>
+			
+			
+			<div style="display:flex;">
+				<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
+				<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales', '')" >Sales <span class="sort-count">({{saleItems.length}})</span></button>
+				<div style="display:flex;">
+					<span>Sort by price</span>
+					<button mat-raised-button (click)='sortPrice("high")' color="accent" >High</button>	
+					<button mat-raised-button (click)='sortPrice("low")' color="accent" >Low</button>	
+				</div>			 
+			</div>			 
 			<mat-divider></mat-divider>
 			
 			<div class="filter-row">
@@ -53,15 +64,11 @@
 		</div>
 	</div>
 	
-	<div id="sort" class='row col s12' *ngIf="menuSortView">
-			<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
-			<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales', '')" >Sales <span class="sort-count">({{saleItems.length}})</span></button>
-			<div style="display:flex;">
-				<span>Sort by price</span>
-				<button mat-raised-button (click)='sortPrice("high")' color="accent" >High</button>	
-				<button mat-raised-button (click)='sortPrice("low")' color="accent" >Low</button>	
-				
-			</div>
+	<div id="sort" class='row col s12' *ngIf="menuAboutView">
+			<p>
+				About
+				</p>
+
 	</div>
 	
 	<div id="distance" class='row col s12' *ngIf="menuDistanceView">
