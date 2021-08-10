@@ -4,8 +4,8 @@
 		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'><span class="material-icons">filter_list</span>Quick Filters</button>
 		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'><span class="material-icons">search</span> Search</button>
 		<button mat-raised-button (click)='menuLocationView = !menuLocationView' [ngClass]='{"active": menuLocationView}'><span class="material-icons">location_on</span>Locations</button>
-		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'><span class="material-icons">attach_money</span>Prices</button>
 		<button mat-raised-button (click)='menuDistanceView = !menuDistanceView' [ngClass]='{"active": menuDistanceView}'><span class="material-icons">my_location</span>Distance</button>
+		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'><span class="material-icons">attach_money</span>Prices</button>
 		<button mat-raised-button (click)='menuAboutView = !menuAboutView' [ngClass]='{"active": menuAboutView}'><span class="material-icons">help_outline</span>About</button>
 	</div>
 	
@@ -16,7 +16,7 @@
 			
 			<div style="display:flex;">
 				<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
-				<button mat-button class="quick-sales" mat-raised-button (click)="sort('Sales', '')" >Sales <span class="sort-count">({{saleItems.length}})</span></button>
+				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >Sales <span class="sort-count">()</span></button>
 				<div style="display:flex;">
 					<span>Sort by price</span>
 					<button mat-raised-button (click)='sortPrice("high")' color="accent" >High</button>	
@@ -27,29 +27,31 @@
 			
 			<div class="filter-row">
 				<h2>Strain names</h2>
-				<button *ngFor='let item of sortStrainMap' mat-button (click)="quickSort(item.name, 'strain')" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
+				<button *ngFor='let item of sortStrainMap' mat-button (click)="quickSort(item.name)" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 			</div>
 			
 			<mat-divider  ></mat-divider>
 			
 			<div class="filter-row">
 				<h2>Types</h2>
-				<button *ngFor='let item of sortTypeMap' mat-button (click)="quickSort(item.name, 'type')" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
+				<button *ngFor='let item of sortTypeMap' mat-button (click)="quickSort(item.name)" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 			</div>
 			
 	</div>
 	
 	<div id="search" class='row' *ngIf="menuSearchView">
-			<mat-form-field class="search-form-field">
-				<div class="search-cont">
-					<input matInput type="text" [(ngModel)]='productFilters.query' (keyup)="doSearch($event)" placeholder="Enter keyword...">
-					<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="productFilters.query='';sortByAll()"><mat-icon>close</mat-icon></button>
-					<!-- <button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button> -->
-				</div>
-			</mat-form-field>
+		<mat-divider ></mat-divider>
+		<mat-form-field class="search-form-field">
+			<div class="search-cont">
+				<input matInput type="text" [(ngModel)]='productFilters.query' (keyup)="doSearch($event)" placeholder="Enter keyword...">
+				<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="productFilters.query='';sortByAll()"><mat-icon>close</mat-icon></button>
+				<!-- <button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button> -->
+			</div>
+		</mat-form-field>
 	</div>
 	
 	<div id="location" class='row' *ngIf="menuLocationView">
+		<mat-divider ></mat-divider>
 		<mat-form-field id="select-dispensary" appearance="fill">
 			<mat-label>Location...</mat-label>
 			<mat-select [formControl]="dispensary" multiple (selectionChange)="sortByDispensary($event)">
@@ -59,19 +61,19 @@
 	</div>
 	
 	<div id="pricing" class='row col s12 m6 l4 xl4' *ngIf="menuPricingView">
+		<mat-divider ></mat-divider>
 		<div class="slider-cont">
 			<ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="soptions" (valueChange)="sortByCostLow($event)" (highValueChange)="sortByCostHigh($event)" (userChangeEnd)="processSorting('pricerange')"></ngx-slider>		
 		</div>
 	</div>
 	
-	<div id="sort" class='row col s12' *ngIf="menuAboutView">
-			<p>
-				About
-				</p>
-
+	<div id="sort" class='row col s12' *ngIf="menuAboutView" style="font-size:1rem;">
+		<p>Are you frustrated with tedious process involved with finding the right cannabis product. Going to countless dispensaries to find a particular product is a waste of time and money. With GreenEndo you can search for cannabis concentrate products in Oregon and lower Washington. Currently displaying <strong>{{ this.originalProducts.length }}</strong> products from <strong>{{ this.dispensaryList.length}} dispensary.</strong></p>
+		<mat-divider ></mat-divider>
 	</div>
 	
 	<div id="distance" class='row col s12' *ngIf="menuDistanceView">
+		<mat-divider ></mat-divider>		
 		<mat-form-field class="search-form-field">
 			<input matInput type="number" [(ngModel)]='postal' (keyup)="doZipSearch($event)" placeholder="Enter Zip Code">
 			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="postal='';sortByAll()"><mat-icon>close</mat-icon></button>
@@ -114,6 +116,9 @@
 				</mat-chip>
 				<mat-chip *ngIf="productFilters.locations.length > 0"  [selectable]="selectable" [removable]="removable">Location Filters
 					<mat-icon matChipRemove (click)="removeSortChip('locations')">cancel</mat-icon>
+				</mat-chip>
+				<mat-chip *ngIf="productFilters.sales.length > 0"  [selectable]="selectable" [removable]="removable">Showing Sales
+					<mat-icon matChipRemove (click)="removeSortChip('sales')">cancel</mat-icon>
 				</mat-chip>
 			</div>
 		</mat-chip-list>	

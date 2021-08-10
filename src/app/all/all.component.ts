@@ -85,18 +85,13 @@ export class AllComponent implements OnInit {
 			'strain': [],
 			'types': [],
 		},
-		// 
 		'query': '',
-		// locations, pricerange, distance
 		'locations': [],
-		// quick, query, pricerange
 		'pricerange': [1,120],
-		// quick, locations, distance
 		'cost': ['sales', 'low/high'],
-		// locations, pricesrange, distance
 		'distance': [],
-		'range': 5
-		// pricesrange
+		'range': 5,
+		'sales': []
 	};			
 	
 	// dispensaryList: DispensaryList[] = DispensaryListData;
@@ -151,6 +146,10 @@ export class AllComponent implements OnInit {
 			case 'quick':
 				this.filterProducts(type);
 				break;
+			case 'sales':
+				this.productFilters.sales = 'sales';
+				this.filterProducts(type);
+				break;
 			case 'query':
 				this.filterProducts(type);
 				break;
@@ -182,9 +181,19 @@ export class AllComponent implements OnInit {
 						&&
 					(inRange || this.productFilters.distance.length === 0 || type === 'locations') // distance // bypass on locations
 						&&
-					(name.includes(this.productFilters.query))	// QUERY search				
+					(name.includes(this.productFilters.query))	// QUERY search
+						&&
+					((product.recSpecialPrices.length > 0 && product.recSpecialPrices[0] < product.Prices[0]) || type !== 'sales' )	// sales			
 							
 			) {
+				if(product.recSpecialPrices[0]) { // build discount property if on sale
+					let diff = product.Prices[0] - product.recSpecialPrices[0];
+					let off = diff / product.Prices[0];
+					product.discount = off.toFixed(2);
+					product.discount = product.discount * 100;
+					product.discountraw = product.discount * 100;
+					product.discount = `$${diff.toFixed(2)} (${product.discount.toFixed()}%)`;
+				}
 				return product
 			}
 		});
@@ -211,13 +220,20 @@ export class AllComponent implements OnInit {
 			this.productFilters.pricerange[0] = 1;
 			this.productFilters.pricerange[1] = 120;
 			this.processSorting('pricerange');
-			
+		}
+		if (type === 'sales') {
+			this.productFilters.sales = '';
+			this.processSorting('pricerange');
 		}
 	}
 	
-	quickSort(name, selected): void {
-		this.productFilters.query = name.toLowerCase();
-		this.processSorting('query');
+	quickSort(name:string): void {
+		if(name === 'sales') {
+			this.processSorting('sales');
+		} else {
+			this.productFilters.query = name.toLowerCase();
+			this.processSorting('query');
+		}
 	}	
 
 	//sort by dispensary
@@ -245,7 +261,7 @@ export class AllComponent implements OnInit {
 
 	// search by query
 	doSearch(e) {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 || this.productFilters.query.length >= 3) {
 			let query = this.productFilters.query.toLowerCase();
 			this.productFilters.query = query;
 			this.processSorting('query');
@@ -343,6 +359,7 @@ export class AllComponent implements OnInit {
 	// show all
 	sortByAll() {
 		this.products = this.originalProducts;
+		this.productFilters.sales = '';
 		this.productFilters.query = '';
 		this.paginateItems();
 		this.quickFilterActive(null, null);
