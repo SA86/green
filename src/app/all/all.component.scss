@@ -125,18 +125,17 @@ header {
 		}
 		button {
 			border:1px solid #0000002b;
-			margin:0 2px 2px 0;
+			margin:0 6px 2px 0;
 			padding:0 4px !important;
-			background-color: #6f3fc6 !important;
+			background-color: #625777 !important;
+			// background-color: #6D5273 !important;
 			&.active {
 				background-color: #277703 !important;
 			}
 		}
 		.btn-quick-all {
-			background-color:#ffd740 !important;
-			border:none;
-		}
-		.btn-quick-all {
+			background-color: #fff !important;
+			color:#000;
 			border:none;
 		}
 		.sort-count {
@@ -149,6 +148,9 @@ header {
 		}
 		mat-divider {
 			margin:6px 0;
+		}
+		.btn-price {
+			background-color: #266426 !important;
 		}
 	}
 	#sort {

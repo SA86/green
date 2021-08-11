@@ -147,7 +147,6 @@ export class AllComponent implements OnInit {
 				this.filterProducts(type);
 				break;
 			case 'sales':
-				this.productFilters.sales = 'sales';
 				this.filterProducts(type);
 				break;
 			case 'query':
@@ -205,7 +204,6 @@ export class AllComponent implements OnInit {
 		if (type === 'query') {
 			this.productFilters.query = '';
 			this.processSorting('query');
-			
 		}
 		if (type === 'distance') {
 			this.productFilters.range = 30;
@@ -229,6 +227,7 @@ export class AllComponent implements OnInit {
 	
 	quickSort(name:string): void {
 		if(name === 'sales') {
+			this.productFilters.sales = 'sales';
 			this.processSorting('sales');
 		} else {
 			this.productFilters.query = name.toLowerCase();

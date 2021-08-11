@@ -19,8 +19,8 @@
 				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >Sales <span class="sort-count">()</span></button>
 				<div style="display:flex;">
 					<span>Sort by price</span>
-					<button mat-raised-button (click)='sortPrice("high")' color="accent" >High</button>	
-					<button mat-raised-button (click)='sortPrice("low")' color="accent" >Low</button>	
+					<button class="btn-price" mat-raised-button (click)='sortPrice("high")' color="primary" ><span class="material-icons"> arrow_upward </span>High</button>	
+					<button class="btn-price" mat-raised-button (click)='sortPrice("low")' color="primary" ><span class="material-icons"> arrow_downward </span>Low</button>	
 				</div>			 
 			</div>			 
 			<mat-divider></mat-divider>
