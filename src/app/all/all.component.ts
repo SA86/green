@@ -436,9 +436,10 @@ export class AllComponent implements OnInit {
 			let greenC = this.http.get('http://api.endo86.com:8051/greenC');
 				forkJoin([greenA, greenB, greenC]).subscribe(results => {
 					let combined = concat(results[0], results[1], results[2]);
-					let sortedByPrice = sortBy(combined, ['price']); // sort by lowest price					
-					this.products = this.removeUnusedProducts(sortedByPrice); // remove items from the list
-					this.originalProducts = this.products; // create copy of items
+					let cleaned = this.removeUnusedProducts(combined); // remove bad items from the list
+					let sortedByPrice = sortBy(cleaned, ['price']); // sort by lowest price				
+					this.originalProducts = sortedByPrice; // create copy of items
+					this.products = sortedByPrice; // out View object
 					this.getGeo();
 					this.paginateItems();
 					this.loading = false;
@@ -449,7 +450,6 @@ export class AllComponent implements OnInit {
 	}
 	paginateItems() {
 		this.productCount = this.products.length; 
-		console.log('h88 paginate', this.productCount);
 		this.productsChunks = chunk(this.products, this.pageSize);
 		this.products = this.productsChunks[0];			
 	}

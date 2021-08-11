@@ -59,12 +59,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _providers_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../providers.service */ "./src/app/providers.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_slider_ngx_slider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular-slider/ngx-slider */ "./node_modules/@angular-slider/ngx-slider/fesm5/angular-slider-ngx-slider.js");
-/* harmony import */ var _postal_codes_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./postal-codes.json */ "./src/app/all/postal-codes.json");
-var _postal_codes_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./postal-codes.json */ "./src/app/all/postal-codes.json", 1);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_slider_ngx_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular-slider/ngx-slider */ "./node_modules/@angular-slider/ngx-slider/fesm5/angular-slider-ngx-slider.js");
+/* harmony import */ var _postal_codes_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./postal-codes.json */ "./src/app/all/postal-codes.json");
+var _postal_codes_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./postal-codes.json */ "./src/app/all/postal-codes.json", 1);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -75,11 +77,11 @@ var _postal_codes_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__w
 
 
 var AllComponent = /** @class */ (function () {
-    function AllComponent(httpClient, providersService) {
-        this.httpClient = httpClient;
+    function AllComponent(http, providersService) {
+        this.http = http;
         this.providersService = providersService;
-        this.dispensary = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]();
-        this.formSearch = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({});
+        this.dispensary = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]();
+        this.formSearch = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]({});
         this.search = '';
         this.postal = 97006;
         this.pageSize = 125;
@@ -107,9 +109,9 @@ var AllComponent = /** @class */ (function () {
             ceil: 120,
             translate: function (value, label) {
                 switch (label) {
-                    case _angular_slider_ngx_slider__WEBPACK_IMPORTED_MODULE_5__["LabelType"].Low:
+                    case _angular_slider_ngx_slider__WEBPACK_IMPORTED_MODULE_6__["LabelType"].Low:
                         return "<b>Min:</b> $" + value;
-                    case _angular_slider_ngx_slider__WEBPACK_IMPORTED_MODULE_5__["LabelType"].High:
+                    case _angular_slider_ngx_slider__WEBPACK_IMPORTED_MODULE_6__["LabelType"].High:
                         return "<b>Max:</b> $" + value;
                     default:
                         return "$" + value;
@@ -166,7 +168,7 @@ var AllComponent = /** @class */ (function () {
             { 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97219, 'geo': [45.4615768, -122.7055526], 'url': 'https://naturalremediespdx.com/' },
             { 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo': [45.5048869, -122.6283683], 'url': 'https://brothers-cannabis.com/' },
         ];
-        this.postalCodes = _postal_codes_json__WEBPACK_IMPORTED_MODULE_6__;
+        this.postalCodes = _postal_codes_json__WEBPACK_IMPORTED_MODULE_7__;
         // this.dispensaryListData = DispensaryListData;
     }
     AllComponent.prototype.ngOnInit = function () {
@@ -201,9 +203,9 @@ var AllComponent = /** @class */ (function () {
     };
     AllComponent.prototype.filterProducts = function (type) {
         var _this = this;
-        var filtered = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["filter"])(this.originalProducts, function (product) {
+        var filtered = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["filter"])(this.originalProducts, function (product) {
             var inDispensary = _this.productFilters.locations.indexOf(product.id);
-            var inRange = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["find"])(_this.productFilters.distance, { 'value': product.id });
+            var inRange = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["find"])(_this.productFilters.distance, { 'value': product.id });
             var name = product.name.toLowerCase();
             if ((product.price >= _this.productFilters.pricerange[0] && product.price <= _this.productFilters.pricerange[1]) // 0-120
                 &&
@@ -299,7 +301,7 @@ var AllComponent = /** @class */ (function () {
         var _this = this;
         var lat = this.postalCodes[this.postal].lat;
         var long = this.postalCodes[this.postal].long;
-        this.productFilters.distance = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["filter"])(this.dispensaryList, (function (item) {
+        this.productFilters.distance = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["filter"])(this.dispensaryList, (function (item) {
             var distance = _this.calculateDistance(lat, long, item.geo[0], item.geo[1]);
             if (_this.productFilters.range >= distance) {
                 return item;
@@ -331,7 +333,7 @@ var AllComponent = /** @class */ (function () {
     };
     AllComponent.prototype.gatherQuickSorts = function (products) {
         this.sortStrainMap = this.quickStrainSorts.map(function (item) {
-            var searched = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["filter"])(products, function (o) {
+            var searched = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["filter"])(products, function (o) {
                 var name = o.name.toLowerCase();
                 if (name.includes(item.toLowerCase())) {
                     return o;
@@ -340,7 +342,7 @@ var AllComponent = /** @class */ (function () {
             return { 'name': item, 'count': searched.length, 'items': searched, 'type': 'quick-strain-sort', 'active': false };
         });
         this.sortTypeMap = this.quickTypesSorts.map(function (item) {
-            var searched = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["filter"])(products, function (o) {
+            var searched = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["filter"])(products, function (o) {
                 var name = o.name.toLowerCase();
                 if (name.includes(item.toLowerCase())) {
                     return o;
@@ -350,7 +352,7 @@ var AllComponent = /** @class */ (function () {
         });
     };
     AllComponent.prototype.gatherSales = function (products) {
-        var filteredForSale = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["filter"])(products, function (o) {
+        var filteredForSale = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["filter"])(products, function (o) {
             if (o.discountPrice && o.discountPrice < o.price) {
                 var diff = o.price - o.discountPrice;
                 var off = diff / o.price;
@@ -361,10 +363,10 @@ var AllComponent = /** @class */ (function () {
                 return o;
             }
         });
-        var sortedBySale = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["sortBy"])(filteredForSale, ['discountPrice']);
+        var sortedBySale = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["sortBy"])(filteredForSale, ['discountPrice']);
         this.saleItems = sortedBySale;
         console.log('h88 saleitems', this.saleItems);
-        this.bestSaleItems = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["orderBy"])(filteredForSale, ['discountraw'], ['desc']);
+        this.bestSaleItems = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["orderBy"])(filteredForSale, ['discountraw'], ['desc']);
     };
     //sort by cost
     AllComponent.prototype.sortByCostLow = function (e) {
@@ -387,10 +389,10 @@ var AllComponent = /** @class */ (function () {
     AllComponent.prototype.sortPrice = function (direction) {
         var sortedByPrice;
         if (direction === 'high') {
-            sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["orderBy"])(this.originalProducts, ['price'], ['desc']);
+            sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["orderBy"])(this.originalProducts, ['price'], ['desc']);
         }
         else if (direction === 'low') {
-            sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["orderBy"])(this.originalProducts, ['price'], ['asc']);
+            sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["orderBy"])(this.originalProducts, ['price'], ['asc']);
         }
         this.products = sortedByPrice;
         this.paginateItems();
@@ -418,7 +420,7 @@ var AllComponent = /** @class */ (function () {
     };
     AllComponent.prototype.removeUnusedProducts = function (products) {
         // let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
-        var filteredProducts = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["filter"])(products, function (o) {
+        var filteredProducts = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["filter"])(products, function (o) {
             var name = o.name.toLowerCase();
             if (name.includes('kief') === false
                 && name.includes('syringe') === false
@@ -446,8 +448,12 @@ var AllComponent = /** @class */ (function () {
     };
     AllComponent.prototype.getConcentrates = function () {
         var _this = this;
-        this.providersService.getRequest().subscribe(function (data) {
-            var sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["sortBy"])(data, ['price']); // sort by lowest price
+        var greenA = this.http.get('http://api.endo86.com:8051/greenA');
+        var greenB = this.http.get('http://api.endo86.com:8051/greenB');
+        var greenC = this.http.get('http://api.endo86.com:8051/greenC');
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["forkJoin"])([greenA, greenB, greenC]).subscribe(function (results) {
+            var combined = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["concat"])(results[0], results[1], results[2]);
+            var sortedByPrice = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["sortBy"])(combined, ['price']); // sort by lowest price					
             _this.products = _this.removeUnusedProducts(sortedByPrice); // remove items from the list
             _this.originalProducts = _this.products; // create copy of items
             _this.getGeo();
@@ -461,7 +467,7 @@ var AllComponent = /** @class */ (function () {
     AllComponent.prototype.paginateItems = function () {
         this.productCount = this.products.length;
         console.log('h88 paginate', this.productCount);
-        this.productsChunks = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["chunk"])(this.products, this.pageSize);
+        this.productsChunks = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["chunk"])(this.products, this.pageSize);
         this.products = this.productsChunks[0];
     };
     AllComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -997,11 +1003,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProvidersService = /** @class */ (function () {
-    function ProvidersService(httpClient) {
-        this.httpClient = httpClient;
+    function ProvidersService(http) {
+        this.http = http;
     }
-    ProvidersService.prototype.getRequest = function () {
-        return this.httpClient.get('http://api.endo86.com:8051/green');
+    // getRequest() {
+    // 	return this.http.get('http://api.endo86.com:8051/green');
+    // }
+    ProvidersService.prototype.getRequestA = function () {
+        return this.http.get('http://api.endo86.com:8051/greenA');
+    };
+    ProvidersService.prototype.getRequestB = function () {
+        return this.http.get('http://api.endo86.com:8051/greenB');
+    };
+    ProvidersService.prototype.getRequestC = function () {
+        return this.http.get('http://api.endo86.com:8051/greenC');
     };
     ProvidersService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
