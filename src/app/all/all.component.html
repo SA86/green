@@ -133,20 +133,20 @@
 	<div id="loading" *ngIf='loading'><h1>Loading...</h1></div>
 	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
 
-		<div class="product" [style.background-image]="'url('+product.Image+')'">
-			<h1 class="product-name">{{ product.Name }}</h1>
-			<h4 *ngIf='product.apiRoot != "kaleafa"' class="product-type">{{ product.brandName }}</h4>
-			<h4 *ngIf='product.apiRoot == "kaleafa"'class="product-type">{{ product.brandName }} / {{ product.type }} </h4>
+		<div class="product" [style.background-image]="'url('+product.image+')'">
+			<h1 class="product-name">{{ product.name }}</h1>
+			<h4 *ngIf='product.apiRoot != "k1"' class="product-type">{{ product.brand }}</h4>
+			<h4 *ngIf='product.apiRoot == "k1"'class="product-type">{{ product.brand }} / {{ product.type }} </h4>
 			
 			<div class="col s6 m6 l6">
-				<h6>{{ product.DispensaryID | dispensary }}</h6>
+				<h6>{{ product.id | dispensary }}</h6>
 
 				<!-- no sale -->
-				<h2 *ngIf="product.recSpecialPrices[0] == null"><strong>${{ product.Prices[0] }}</strong></h2>
-				<h3 class="sale-price" *ngIf="product.recSpecialPrices.length >= 1"><strong>Sale:</strong> ${{ product.recSpecialPrices[0] }}</h3>
-				<h4 class="percentoff" *ngIf="product.recSpecialPrices.length >= 1"><span>Save:</span> {{ product.discount }}</h4>
+				<h2 *ngIf="!product.discountPrice"><strong>${{ product.price }}</strong></h2>
+				<h3 class="sale-price" *ngIf="product.discountPrice"><strong>Sale:</strong> ${{ product.discountPrice }}</h3>
+				<h4 class="percentoff" *ngIf="product.discountPrice"><span>Save:</span> {{ product.discount }}</h4>
 				<!-- sale -->
-				<h4 class="regular-price" *ngIf="product.recSpecialPrices[0] != null">Was: ${{ product.Prices[0] }}</h4>
+				<h4 class="regular-price" *ngIf="product.discountPrice">Was: ${{ product.price }}</h4>
 
 				<div class="power">
 					<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>

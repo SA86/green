@@ -172,10 +172,10 @@ export class AllComponent implements OnInit {
 	
 	filterProducts(type:string): void {
 		let filtered = filter(this.originalProducts, (product) => {
-			let inDispensary = this.productFilters.locations.indexOf(product.DispensaryID);
-			let inRange = find(this.productFilters.distance, { 'value' : product.DispensaryID});
-			let name = product.Name.toLowerCase();
-			if ((product.Prices[0] >= this.productFilters.pricerange[0] && product.Prices[0] <= this.productFilters.pricerange[1]) // 0-120
+			let inDispensary = this.productFilters.locations.indexOf(product.id);
+			let inRange = find(this.productFilters.distance, { 'value' : product.id});
+			let name = product.name.toLowerCase();
+			if ((product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1]) // 0-120
 						&&
 					(inDispensary > -1 || this.productFilters.locations.length === 0) // products is in our location array
 						&&
@@ -183,12 +183,12 @@ export class AllComponent implements OnInit {
 						&&
 					(name.includes(this.productFilters.query))	// QUERY search
 						&&
-					((product.recSpecialPrices.length > 0 && product.recSpecialPrices[0] < product.Prices[0]) || type !== 'sales' )	// sales			
+					((product.discountPrice && product.discountPrice < product.price) || type !== 'sales' )	// sales			
 							
 			) {
-				if(product.recSpecialPrices[0]) { // build discount property if on sale
-					let diff = product.Prices[0] - product.recSpecialPrices[0];
-					let off = diff / product.Prices[0];
+				if(product.discountPrice) { // build discount property if on sale
+					let diff = product.price - product.discountPrice;
+					let off = diff / product.price;
 					product.discount = off.toFixed(2);
 					product.discount = product.discount * 100;
 					product.discountraw = product.discount * 100;
@@ -223,7 +223,7 @@ export class AllComponent implements OnInit {
 		}
 		if (type === 'sales') {
 			this.productFilters.sales = '';
-			this.processSorting('pricerange');
+			this.processSorting('sales');
 		}
 	}
 	
@@ -310,7 +310,7 @@ export class AllComponent implements OnInit {
 	gatherQuickSorts(products) { // build quick sorts + counts
 		this.sortStrainMap = this.quickStrainSorts.map((item) => {
 			let searched = filter(products, (o) => {
-				let name = o.Name.toLowerCase();
+				let name = o.name.toLowerCase();
 				if (name.includes(item.toLowerCase())) {
 					return o;
 				}
@@ -320,7 +320,7 @@ export class AllComponent implements OnInit {
 		
 		this.sortTypeMap = this.quickTypesSorts.map((item) => {
 			let searched = filter(products, (o) => {
-				let name = o.Name.toLowerCase();
+				let name = o.name.toLowerCase();
 				if (name.includes(item.toLowerCase())) {
 					return o;
 				}
@@ -331,9 +331,9 @@ export class AllComponent implements OnInit {
 	
 	gatherSales(products) { // build quick sale sort + counts
 		let filteredForSale = filter(products, (o) => {
-			if (o.recSpecialPrices.length > 0 && o.recSpecialPrices[0] < o.Prices[0]) {
-				let diff = o.Prices[0] - o.recSpecialPrices[0];
-				let off = diff / o.Prices[0];
+			if (o.discountPrice && o.discountPrice < o.price) {
+				let diff = o.price - o.discountPrice;
+				let off = diff / o.price;
 				o.discount = off.toFixed(2);
 				o.discount = o.discount * 100;
 				o.discountraw = o.discount * 100;
@@ -341,8 +341,9 @@ export class AllComponent implements OnInit {
 				return o
 			}
 		});
-		let sortedBySale = sortBy(filteredForSale, ['recSpecialPrices[0]']);
+		let sortedBySale = sortBy(filteredForSale, ['discountPrice']);
 		this.saleItems = sortedBySale;
+		console.log('h88 saleitems', this.saleItems);
 		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
 	
@@ -402,7 +403,7 @@ export class AllComponent implements OnInit {
 	removeUnusedProducts(products) { // remove select items from product list
 		// let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
 		let filteredProducts = filter(products, (o) => {
-			let name = o.Name.toLowerCase();
+			let name = o.name.toLowerCase();
 			if (
 				name.includes('kief') === false 
 				&& name.includes('syringe') === false 
