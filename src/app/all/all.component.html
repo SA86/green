@@ -9,18 +9,17 @@
 		<button mat-raised-button (click)='menuAboutView = !menuAboutView' [ngClass]='{"active": menuAboutView}'><span class="material-icons">help_outline</span>About</button>
 	</div>
 	
+	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
 			<mat-divider ></mat-divider>
-			<p>Filter products by strain names and type. More indept querying capable under search.</p>
-			
-			
+			<!-- <p>Filter products by strain names and type. More indept querying capable under search.</p> -->
 			<div style="display:flex;">
 				<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
-				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >Sales <span class="sort-count">()</span></button>
-				<div style="display:flex;">
-					<span>Sort by price</span>
-					<button class="btn-price" mat-raised-button (click)='sortPrice("high")' color="primary" ><span class="material-icons"> arrow_upward </span>High</button>	
-					<button class="btn-price" mat-raised-button (click)='sortPrice("low")' color="primary" ><span class="material-icons"> arrow_downward </span>Low</button>	
+				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >SALES <span class="sort-count"></span></button>
+				<div style="display:flex;margin-left:12px;line-height: 31px;">
+					<h3>Sort price:</h3>
+					<button class="btn-price" mat-raised-button (click)='sortPrice("high")' color="primary" [ngClass]='{"active": productFilters.priceSort == "High"}'><span class="material-icons"> arrow_upward </span>High</button>	
+					<button class="btn-price" mat-raised-button (click)='sortPrice("low")' color="primary" [ngClass]='{"active": productFilters.priceSort == "Low"}'><span class="material-icons"> arrow_downward </span>Low</button>	
 				</div>			 
 			</div>			 
 			<mat-divider></mat-divider>
@@ -105,6 +104,7 @@
 	<div id="chips" class="col s12">
 		<mat-chip-list>
 			<div>
+				<mat-chip *ngIf="productFilters.priceSort"  [selectable]="selectable" [removable]="removable">{{ productFilters.priceSort }}est $$ 1st </mat-chip>
 				<mat-chip *ngIf="productFilters.query" [selectable]="selectable" [removable]="removable">{{productFilters.query}}
 					<mat-icon matChipRemove (click)="removeSortChip('query')">cancel</mat-icon>
 				</mat-chip>
@@ -114,10 +114,10 @@
 				<mat-chip *ngIf="!productFilters.locations.length > 0" [selectable]="selectable" [removable]="removable">{{productFilters.range}} mile radius
 					<mat-icon matChipRemove (click)="removeSortChip('distance')">cancel</mat-icon>
 				</mat-chip>
-				<mat-chip *ngIf="productFilters.locations.length > 0"  [selectable]="selectable" [removable]="removable">Location Filters
+				<mat-chip *ngIf="productFilters.locations.length > 0"  [selectable]="selectable" [removable]="removable">Location Filters <span> ({{productFilters.locations.length}}) </span>
 					<mat-icon matChipRemove (click)="removeSortChip('locations')">cancel</mat-icon>
 				</mat-chip>
-				<mat-chip *ngIf="productFilters.sales.length > 0"  [selectable]="selectable" [removable]="removable">Showing Sales
+				<mat-chip *ngIf="productFilters.sales.length > 0"  [selectable]="selectable" [removable]="removable">Showing SALES
 					<mat-icon matChipRemove (click)="removeSortChip('sales')">cancel</mat-icon>
 				</mat-chip>
 			</div>

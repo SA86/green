@@ -130,12 +130,14 @@ header {
 			background-color: #625777 !important;
 			// background-color: #6D5273 !important;
 			&.active {
+				text-decoration: underline;
 				background-color: #277703 !important;
 			}
 		}
 		.btn-quick-all {
-			background-color: #fff !important;
-			color:#000;
+			// background-color: #4d68b9 !important;
+			background-color: #504db9 !important;
+			color:#fff;
 			border:none;
 		}
 		.sort-count {
@@ -143,8 +145,8 @@ header {
 			color: #e19696;			
 		}
 		.quick-sales {
-			background-color: #9b15418f !important;
-			border:1px solid #9b15418f;
+			background-color: #ffe300 !important;
+			// border:1px solid #9b6d158f;
 		}
 		mat-divider {
 			margin:6px 0;
@@ -205,10 +207,6 @@ header {
 		display:flex;
 		flex-wrap:wrap;
 		padding: 0 12px 12px 12px !important;
-		.mat-form-field-wrapper {
-			border: 1px solid #000;
-			border-radius: 6px;
-		}
 		.mat-select-value-text {
 			color:#fff;
 		 }

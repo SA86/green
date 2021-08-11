@@ -8,7 +8,6 @@ import { PageEvent } from '@angular/material';
 import { MatChipInputEvent } from '@angular/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
-// import * as PostalCodeData from "./postal-codes.json";
 import PostalCodeData from "./postal-codes.json";
 // import DispensaryListData from "./dispensary-list.json";
 import { catchError, retry } from 'rxjs/operators';
@@ -91,7 +90,8 @@ export class AllComponent implements OnInit {
 		'cost': ['sales', 'low/high'],
 		'distance': [],
 		'range': 5,
-		'sales': []
+		'sales': [],
+		'priceSort': 'Low'
 	};			
 	
 	// dispensaryList: DispensaryList[] = DispensaryListData;
@@ -342,7 +342,6 @@ export class AllComponent implements OnInit {
 		});
 		let sortedBySale = sortBy(filteredForSale, ['discountPrice']);
 		this.saleItems = sortedBySale;
-		console.log('h88 saleitems', this.saleItems);
 		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
 	
@@ -370,8 +369,10 @@ export class AllComponent implements OnInit {
 	sortPrice(direction) {
 		let sortedByPrice;
 		if (direction === 'high') {
+			this.productFilters.priceSort = 'High';
 			sortedByPrice = orderBy(this.originalProducts, ['price'], ['desc']); 
 		} else if (direction === 'low') {
+			this.productFilters.priceSort = 'Low';
 			sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
 		}
 		this.products = sortedByPrice;
