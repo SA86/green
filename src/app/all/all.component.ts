@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProvidersService } from '../providers.service';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, forkJoin } from 'rxjs';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material';
 import { MatChipInputEvent } from '@angular/material';
@@ -12,7 +12,7 @@ import { Options, LabelType } from "@angular-slider/ngx-slider";
 import PostalCodeData from "./postal-codes.json";
 // import DispensaryListData from "./dispensary-list.json";
 import { catchError, retry } from 'rxjs/operators';
-import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy } from 'lodash';
+import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy, concat } from 'lodash';
 
 interface Products {
 	products: any;
@@ -132,7 +132,7 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo':[45.5048869,-122.6283683], 'url':'https://brothers-cannabis.com/' },
 	];
 
-	constructor(private httpClient: HttpClient, private providersService: ProvidersService) {
+	constructor(private http: HttpClient, private providersService: ProvidersService) {
 		this.postalCodes = PostalCodeData;
 		// this.dispensaryListData = DispensaryListData;
 	}
@@ -198,7 +198,7 @@ export class AllComponent implements OnInit {
 			}
 		});
 		this.products = filtered;
-		this.paginateItems();			
+		// this.paginateItems();			
 	}
 	
 	removeSortChip(type): void {
@@ -371,9 +371,9 @@ export class AllComponent implements OnInit {
 	sortPrice(direction) {
 		let sortedByPrice;
 		if (direction === 'high') {
-			sortedByPrice = orderBy(this.originalProducts, ['Prices[0]'], ['desc']); 
+			sortedByPrice = orderBy(this.originalProducts, ['price'], ['desc']); 
 		} else if (direction === 'low') {
-			sortedByPrice = orderBy(this.originalProducts, ['Prices[0]'], ['asc']); 
+			sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
 		}
 		this.products = sortedByPrice;
 		this.paginateItems();
@@ -431,21 +431,25 @@ export class AllComponent implements OnInit {
 	}
 
 	getConcentrates() {
-		this.providersService.getRequest().subscribe((data: Products) => {
-			let sortedByPrice = sortBy(data, ['Prices[0]']); // sort by lowest price
-			this.products = this.removeUnusedProducts(sortedByPrice); // remove items from the list
-			this.originalProducts = this.products; // create copy of items
-			this.getGeo();
-			this.paginateItems();
-			this.loading = false;
-			console.log('h88 prod', this.products);
-			this.gatherQuickSorts(this.originalProducts);
-			this.gatherSales(this.originalProducts);
-		});
+			let greenA = this.http.get('http://api.endo86.com:8051/greenA');
+			let greenB = this.http.get('http://api.endo86.com:8051/greenB');
+			let greenC = this.http.get('http://api.endo86.com:8051/greenC');
+				forkJoin([greenA, greenB, greenC]).subscribe(results => {
+					let combined = concat(results[0], results[1], results[2]);
+					let sortedByPrice = sortBy(combined, ['price']); // sort by lowest price					
+					this.products = this.removeUnusedProducts(sortedByPrice); // remove items from the list
+					this.originalProducts = this.products; // create copy of items
+					this.getGeo();
+					this.paginateItems();
+					this.loading = false;
+					console.log('h88 prod', this.products);
+					this.gatherQuickSorts(this.originalProducts);
+					this.gatherSales(this.originalProducts);
+				});			
 	}
-	
 	paginateItems() {
 		this.productCount = this.products.length; 
+		console.log('h88 paginate', this.productCount);
 		this.productsChunks = chunk(this.products, this.pageSize);
 		this.products = this.productsChunks[0];			
 	}
