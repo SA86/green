@@ -366,6 +366,7 @@ export class AllComponent implements OnInit {
 	}
 	
 	// sorts by low/high price
+	//@TODO fix sortedByPrice to use filter matrix
 	sortPrice(direction) {
 		let sortedByPrice;
 		if (direction === 'high') {
@@ -458,6 +459,7 @@ export class AllComponent implements OnInit {
 				});			
 	}
 	paginateItems() {
+		console.log('h88 paginate');
 		this.productCount = this.products.length; 
 		this.productsChunks = chunk(this.products, this.pageSize);
 		this.products = this.productsChunks[0];			
