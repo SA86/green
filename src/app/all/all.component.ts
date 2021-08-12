@@ -446,6 +446,8 @@ export class AllComponent implements OnInit {
 					console.log('h88 prod', this.products);
 					this.gatherQuickSorts(this.originalProducts);
 					this.gatherSales(this.originalProducts);
+				}).catch((e)=>{
+					console.log('h88 error', e);
 				});			
 	}
 	paginateItems() {
