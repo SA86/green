@@ -89,7 +89,7 @@ export class AllComponent implements OnInit {
 		'pricerange': [1,120],
 		'cost': ['sales', 'low/high'],
 		'distance': [],
-		'range': 5,
+		'range': '5',
 		'sales': [],
 		'priceSort': 'Low'
 	};			
@@ -221,7 +221,7 @@ export class AllComponent implements OnInit {
 		}
 		if (type === 'sales') {
 			this.productFilters.sales = '';
-			this.processSorting('sales');
+			this.sortByAll();
 		}
 	}
 	
@@ -269,7 +269,7 @@ export class AllComponent implements OnInit {
 	
 	// search zip query // handle hard return
 	doZipSearch(e) {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 || Math.ceil(Math.log10(this.postal + 1)) === 5) { // enter key or zip.length=5
 			this.getGeo();
 		}
 	}
@@ -446,8 +446,6 @@ export class AllComponent implements OnInit {
 					console.log('h88 prod', this.products);
 					this.gatherQuickSorts(this.originalProducts);
 					this.gatherSales(this.originalProducts);
-				}).catch((e)=>{
-					console.log('h88 error', e);
 				});			
 	}
 	paginateItems() {

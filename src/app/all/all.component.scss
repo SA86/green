@@ -102,7 +102,7 @@ header {
 		button {
 			border: 1px solid #000;
 			color: #242424;
-			margin-right:12px;
+			margin:0 12px 6px 0;
 			&.active {
 				background-color: #375df2 !important;
 				border: 1px solid #1400ff;
@@ -215,6 +215,7 @@ header {
 	#distance {
 		display:flex;
 		flex-wrap:wrap;
+		align-items:center;
 		padding: 0 12px 12px 12px !important;
 		.mat-form-field-appearance-legacy .mat-form-field-label {
 			top: 2em;
@@ -223,10 +224,9 @@ header {
 		input {
 			width:125px;
 			color:#fff;
-			border:1px solid black;
 			border-radius: 6px;
 			padding:12px;
-			background-color: #151515;
+			background-color: #393146;
 		}	
 		.mat-radio-button{
 			padding-right: 16px;
