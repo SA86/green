@@ -44,6 +44,7 @@ export class AllComponent implements OnInit {
 	currentPage = 0;
 	originalProducts: any;
 	products: any;
+	productsFull: any; // unchunked
 	productsChunks: any;
 	productCount: number;
 	productBank = [];
@@ -159,6 +160,7 @@ export class AllComponent implements OnInit {
 				this.filterProducts(type);
 				break;
 			case 'distance':
+				//@TODO change distance looses high/low sort pref
 				this.dispensary.setValue(''); // clear location select
 				this.productFilters.locations = []; // clear locations
 				this.filterProducts(type);
@@ -197,31 +199,36 @@ export class AllComponent implements OnInit {
 			}
 		});
 		this.products = filtered;
-		// this.paginateItems();			
+		this.productsFull = filtered;
+		this.paginateItems();			
 	}
 	
-	removeSortChip(type): void {
-		if (type === 'query') {
-			this.productFilters.query = '';
-			this.processSorting('query');
-		}
-		if (type === 'distance') {
-			this.productFilters.range = 30;
-			this.getGeo();
-		}
-		if (type === 'locations') {
-			this.productFilters.locations = [];
-			this.dispensary.setValue('');
-			this.processSorting('locations');
-		}
-		if (type === 'pricerange') {
-			this.productFilters.pricerange[0] = 1;
-			this.productFilters.pricerange[1] = 120;
-			this.processSorting('pricerange');
-		}
-		if (type === 'sales') {
-			this.productFilters.sales = '';
-			this.sortByAll();
+	removeSortChip(type:string): void {
+		switch (type) {
+			case 'query':
+				this.productFilters.query = '';
+				this.processSorting('query');
+				break;
+			case 'distance':
+				this.productFilters.range = 30;
+				this.getGeo();
+				break;
+			case 'locations':
+				this.productFilters.locations = [];
+				this.dispensary.setValue('');
+				this.processSorting('locations');
+				break;
+			case 'pricerange':
+				this.productFilters.pricerange[0] = 1;
+				this.productFilters.pricerange[1] = 120;
+				this.processSorting('pricerange');
+				break;
+			case 'sales':
+				this.productFilters.sales = '';
+				this.sortByAll();
+				break;
+			default:
+				break;
 		}
 	}
 	
@@ -248,12 +255,11 @@ export class AllComponent implements OnInit {
 
 	// pagination event change
 	handlePage(e: any) { 
-		//& TOTO need to get products rather than originalproducts
 		this.currentPage = e.pageIndex;
 		this.pageSize = e.pageSize;
 		const end = (this.currentPage + 1) * this.pageSize;
 		const start = this.currentPage * this.pageSize;
-		const part = this.originalProducts.slice(start, end);
+		const part = this.productsFull.slice(start, end);
 		this.products = part;		
 	}
 
@@ -357,7 +363,7 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
-		this.products = this.originalProducts;
+		this.products = this.productsFull;
 		this.productFilters.sales = '';
 		this.productFilters.query = '';
 		this.paginateItems();
@@ -366,22 +372,21 @@ export class AllComponent implements OnInit {
 	}
 	
 	// sorts by low/high price
-	//@TODO fix sortedByPrice to use filter matrix
 	sortPrice(direction) {
 		let sortedByPrice;
 		if (direction === 'high') {
 			this.productFilters.priceSort = 'High';
-			sortedByPrice = orderBy(this.originalProducts, ['price'], ['desc']); 
+			sortedByPrice = orderBy(this.productsFull, ['price'], ['desc']); 
 		} else if (direction === 'low') {
 			this.productFilters.priceSort = 'Low';
-			sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
+			sortedByPrice = orderBy(this.productsFull, ['price'], ['asc']); 
 		} else if (direction === 'toggle') {
 			if(this.productFilters.priceSort === 'Low') {
 				this.productFilters.priceSort = 'High';
-				sortedByPrice = orderBy(this.originalProducts, ['price'], ['desc']); 
+				sortedByPrice = orderBy(this.productsFull, ['price'], ['desc']); 
 			} else {
 				this.productFilters.priceSort = 'Low';
-				sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
+				sortedByPrice = orderBy(this.productsFull, ['price'], ['asc']); 
 			}
 			
 		}
@@ -450,16 +455,16 @@ export class AllComponent implements OnInit {
 					let sortedByPrice = sortBy(cleaned, ['price']); // sort by lowest price				
 					this.originalProducts = sortedByPrice; // create copy of items
 					this.products = sortedByPrice; // out View object
+					this.productsFull = sortedByPrice;
 					this.getGeo();
-					this.paginateItems();
 					this.loading = false;
 					console.log('h88 prod', this.products);
 					this.gatherQuickSorts(this.originalProducts);
 					this.gatherSales(this.originalProducts);
 				});			
 	}
+	
 	paginateItems() {
-		console.log('h88 paginate');
 		this.productCount = this.products.length; 
 		this.productsChunks = chunk(this.products, this.pageSize);
 		this.products = this.productsChunks[0];			
