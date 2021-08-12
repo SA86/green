@@ -374,6 +374,15 @@ export class AllComponent implements OnInit {
 		} else if (direction === 'low') {
 			this.productFilters.priceSort = 'Low';
 			sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
+		} else if (direction === 'toggle') {
+			if(this.productFilters.priceSort === 'Low') {
+				this.productFilters.priceSort = 'High';
+				sortedByPrice = orderBy(this.originalProducts, ['price'], ['desc']); 
+			} else {
+				this.productFilters.priceSort = 'Low';
+				sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
+			}
+			
 		}
 		this.products = sortedByPrice;
 		this.paginateItems();

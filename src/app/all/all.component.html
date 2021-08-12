@@ -105,11 +105,11 @@
 			<div>
 				<mat-chip *ngIf="!productFilters.locations.length > 0" [selectable]="selectable" [removable]="removable" (click)='menuDistanceView = !menuDistanceView'>Showing ({{productFilters.distance.length}}) dispensaries
 				</mat-chip>
-				<mat-chip *ngIf="productFilters.priceSort"  [selectable]="selectable" [removable]="removable">{{ productFilters.priceSort }}est $$ 1st </mat-chip>
+				<mat-chip *ngIf="productFilters.priceSort"  [selectable]="selectable" [removable]="removable" (click)="sortPrice('toggle')">{{ productFilters.priceSort }}est $$ 1st </mat-chip>
 				<mat-chip *ngIf="productFilters.query" [selectable]="selectable" [removable]="removable">{{productFilters.query}}
 					<mat-icon matChipRemove (click)="removeSortChip('query')">cancel</mat-icon>
 				</mat-chip>
-				<mat-chip  [selectable]="selectable" [removable]="removable">${{productFilters.pricerange[0]}}-{{productFilters.pricerange[1]}}
+				<mat-chip  [selectable]="selectable" [removable]="removable" (click)='menuPricingView = !menuPricingView'>${{productFilters.pricerange[0]}}-{{productFilters.pricerange[1]}}
 					<mat-icon matChipRemove (click)="removeSortChip('pricerange')" *ngIf="productFilters.pricerange[0] != 1 || productFilters.pricerange[1] != 120">cancel</mat-icon>
 				</mat-chip>
 				<mat-chip *ngIf="!productFilters.locations.length > 0" [selectable]="selectable" [removable]="removable" (click)='menuDistanceView = !menuDistanceView'>{{productFilters.range}} mile radius from {{ postal }}
