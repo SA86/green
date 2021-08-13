@@ -140,7 +140,7 @@
 			<h4 *ngIf='product.apiRoot == "k1"'class="product-type">{{ product.brand }} / {{ product.type }} </h4>
 			
 			<div class="col s6 m6 l6">
-				<h6>{{ product.id | dispensary }}</h6>
+				<h6>{{ product.dname }}</h6>
 
 				<!-- no sale -->
 				<h2 *ngIf="!product.discountPrice"><strong>${{ product.price }}</strong></h2>

@@ -97,40 +97,41 @@ export class AllComponent implements OnInit {
 	
 	// dispensaryList: DispensaryList[] = DispensaryListData;
 	dispensaryList: DispensaryList[] = [
+		{ 'name': 'Broadway - Beaverton', 'value': '605b64fa3da35500d1dd9d05', 'postal': 97005, 'geo':[45.4862065,-122.7813575], 'url':'dat'  },
+		{ 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo':[45.5048869,-122.6283683], 'url':'https://brothers-cannabis.com/' },
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy', 'postal': 97006, 'geo':[45.5203821,-122.8431368], 'url':'dat'  },
-		{ 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj', 'postal': 97006, 'geo':[45.4966407,-122.8912542], 'url':'dat'  },
-		{ 'name': 'Nectar-Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6', 'postal': 97005, 'geo':[45.4766619,-122.8250877], 'url':'dat'  },
-		{ 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A', 'postal': 97008, 'geo':[45.457036,-122.7856972], 'url':'dat'},
-		{ 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea', 'postal': 97006, 'geo':[45.5160132,-122.8435447], 'url':'dat'  },
-		{ 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton', 'postal': 97005, 'geo':[45.4862895,-122.7912229], 'url':'dat'  },
-		{ 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05', 'postal': 97005, 'geo':[45.4862065,-122.7813575], 'url':'dat'  },
-		{ 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30', 'postal': 97008, 'geo':[45.4695997,-122.7862657], 'url':'dat'},
-		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818, 'postal': 97005, 'geo':[45.4899831,-122.7907909], 'url':'dat'},
-		{ 'name': 'Green Planet-Beaverton', 'value': 107819, 'postal': 97005, 'geo':[45.4928959,-122.7829708], 'url':'dat'},
-		{ 'name': 'Stone Age-Beaverton', 'value': 123946, 'postal': 97225, 'geo':[45.498724,-122.767445], 'url':'dat'},
-		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton', 'postal': 97005, 'geo':[45.496279,-122.8103849], 'url':'dat'},
+		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2', 'postal': 97223, 'geo':[45.4221154,-122.7869961], 'url':'https://dutchie.com/store/cola-cove/menu' },
+		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard', 'postal': 97224, 'geo':[45.3989266,-122.8014775], 'url':'https://www.chalicefarms.com/locations/tigard-cannabis-dispensary'  },
+		{ 'name': 'Electric Lettuce - Beaverton', 'value': '5e7b8808bf130d00a8f6bd30', 'postal': 97008, 'geo':[45.4695997,-122.7862657], 'url':'dat'},
+		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa', 'postal': 97223, 'geo':[45.4380797,-122.7564607], 'url':'https://electriclettuce.com/location/tigard-dispensary?utm_source=google&utm_medium=local&utm_campaign=website_button' },
+		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97219, 'geo':[45.4615768,-122.7055526], 'url':'https://naturalremediespdx.com/' },
+		{ 'name': 'Nectar - Aloha', 'value': 'YbTHoLFPigH4scErj', 'postal': 97006, 'geo':[45.4966407,-122.8912542], 'url':'dat'  },
+		{ 'name': 'Nectar - Barbur', 'value': '4oiKwdDJgmPecXMek', 'postal': 97216, 'geo':[45.4462891,-122.7334938], 'url':'https://nectar.store/barbur/' },
+		{ 'name': 'Nectar - Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6', 'postal': 97005, 'geo':[45.4766619,-122.8250877], 'url':'dat'  },
+		{ 'name': 'Nectar - Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A', 'postal': 97008, 'geo':[45.457036,-122.7856972], 'url':'dat'},
+		{ 'name': 'Nectar - Regatta', 'value': '5f6bdb8157c27500f22d66ea', 'postal': 97006, 'geo':[45.5160132,-122.8435447], 'url':'dat'  },
+		{ 'name': 'Nectar - Forest Grove', 'value': '5f6bda5d94967900cc658f7d', 'postal': 97116, 'geo':[45.5178533,-123.1037687], 'url':'https://brothers-cannabis.com/' },
+		{ 'name': 'Kaleafa - Beaverton', 'value': 'KaleafaBeaverton', 'postal': 97005, 'geo':[45.4862895,-122.7912229], 'url':'dat'  },
+		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard', 'postal': 97223, 'geo':[45.4404432,-122.7514242], 'url':'http://kaleafa.com/' },
+		{ 'name': 'Kaleafa - Hillsboro', 'value': 'KaleafaHillsboro', 'postal': 97123, 'geo':[45.5178175,-122.9963372], 'url':'dat'  },
+		{ 'name': 'Growing Releaf - Beaverton', 'value': 115818, 'postal': 97005, 'geo':[45.4899831,-122.7907909], 'url':'dat'},
+		{ 'name': 'Green Planet - Beaverton', 'value': 107819, 'postal': 97005, 'geo':[45.4928959,-122.7829708], 'url':'https://www.leafly.com/dispensary-info/the-green-planet'},
+		{ 'name': 'Stone Age - Portland', 'value': 123946, 'postal': 97225, 'geo':[45.498724,-122.767445], 'url':'dat'},
+		{ 'name': 'Oregon Bud C. - Beaverton', 'value': 'OregonBudBeaverton', 'postal': 97005, 'geo':[45.496279,-122.8103849], 'url':'dat'},
 		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL', 'postal': 97003, 'geo':[45.4930636,-122.855204], 'url':'dat'  },
 		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e', 'postal': 97225, 'geo':[45.5093087,-122.7853587], 'url':'dat'  },
-		{ 'name': 'Green Mart-CedarHills', 'value': 143818, 'postal': 97005, 'geo':[45.5027025,-122.8104366], 'url':'dat'  },
-		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'postal': 97229, 'geo':[45.4798169,-122.8497282], 'url':'dat'  },
-		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro', 'postal': 97123, 'geo':[45.5178175,-122.9963372], 'url':'dat'  },
-		{ 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g', 'postal': 97113, 'geo':[45.5203924,-123.0348346], 'url':'https://www.mrniceguyretail.com/mr-nice-guy-cornelius'  },
+		{ 'name': 'Green Mart - Beaverton', 'value': 143818, 'postal': 97005, 'geo':[45.5027025,-122.8104366], 'url':'https://greenmartpdx.com/'  },
+		{ 'name': 'Mr NiceGuy - Cornelius', 'value': '6YskMw5YxzjN3AP3g', 'postal': 97113, 'geo':[45.5203924,-123.0348346], 'url':'https://www.mrniceguyretail.com/mr-nice-guy-cornelius'  },
 		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136, 'postal': 97123, 'geo':[45.514556,-122.9983446], 'url':'http://www.speedyjanes.com/' },
 		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb', 'postal': 97123, 'geo':[45.5201985,-123.0053237], 'url':'https://thevth.com/' },
 		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881, 'postal': 97123, 'geo':[45.5261959,-123.0056568], 'url':'http://westernoregondispensary.com/' },
 		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger', 'postal': 97223, 'geo':[45.4476039,-122.7679728], 'url':'http://cdcpdx.com/' },
-		{ 'name': 'Lemonnade-Metzger', 'value': 130410, 'postal': 97219, 'geo':[45.4435975,-122.7452872], 'url':'https://magic-castle-cannabis-store.business.site/' },
+		{ 'name': 'Lemonnade - Portland', 'value': 130410, 'postal': 97219, 'geo':[45.4435975,-122.7452872], 'url':'https://magic-castle-cannabis-store.business.site/' },
 		{ 'name': 'Local Leaf-Metzger', 'value': 144011, 'postal': 97223, 'geo':[45.4650255,-122.7570999], 'url':'http://www.localleaf420.com/#!contact_us/c1z0x' },
-		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2', 'postal': 97223, 'geo':[45.4221154,-122.7869961], 'url':'https://dutchie.com/store/cola-cove/menu' },
-		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard', 'postal': 97224, 'geo':[45.3989266,-122.8014775], 'url':'https://www.chalicefarms.com/locations/tigard-cannabis-dispensary'  },
-		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa', 'postal': 97223, 'geo':[45.4380797,-122.7564607], 'url':'https://electriclettuce.com/location/tigard-dispensary?utm_source=google&utm_medium=local&utm_campaign=website_button' },
-		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard', 'postal': 97223, 'geo':[45.4404432,-122.7514242], 'url':'http://kaleafa.com/' },
-		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek', 'postal': 97216, 'geo':[45.4462891,-122.7334938], 'url':'https://nectar.store/barbur/' },
 		{ 'name': 'Green Planet-KingCity', 'value': 196138, 'postal': 97224, 'geo':[45.4085658,-122.7974766], 'url':'https://www.thegreenplanet.net/' },
 		{ 'name': 'Green Goddess Remedies', 'value': 85676, 'postal': 97215, 'geo':[45.4549689,-122.7353912], 'url':'https://greengoddesspdx.com/' },
 		{ 'name': 'Parlour-Beaverton', 'value': 'AYYz8RrZ62Zqme9fv', 'postal': 97225, 'geo':[45.4927978,-122.8394032], 'url':'http://www.parlourcannabis.com/' },
-		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97219, 'geo':[45.4615768,-122.7055526], 'url':'https://naturalremediespdx.com/' },
-		{ 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo':[45.5048869,-122.6283683], 'url':'https://brothers-cannabis.com/' },
+		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'postal': 97229, 'geo':[45.4798169,-122.8497282], 'url':'http://westernoregondispensary.com/'  },
 	];
 
 	constructor(private http: HttpClient, private providersService: ProvidersService) {
@@ -376,16 +377,11 @@ export class AllComponent implements OnInit {
 	
 	// sorts by low/high price
 	sortPrice(direction) {
-		// this.productFilters.priceSort = direction;
-		
-		// this.processSorting('');
 		if (direction === 'toggle') {
 			if(this.productFilters.priceSort === 'Low') {
 				this.productFilters.priceSort = 'High';
-				// this.processSorting('');
 			} else {
 				this.productFilters.priceSort = 'Low';
-				// this.processSorting('');
 			}
 		} else {
 			this.productFilters.priceSort = direction;

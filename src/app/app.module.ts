@@ -7,7 +7,6 @@ import { MaterialModule } from './material-module';
 import { AppComponent } from './app.component';
 import { AllComponent } from './all/all.component';
 import { UnitPipe } from './pipes/unit.pipe';
-import { DispensaryPipe } from './pipes/dispensary.pipe';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -16,7 +15,6 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 		AppComponent,
 		AllComponent,
 		UnitPipe,
-		DispensaryPipe
 	],
 	imports: [
 		BrowserModule,
