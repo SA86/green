@@ -132,6 +132,17 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Green Goddess Remedies', 'value': 85676, 'postal': 97215, 'geo':[45.4549689,-122.7353912], 'url':'https://greengoddesspdx.com/' },
 		{ 'name': 'Parlour-Beaverton', 'value': 'AYYz8RrZ62Zqme9fv', 'postal': 97225, 'geo':[45.4927978,-122.8394032], 'url':'http://www.parlourcannabis.com/' },
 		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'postal': 97229, 'geo':[45.4798169,-122.8497282], 'url':'http://westernoregondispensary.com/'  },
+		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
+		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
+		{ 'name': 'La Mota - NE Portland', 'value': 'EnY8RLfGfypL9vomM', 'postal': 97220, 'geo':[45.5328304,-122.7258363], 'url':'http://www.lamota.com/'  },
+		{ 'name': 'Sticky\'s Pot Shop', 'value': '5efa452f0aab1a0127d2304b', 'postal': 98665, 'geo':[45.6908302,-122.6592531], 'url':'http://www.stickysmj.com/'  },
+		{ 'name': 'Fire & Frost Cannabis', 'value': 'vC35RJ6Zdb5soBWp2', 'postal': 98661, 'geo':[45.6448585,-122.60436], 'url':'dat'  },
+		{ 'name': 'Five Zero Trees - E.Portland', 'value': '5eb33c2258a5f300e86f6ac5', 'postal': 97266, 'geo':[45.5046807,-122.5604937], 'url':'https://fivezerotrees.com/east/'  },
+		{ 'name': 'Deanz Greanz - Sandy', 'value': 'SSexAhLYfSzoLqm9o', 'postal': 97220, 'geo':[45.559108,-122.5576035], 'url':'http://www.deanzgreenz.com/'  },
+		{ 'name': 'Green Gratitude', 'value': '5e79282f11ac2700af19b210', 'postal': 97266, 'geo':[45.4895517,-122.5587577], 'url':'https://greengratitude.us/cannabis-delivery-portland/'  },
+		{ 'name': 'Lifted Northwest', 'value': '6099a9f7fe765200bb01a140', 'postal': 97266, 'geo':[45.5044507,-122.5508177], 'url':'https://lifted-northwest.business.site/'  },
+		{ 'name': 'Archive Dispensary', 'value': '60a44a64a8d25500d8ddf30e', 'postal': 97266, 'geo':[45.4767497,-122.5554347], 'url':'http://archivedispensary.com/'  },
+		{ 'name': 'Mr Nice Guy - PDX Holgate', 'value': 'FGucd4jvPeqAmJNJy', 'postal': 97266, 'geo':[45.4895506,-122.5514853], 'url':'https://www.mrniceguyretail.com/mr-nice-guy-portland-se-holgate'  },
 	];
 
 	constructor(private http: HttpClient, private providersService: ProvidersService) {
