@@ -160,13 +160,13 @@ export class AllComponent implements OnInit {
 				this.filterProducts(type);
 				break;
 			case 'distance':
-				//@TODO change distance looses high/low sort pref
 				this.dispensary.setValue(''); // clear location select
 				this.productFilters.locations = []; // clear locations
 				this.filterProducts(type);
 				break;
 		
 			default:
+				this.filterProducts('none');
 				break;
 		}
 	}	
@@ -198,6 +198,12 @@ export class AllComponent implements OnInit {
 				return product
 			}
 		});
+		if (this.productFilters.priceSort === 'High') {
+			console.log('h88 ps', this.productFilters.priceSort);
+			filtered = orderBy(filtered, ['price'], ['desc']);
+		} else {
+			filtered = orderBy(filtered, ['price'], ['asc']);
+		}
 		this.products = filtered;
 		this.productsFull = filtered;
 		this.paginateItems();			
@@ -232,7 +238,7 @@ export class AllComponent implements OnInit {
 		}
 	}
 	
-	quickSort(name:string): void {
+	quickSort(name): void {
 		if(name === 'sales') {
 			this.productFilters.sales = 'sales';
 			this.processSorting('sales');
@@ -348,7 +354,7 @@ export class AllComponent implements OnInit {
 		});
 		let sortedBySale = sortBy(filteredForSale, ['discountPrice']);
 		this.saleItems = sortedBySale;
-		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
+		// this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
 	
 	//sort by cost
@@ -363,57 +369,50 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
-		this.products = this.productsFull;
+		this.processSorting('distance');
 		this.productFilters.sales = '';
 		this.productFilters.query = '';
-		this.paginateItems();
-		this.quickFilterActive(null, null);
-		this.gatherQuickSorts(this.products);
 	}
 	
 	// sorts by low/high price
 	sortPrice(direction) {
-		let sortedByPrice;
-		if (direction === 'high') {
-			this.productFilters.priceSort = 'High';
-			sortedByPrice = orderBy(this.productsFull, ['price'], ['desc']); 
-		} else if (direction === 'low') {
-			this.productFilters.priceSort = 'Low';
-			sortedByPrice = orderBy(this.productsFull, ['price'], ['asc']); 
-		} else if (direction === 'toggle') {
+		// this.productFilters.priceSort = direction;
+		
+		// this.processSorting('');
+		if (direction === 'toggle') {
 			if(this.productFilters.priceSort === 'Low') {
 				this.productFilters.priceSort = 'High';
-				sortedByPrice = orderBy(this.productsFull, ['price'], ['desc']); 
+				// this.processSorting('');
 			} else {
 				this.productFilters.priceSort = 'Low';
-				sortedByPrice = orderBy(this.productsFull, ['price'], ['asc']); 
+				// this.processSorting('');
 			}
-			
+		} else {
+			this.productFilters.priceSort = direction;
 		}
-		this.products = sortedByPrice;
-		this.paginateItems();
+		this.processSorting('');
 	}
 
 	
-	// toggles active quick sort class
-	quickFilterActive(name, type) { 
-		this.sortTypeMap.map((e) => {
-			if(e.name === name) {
-				e.active = !e.active;
-			} else {
-				e.active = false;
-			}
-			return e
-		});			
-		this.sortStrainMap.map((e) => {
-			if(e.name === name) {
-				e.active = !e.active;
-			} else {
-				e.active = false;
-			}
-			return e
-		});			
-	}
+	// // toggles active quick sort class
+	// quickFilterActive(name, type) { 
+	// 	this.sortTypeMap.map((e) => {
+	// 		if(e.name === name) {
+	// 			e.active = !e.active;
+	// 		} else {
+	// 			e.active = false;
+	// 		}
+	// 		return e
+	// 	});			
+	// 	this.sortStrainMap.map((e) => {
+	// 		if(e.name === name) {
+	// 			e.active = !e.active;
+	// 		} else {
+	// 			e.active = false;
+	// 		}
+	// 		return e
+	// 	});			
+	// }
 
 	removeUnusedProducts(products) { // remove select items from product list
 		// let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
