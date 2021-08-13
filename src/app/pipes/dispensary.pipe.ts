@@ -107,7 +107,10 @@ export class DispensaryPipe implements PipeTransform {
 				return 'Western Oregon - Hillsboro'
 				break;
 			case '6YskMw5YxzjN3AP3g':
-				return 'Mr NiceGuy - Hillsboro'
+				return 'Mr NiceGuy - Cornelius'
+				break;
+			case '5f6bda5d94967900cc658f7d':
+				return 'Nectar - Forest Grove'
 				break;
 		
 			default:

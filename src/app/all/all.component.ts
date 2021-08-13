@@ -44,6 +44,7 @@ export class AllComponent implements OnInit {
 	currentPage = 0;
 	originalProducts: any;
 	products: any;
+	productsFull: any; // unchunked
 	productsChunks: any;
 	productCount: number;
 	productBank = [];
@@ -89,47 +90,48 @@ export class AllComponent implements OnInit {
 		'pricerange': [1,120],
 		'cost': ['sales', 'low/high'],
 		'distance': [],
-		'range': 5,
+		'range': '5',
 		'sales': [],
 		'priceSort': 'Low'
 	};			
 	
 	// dispensaryList: DispensaryList[] = DispensaryListData;
 	dispensaryList: DispensaryList[] = [
+		{ 'name': 'Broadway - Beaverton', 'value': '605b64fa3da35500d1dd9d05', 'postal': 97005, 'geo':[45.4862065,-122.7813575], 'url':'dat'  },
+		{ 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo':[45.5048869,-122.6283683], 'url':'https://brothers-cannabis.com/' },
 		{ 'name': 'Cannabis Nation-Beaverton', 'value': 'acMFAfbvyQ9CKsrNy', 'postal': 97006, 'geo':[45.5203821,-122.8431368], 'url':'dat'  },
-		{ 'name': 'Nectar-Aloha', 'value': 'YbTHoLFPigH4scErj', 'postal': 97006, 'geo':[45.4966407,-122.8912542], 'url':'dat'  },
-		{ 'name': 'Nectar-Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6', 'postal': 97005, 'geo':[45.4766619,-122.8250877], 'url':'dat'  },
-		{ 'name': 'Nectar-Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A', 'postal': 97008, 'geo':[45.457036,-122.7856972], 'url':'dat'},
-		{ 'name': 'Nectar-Regatta', 'value': '5f6bdb8157c27500f22d66ea', 'postal': 97006, 'geo':[45.5160132,-122.8435447], 'url':'dat'  },
-		{ 'name': 'Kaleafa-Beaverton', 'value': 'KaleafaBeaverton', 'postal': 97005, 'geo':[45.4862895,-122.7912229], 'url':'dat'  },
-		{ 'name': 'Broadway-Beaverton', 'value': '605b64fa3da35500d1dd9d05', 'postal': 97005, 'geo':[45.4862065,-122.7813575], 'url':'dat'  },
-		{ 'name': 'Electric Lettuce-Beaverton', 'value': '5e7b8808bf130d00a8f6bd30', 'postal': 97008, 'geo':[45.4695997,-122.7862657], 'url':'dat'},
-		{ 'name': 'Growing Releaf-Beaverton', 'value': 115818, 'postal': 97005, 'geo':[45.4899831,-122.7907909], 'url':'dat'},
-		{ 'name': 'Green Planet-Beaverton', 'value': 107819, 'postal': 97005, 'geo':[45.4928959,-122.7829708], 'url':'dat'},
-		{ 'name': 'Stone Age-Beaverton', 'value': 123946, 'postal': 97225, 'geo':[45.498724,-122.767445], 'url':'dat'},
-		{ 'name': 'Oregon Bud Comp-Beaverton', 'value': 'OregonBudBeaverton', 'postal': 97005, 'geo':[45.496279,-122.8103849], 'url':'dat'},
+		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2', 'postal': 97223, 'geo':[45.4221154,-122.7869961], 'url':'https://dutchie.com/store/cola-cove/menu' },
+		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard', 'postal': 97224, 'geo':[45.3989266,-122.8014775], 'url':'https://www.chalicefarms.com/locations/tigard-cannabis-dispensary'  },
+		{ 'name': 'Electric Lettuce - Beaverton', 'value': '5e7b8808bf130d00a8f6bd30', 'postal': 97008, 'geo':[45.4695997,-122.7862657], 'url':'dat'},
+		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa', 'postal': 97223, 'geo':[45.4380797,-122.7564607], 'url':'https://electriclettuce.com/location/tigard-dispensary?utm_source=google&utm_medium=local&utm_campaign=website_button' },
+		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97219, 'geo':[45.4615768,-122.7055526], 'url':'https://naturalremediespdx.com/' },
+		{ 'name': 'Nectar - Aloha', 'value': 'YbTHoLFPigH4scErj', 'postal': 97006, 'geo':[45.4966407,-122.8912542], 'url':'dat'  },
+		{ 'name': 'Nectar - Barbur', 'value': '4oiKwdDJgmPecXMek', 'postal': 97216, 'geo':[45.4462891,-122.7334938], 'url':'https://nectar.store/barbur/' },
+		{ 'name': 'Nectar - Beaverton-Allen', 'value': 'CAcMm4qtR9t29dzg6', 'postal': 97005, 'geo':[45.4766619,-122.8250877], 'url':'dat'  },
+		{ 'name': 'Nectar - Beaverton-Hall', 'value': 'cynASLBsrjDueyH3A', 'postal': 97008, 'geo':[45.457036,-122.7856972], 'url':'dat'},
+		{ 'name': 'Nectar - Regatta', 'value': '5f6bdb8157c27500f22d66ea', 'postal': 97006, 'geo':[45.5160132,-122.8435447], 'url':'dat'  },
+		{ 'name': 'Nectar - Forest Grove', 'value': '5f6bda5d94967900cc658f7d', 'postal': 97116, 'geo':[45.5178533,-123.1037687], 'url':'https://brothers-cannabis.com/' },
+		{ 'name': 'Kaleafa - Beaverton', 'value': 'KaleafaBeaverton', 'postal': 97005, 'geo':[45.4862895,-122.7912229], 'url':'dat'  },
+		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard', 'postal': 97223, 'geo':[45.4404432,-122.7514242], 'url':'http://kaleafa.com/' },
+		{ 'name': 'Kaleafa - Hillsboro', 'value': 'KaleafaHillsboro', 'postal': 97123, 'geo':[45.5178175,-122.9963372], 'url':'dat'  },
+		{ 'name': 'Growing Releaf - Beaverton', 'value': 115818, 'postal': 97005, 'geo':[45.4899831,-122.7907909], 'url':'dat'},
+		{ 'name': 'Green Planet - Beaverton', 'value': 107819, 'postal': 97005, 'geo':[45.4928959,-122.7829708], 'url':'https://www.leafly.com/dispensary-info/the-green-planet'},
+		{ 'name': 'Stone Age - Portland', 'value': 123946, 'postal': 97225, 'geo':[45.498724,-122.767445], 'url':'dat'},
+		{ 'name': 'Oregon Bud C. - Beaverton', 'value': 'OregonBudBeaverton', 'postal': 97005, 'geo':[45.496279,-122.8103849], 'url':'dat'},
 		{ 'name': 'LaMota-Beaverton', 'value': 'oJN2QYZJHAxvBDWrL', 'postal': 97003, 'geo':[45.4930636,-122.855204], 'url':'dat'  },
 		{ 'name': 'Electric Lettuce-CedarHills', 'value': '5e7b8dfe49f75e00bbdb7b9e', 'postal': 97225, 'geo':[45.5093087,-122.7853587], 'url':'dat'  },
-		{ 'name': 'Green Mart-CedarHills', 'value': 143818, 'postal': 97005, 'geo':[45.5027025,-122.8104366], 'url':'dat'  },
-		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'postal': 97229, 'geo':[45.4798169,-122.8497282], 'url':'dat'  },
-		{ 'name': 'Kaleafa-Hillsboro', 'value': 'KaleafaHillsboro', 'postal': 97123, 'geo':[45.5178175,-122.9963372], 'url':'dat'  },
-		{ 'name': 'Mr NiceGuy-Hillsboro', 'value': '6YskMw5YxzjN3AP3g', 'postal': 97113, 'geo':[45.5203924,-123.0348346], 'url':'https://www.mrniceguyretail.com/mr-nice-guy-cornelius'  },
+		{ 'name': 'Green Mart - Beaverton', 'value': 143818, 'postal': 97005, 'geo':[45.5027025,-122.8104366], 'url':'https://greenmartpdx.com/'  },
+		{ 'name': 'Mr NiceGuy - Cornelius', 'value': '6YskMw5YxzjN3AP3g', 'postal': 97113, 'geo':[45.5203924,-123.0348346], 'url':'https://www.mrniceguyretail.com/mr-nice-guy-cornelius'  },
 		{ 'name': 'Speedy Janes-Hillsboro', 'value': 300136, 'postal': 97123, 'geo':[45.514556,-122.9983446], 'url':'http://www.speedyjanes.com/' },
 		{ 'name': 'The Vth-Hillsboro', 'value': 'HXg4iybZrq6wRbZMb', 'postal': 97123, 'geo':[45.5201985,-123.0053237], 'url':'https://thevth.com/' },
 		{ 'name': 'Western Oregon-Hillsboro', 'value': 319881, 'postal': 97123, 'geo':[45.5261959,-123.0056568], 'url':'http://westernoregondispensary.com/' },
 		{ 'name': 'CDC-Metzger', 'value': 'CDCMetzger', 'postal': 97223, 'geo':[45.4476039,-122.7679728], 'url':'http://cdcpdx.com/' },
-		{ 'name': 'Lemonnade-Metzger', 'value': 130410, 'postal': 97219, 'geo':[45.4435975,-122.7452872], 'url':'https://magic-castle-cannabis-store.business.site/' },
+		{ 'name': 'Lemonnade - Portland', 'value': 130410, 'postal': 97219, 'geo':[45.4435975,-122.7452872], 'url':'https://magic-castle-cannabis-store.business.site/' },
 		{ 'name': 'Local Leaf-Metzger', 'value': 144011, 'postal': 97223, 'geo':[45.4650255,-122.7570999], 'url':'http://www.localleaf420.com/#!contact_us/c1z0x' },
-		{ 'name': 'Cola Cove-Tigard', 'value': '5e7b9f3bdbf9cc0b3d2e3ff2', 'postal': 97223, 'geo':[45.4221154,-122.7869961], 'url':'https://dutchie.com/store/cola-cove/menu' },
-		{ 'name': 'Chalice-Tigard', 'value': 'ChaliceTigard', 'postal': 97224, 'geo':[45.3989266,-122.8014775], 'url':'https://www.chalicefarms.com/locations/tigard-cannabis-dispensary'  },
-		{ 'name': 'Electric Lettuce-Tigard', 'value': '5f19ecdfa7db3b01086e24fa', 'postal': 97223, 'geo':[45.4380797,-122.7564607], 'url':'https://electriclettuce.com/location/tigard-dispensary?utm_source=google&utm_medium=local&utm_campaign=website_button' },
-		{ 'name': 'Kaleafa-Tigard', 'value': 'kaleafaTigard', 'postal': 97223, 'geo':[45.4404432,-122.7514242], 'url':'http://kaleafa.com/' },
-		{ 'name': 'Nectar-Barbur', 'value': '4oiKwdDJgmPecXMek', 'postal': 97216, 'geo':[45.4462891,-122.7334938], 'url':'https://nectar.store/barbur/' },
 		{ 'name': 'Green Planet-KingCity', 'value': 196138, 'postal': 97224, 'geo':[45.4085658,-122.7974766], 'url':'https://www.thegreenplanet.net/' },
 		{ 'name': 'Green Goddess Remedies', 'value': 85676, 'postal': 97215, 'geo':[45.4549689,-122.7353912], 'url':'https://greengoddesspdx.com/' },
 		{ 'name': 'Parlour-Beaverton', 'value': 'AYYz8RrZ62Zqme9fv', 'postal': 97225, 'geo':[45.4927978,-122.8394032], 'url':'http://www.parlourcannabis.com/' },
-		{ 'name': 'Natural Remedies-Barbur', 'value': 'zBKaBM3hTpspDwMED', 'postal': 97219, 'geo':[45.4615768,-122.7055526], 'url':'https://naturalremediespdx.com/' },
-		{ 'name': 'Brothers-Oswego', 'value': 328152, 'postal': 97202, 'geo':[45.5048869,-122.6283683], 'url':'https://brothers-cannabis.com/' },
+		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'postal': 97229, 'geo':[45.4798169,-122.8497282], 'url':'http://westernoregondispensary.com/'  },
 	];
 
 	constructor(private http: HttpClient, private providersService: ProvidersService) {
@@ -165,6 +167,7 @@ export class AllComponent implements OnInit {
 				break;
 		
 			default:
+				this.filterProducts('none');
 				break;
 		}
 	}	
@@ -196,36 +199,47 @@ export class AllComponent implements OnInit {
 				return product
 			}
 		});
+		if (this.productFilters.priceSort === 'High') {
+			console.log('h88 ps', this.productFilters.priceSort);
+			filtered = orderBy(filtered, ['price'], ['desc']);
+		} else {
+			filtered = orderBy(filtered, ['price'], ['asc']);
+		}
 		this.products = filtered;
-		// this.paginateItems();			
+		this.productsFull = filtered;
+		this.paginateItems();			
 	}
 	
-	removeSortChip(type): void {
-		if (type === 'query') {
-			this.productFilters.query = '';
-			this.processSorting('query');
-		}
-		if (type === 'distance') {
-			this.productFilters.range = 30;
-			this.getGeo();
-		}
-		if (type === 'locations') {
-			this.productFilters.locations = [];
-			this.dispensary.setValue('');
-			this.processSorting('locations');
-		}
-		if (type === 'pricerange') {
-			this.productFilters.pricerange[0] = 1;
-			this.productFilters.pricerange[1] = 120;
-			this.processSorting('pricerange');
-		}
-		if (type === 'sales') {
-			this.productFilters.sales = '';
-			this.processSorting('sales');
+	removeSortChip(type:string): void {
+		switch (type) {
+			case 'query':
+				this.productFilters.query = '';
+				this.processSorting('query');
+				break;
+			case 'distance':
+				this.productFilters.range = 30;
+				this.getGeo();
+				break;
+			case 'locations':
+				this.productFilters.locations = [];
+				this.dispensary.setValue('');
+				this.processSorting('locations');
+				break;
+			case 'pricerange':
+				this.productFilters.pricerange[0] = 1;
+				this.productFilters.pricerange[1] = 120;
+				this.processSorting('pricerange');
+				break;
+			case 'sales':
+				this.productFilters.sales = '';
+				this.sortByAll();
+				break;
+			default:
+				break;
 		}
 	}
 	
-	quickSort(name:string): void {
+	quickSort(name): void {
 		if(name === 'sales') {
 			this.productFilters.sales = 'sales';
 			this.processSorting('sales');
@@ -248,12 +262,11 @@ export class AllComponent implements OnInit {
 
 	// pagination event change
 	handlePage(e: any) { 
-		//& TOTO need to get products rather than originalproducts
 		this.currentPage = e.pageIndex;
 		this.pageSize = e.pageSize;
 		const end = (this.currentPage + 1) * this.pageSize;
 		const start = this.currentPage * this.pageSize;
-		const part = this.originalProducts.slice(start, end);
+		const part = this.productsFull.slice(start, end);
 		this.products = part;		
 	}
 
@@ -269,7 +282,7 @@ export class AllComponent implements OnInit {
 	
 	// search zip query // handle hard return
 	doZipSearch(e) {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 || Math.ceil(Math.log10(this.postal + 1)) === 5) { // enter key or zip.length=5
 			this.getGeo();
 		}
 	}
@@ -342,7 +355,7 @@ export class AllComponent implements OnInit {
 		});
 		let sortedBySale = sortBy(filteredForSale, ['discountPrice']);
 		this.saleItems = sortedBySale;
-		this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
+		// this.bestSaleItems = orderBy(filteredForSale, ['discountraw'], ['desc']);		
 	}
 	
 	//sort by cost
@@ -357,48 +370,45 @@ export class AllComponent implements OnInit {
 
 	// show all
 	sortByAll() {
-		this.products = this.originalProducts;
+		this.processSorting('distance');
 		this.productFilters.sales = '';
 		this.productFilters.query = '';
-		this.paginateItems();
-		this.quickFilterActive(null, null);
-		this.gatherQuickSorts(this.products);
 	}
 	
 	// sorts by low/high price
 	sortPrice(direction) {
-		let sortedByPrice;
-		if (direction === 'high') {
-			this.productFilters.priceSort = 'High';
-			sortedByPrice = orderBy(this.originalProducts, ['price'], ['desc']); 
-		} else if (direction === 'low') {
-			this.productFilters.priceSort = 'Low';
-			sortedByPrice = orderBy(this.originalProducts, ['price'], ['asc']); 
+		if (direction === 'toggle') {
+			if(this.productFilters.priceSort === 'Low') {
+				this.productFilters.priceSort = 'High';
+			} else {
+				this.productFilters.priceSort = 'Low';
+			}
+		} else {
+			this.productFilters.priceSort = direction;
 		}
-		this.products = sortedByPrice;
-		this.paginateItems();
+		this.processSorting('');
 	}
 
 	
-	// toggles active quick sort class
-	quickFilterActive(name, type) { 
-		this.sortTypeMap.map((e) => {
-			if(e.name === name) {
-				e.active = !e.active;
-			} else {
-				e.active = false;
-			}
-			return e
-		});			
-		this.sortStrainMap.map((e) => {
-			if(e.name === name) {
-				e.active = !e.active;
-			} else {
-				e.active = false;
-			}
-			return e
-		});			
-	}
+	// // toggles active quick sort class
+	// quickFilterActive(name, type) { 
+	// 	this.sortTypeMap.map((e) => {
+	// 		if(e.name === name) {
+	// 			e.active = !e.active;
+	// 		} else {
+	// 			e.active = false;
+	// 		}
+	// 		return e
+	// 	});			
+	// 	this.sortStrainMap.map((e) => {
+	// 		if(e.name === name) {
+	// 			e.active = !e.active;
+	// 		} else {
+	// 			e.active = false;
+	// 		}
+	// 		return e
+	// 	});			
+	// }
 
 	removeUnusedProducts(products) { // remove select items from product list
 		// let productsToRemove = ['kief', 'syringe', 'dabaratus', 'dripper', 'moonrock', 'cartridge', 'cart', 'rso', 'preroll', 'pre-roll'];
@@ -440,14 +450,15 @@ export class AllComponent implements OnInit {
 					let sortedByPrice = sortBy(cleaned, ['price']); // sort by lowest price				
 					this.originalProducts = sortedByPrice; // create copy of items
 					this.products = sortedByPrice; // out View object
+					this.productsFull = sortedByPrice;
 					this.getGeo();
-					this.paginateItems();
 					this.loading = false;
 					console.log('h88 prod', this.products);
 					this.gatherQuickSorts(this.originalProducts);
 					this.gatherSales(this.originalProducts);
 				});			
 	}
+	
 	paginateItems() {
 		this.productCount = this.products.length; 
 		this.productsChunks = chunk(this.products, this.pageSize);

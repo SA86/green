@@ -14,12 +14,11 @@
 			<mat-divider ></mat-divider>
 			<!-- <p>Filter products by strain names and type. More indept querying capable under search.</p> -->
 			<div style="display:flex;">
-				<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All <span class="sort-count">({{originalProducts.length}})</span></button>	
-				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >SALES <span class="sort-count"></span></button>
-				<div style="display:flex;margin-left:12px;line-height: 31px;">
-					<h3>Sort price:</h3>
-					<button class="btn-price" mat-raised-button (click)='sortPrice("high")' color="primary" [ngClass]='{"active": productFilters.priceSort == "High"}'><span class="material-icons"> arrow_upward </span>High</button>	
-					<button class="btn-price" mat-raised-button (click)='sortPrice("low")' color="primary" [ngClass]='{"active": productFilters.priceSort == "Low"}'><span class="material-icons"> arrow_downward </span>Low</button>	
+				<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button>	
+				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >SALES</button>
+				<div style="display:flex;margin-left:12px;align-items:center;"><h3>Sort price:</h3>
+					<button class="btn-price" mat-raised-button (click)='sortPrice("High")' color="primary" [ngClass]='{"active": productFilters.priceSort == "High"}'><span class="material-icons"> arrow_upward </span>High</button>	
+					<button class="btn-price" mat-raised-button (click)='sortPrice("Low")' color="primary" [ngClass]='{"active": productFilters.priceSort == "Low"}'><span class="material-icons"> arrow_downward </span>Low</button>	
 				</div>			 
 			</div>			 
 			<mat-divider></mat-divider>
@@ -67,7 +66,7 @@
 	</div>
 	
 	<div id="sort" class='row col s12' *ngIf="menuAboutView" style="font-size:1rem;">
-		<p>Are you frustrated with tedious process involved with finding the right cannabis product. Going to countless dispensaries to find a particular product is a waste of time and money. With GreenEndo you can search for cannabis concentrate products in Oregon and lower Washington. Currently displaying <strong>{{ this.originalProducts.length }}</strong> products from <strong>{{ this.dispensaryList.length}} dispensary.</strong></p>
+		<p>Search for cannabis concentrate products in Oregon and lower Washington. Currently displaying <strong>{{ this.originalProducts.length }}</strong> products from <strong>{{ this.dispensaryList.length}} dispensaries.</strong></p>
 		<mat-divider ></mat-divider>
 	</div>
 	
@@ -75,13 +74,13 @@
 		<mat-divider ></mat-divider>		
 		<mat-form-field class="search-form-field">
 			<input matInput type="number" [(ngModel)]='postal' (keyup)="doZipSearch($event)" placeholder="Enter Zip Code">
-			<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="postal='';sortByAll()"><mat-icon>close</mat-icon></button>
+			<!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="postal='';sortByAll()"><mat-icon>close</mat-icon></button> -->
 		</mat-form-field>	
 		<div>
-			<p>Enter zip code then choose the distance in which to include in your search.</p>	
+			<!-- <p>Enter zip code then choose the distance in which to include in your search.</p>	 -->
 			<mat-radio-group [(ngModel)]="productFilters.range" (change)="getGeo()">
 				<mat-radio-button value="1">1 mi</mat-radio-button>
-				<mat-radio-button value="5" checked="true">5 mi</mat-radio-button>
+				<mat-radio-button value="5">5 mi</mat-radio-button>
 				<mat-radio-button value="10">10 mi</mat-radio-button>
 				<mat-radio-button value="15">15 mi</mat-radio-button>
 				<mat-radio-button value="20">20 mi</mat-radio-button>
@@ -89,7 +88,7 @@
 				<mat-radio-button value="30">30 mi</mat-radio-button>
 			</mat-radio-group>
 		</div>
-		<div style="flex-basis:100%">Products from these dispensaries are being show in the results. Change the distance radius to effect.</div>
+		<div style="flex-basis:100%">Products from these dispensaries are being show in the results.</div>
 		<div style="display:flex;flex-wrap:wrap;font-size:0.75rem;color:#adaece;" *ngIf="productFilters.distance.length > 0">
 			<div *ngFor="let dispensary of productFilters.distance">
 				{{dispensary.name}},&nbsp;&nbsp;
@@ -104,14 +103,16 @@
 	<div id="chips" class="col s12">
 		<mat-chip-list>
 			<div>
-				<mat-chip *ngIf="productFilters.priceSort"  [selectable]="selectable" [removable]="removable">{{ productFilters.priceSort }}est $$ 1st </mat-chip>
+				<mat-chip *ngIf="!productFilters.locations.length > 0" [selectable]="selectable" [removable]="removable" (click)='menuDistanceView = !menuDistanceView'>Showing ({{productFilters.distance.length}}) dispensaries
+				</mat-chip>
+				<mat-chip *ngIf="productFilters.priceSort"  [selectable]="selectable" [removable]="removable" (click)="sortPrice('toggle')">{{ productFilters.priceSort }}est $$ 1st </mat-chip>
 				<mat-chip *ngIf="productFilters.query" [selectable]="selectable" [removable]="removable">{{productFilters.query}}
 					<mat-icon matChipRemove (click)="removeSortChip('query')">cancel</mat-icon>
 				</mat-chip>
-				<mat-chip  [selectable]="selectable" [removable]="removable">${{productFilters.pricerange[0]}}-{{productFilters.pricerange[1]}}
+				<mat-chip  [selectable]="selectable" [removable]="removable" (click)='menuPricingView = !menuPricingView'>${{productFilters.pricerange[0]}}-{{productFilters.pricerange[1]}}
 					<mat-icon matChipRemove (click)="removeSortChip('pricerange')" *ngIf="productFilters.pricerange[0] != 1 || productFilters.pricerange[1] != 120">cancel</mat-icon>
 				</mat-chip>
-				<mat-chip *ngIf="!productFilters.locations.length > 0" [selectable]="selectable" [removable]="removable">{{productFilters.range}} mile radius
+				<mat-chip *ngIf="!productFilters.locations.length > 0" [selectable]="selectable" [removable]="removable" (click)='menuDistanceView = !menuDistanceView'>{{productFilters.range}} mile radius from {{ postal }}
 					<mat-icon matChipRemove (click)="removeSortChip('distance')">cancel</mat-icon>
 				</mat-chip>
 				<mat-chip *ngIf="productFilters.locations.length > 0"  [selectable]="selectable" [removable]="removable">Location Filters <span> ({{productFilters.locations.length}}) </span>
@@ -139,7 +140,7 @@
 			<h4 *ngIf='product.apiRoot == "k1"'class="product-type">{{ product.brand }} / {{ product.type }} </h4>
 			
 			<div class="col s6 m6 l6">
-				<h6>{{ product.id | dispensary }}</h6>
+				<h6>{{ product.dname }}</h6>
 
 				<!-- no sale -->
 				<h2 *ngIf="!product.discountPrice"><strong>${{ product.price }}</strong></h2>
