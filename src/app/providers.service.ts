@@ -22,6 +22,10 @@ export class ProvidersService {
 	getRequestC() {
 		return this.http.get('http://api.endo86.com:8051/greenC');
 	}
+	
+	getDispensaries() {
+		return this.http.get('http://api.endo86.com:8051/dispensaries');
+	}
 
 	// getRequest() {
 	// 	let greenA = this.http.get('http://api.endo86.com:8051/greenA');
