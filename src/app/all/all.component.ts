@@ -134,6 +134,16 @@ export class AllComponent implements OnInit {
 		{ 'name': 'Western Oregon-CedarHills', 'value': 301745, 'postal': 97229, 'geo':[45.4798169,-122.8497282], 'url':'http://westernoregondispensary.com/'  },
 		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
 		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
+		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
+		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
+		// { 'name': 'dat', 'value': 'kkkkkkkkkkk', 'postal': 97266, 'geo':[000000], 'url':'dat'  },
+		{ 'name': 'Cannabliss & Co. - T.Blvd', 'value': 'zaszMhfCbuLdD3Dpb', 'postal': 97266, 'geo':[45.4977617,-122.5752099], 'url':'https://www.cannablissandco.com/'  },
+		{ 'name': 'Nectar - Stark', 'value': 'Le4ZSHDFRWbMpyi7K', 'postal': 97216, 'geo':[45.5192242,-122.571726], 'url':'https://nectar.store/stark/'  },
+		{ 'name': 'Deanz Greenz - Foster', 'value': 'Yn3jEf88Eqa3APASZ', 'postal': 97266, 'geo':[45.4817306,-122.5783324], 'url':'http://www.marijuana-dispensary-portland.com/'  },
+		{ 'name': 'La Mota - Sandy', 'value': 'KhAt2jtXQHDDKuP8r', 'postal': 97220, 'geo':[45.5560291,-122.571315], 'url':'http://www.lamota.com/'  },
+		{ 'name': 'Nectar - Milwaukie Harmony', 'value': '5fc983fc8f856700ebdf0398', 'postal': 97222, 'geo':[45.43222,-122.5998745], 'url':'https://nectar.store/harmony/'  },
+		{ 'name': 'Left Coast Connection', 'value': 'mrRCfw9orrg6ZPQWK', 'postal': 97220, 'geo':[45.5266427,-122.5618697], 'url':'https://leftcoastconnection.com/'  },
+		{ 'name': 'Nectar - Woodstock', 'value': 'Efj6GF8PzRNNBNadm', 'postal': 97266, 'geo':[45.4788543,-122.5705842], 'url':'https://nectar.store/Woodstock/'  },
 		{ 'name': 'La Mota - NE Portland', 'value': 'EnY8RLfGfypL9vomM', 'postal': 97220, 'geo':[45.5328304,-122.7258363], 'url':'http://www.lamota.com/'  },
 		{ 'name': 'Sticky\'s Pot Shop', 'value': '5efa452f0aab1a0127d2304b', 'postal': 98665, 'geo':[45.6908302,-122.6592531], 'url':'http://www.stickysmj.com/'  },
 		{ 'name': 'Fire & Frost Cannabis', 'value': 'vC35RJ6Zdb5soBWp2', 'postal': 98661, 'geo':[45.6448585,-122.60436], 'url':'dat'  },
@@ -185,8 +195,8 @@ export class AllComponent implements OnInit {
 	
 	filterProducts(type:string): void {
 		let filtered = filter(this.originalProducts, (product) => {
-			let inDispensary = this.productFilters.locations.indexOf(product.id);
-			let inRange = find(this.productFilters.distance, { 'value' : product.id});
+			let inDispensary = this.productFilters.locations.indexOf(product.value);
+			let inRange = find(this.productFilters.distance, { 'value' : product.value});
 			let name = product.name.toLowerCase();
 			if ((product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1]) // 0-120
 						&&
@@ -308,6 +318,7 @@ export class AllComponent implements OnInit {
 				return item
 			}			
 		}));
+		console.log('h88 geo', this.productFilters.distance);
 		this.processSorting('distance');
 	}
 
@@ -462,6 +473,7 @@ export class AllComponent implements OnInit {
 					this.originalProducts = sortedByPrice; // create copy of items
 					this.products = sortedByPrice; // out View object
 					this.productsFull = sortedByPrice;
+					console.log('h88 results', sortedByPrice);
 					this.getGeo();
 					this.loading = false;
 					console.log('h88 prod', this.products);
