@@ -161,6 +161,14 @@ header {
 		padding: 0 12px 12px 12px !important;
 		font-size: 0.75rem;
 		margin: 0 !important;
+		h1 {
+			margin:0;
+			flex-basis: 100%;
+			background-color: transparent;
+		}
+		p {
+			margin:0 0 12px 0;
+		}
 		button {
 			border: 1px solid #000;
 			margin-right:12px;
