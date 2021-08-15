@@ -402,7 +402,6 @@ export class AllComponent implements OnInit {
 	getDispensaries() {
 		let disp = this.providersService.getDispensaries().subscribe(results=>{
 			this.dispensaryList = orderBy(results, ['name'], ['asc']);
-			
 		});
 	}
 	
