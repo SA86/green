@@ -9,7 +9,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import PostalCodeData from "./postal-codes.json";
-// import DispensaryListData from "./dispensary-list.json";
+import { AboutModalComponent } from '../modals/about-modal/about-modal.component';
+import { MatDialog } from  '@angular/material/dialog';
 import { catchError, retry } from 'rxjs/operators';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy, concat } from 'lodash';
 
@@ -97,7 +98,7 @@ export class AllComponent implements OnInit {
 	};			
 
 
-	constructor(private http: HttpClient, private providersService: ProvidersService) {
+	constructor(private http: HttpClient, private providersService: ProvidersService, private  dialogRef : MatDialog) {
 		this.postalCodes = PostalCodeData;
 	}
 
@@ -379,6 +380,11 @@ export class AllComponent implements OnInit {
 		});
 		return filteredProducts
 	}
+	
+	openAboutDialog(){
+		this.dialogRef.open(AboutModalComponent);
+	}
+	
 
 	getConcentrates() {
 			let greenA = this.http.get('http://api.endo86.com:8051/greenA');

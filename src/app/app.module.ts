@@ -9,12 +9,14 @@ import { AllComponent } from './all/all.component';
 import { UnitPipe } from './pipes/unit.pipe';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { AboutModalComponent } from './modals/about-modal/about-modal.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		AllComponent,
 		UnitPipe,
+ 		AboutModalComponent,
 	],
 	imports: [
 		BrowserModule,
