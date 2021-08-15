@@ -66,10 +66,10 @@ export class AllComponent implements OnInit {
 	bestSaleItems: any;
 	removable: boolean = true;
 	minValue: number = 1;
-	maxValue: number = 120;
+	maxValue: number = 180;
 	soptions: Options = {
 		floor: 0,
-		ceil: 120,
+		ceil: 180,
 		translate: (value: number, label: LabelType): string => {
 			switch (label) {
 				case LabelType.Low:
