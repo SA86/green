@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProvidersService } from '../providers.service';
 import { Observable, throwError, forkJoin } from 'rxjs';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { PageEvent } from '@angular/material/paginator';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatChipsModule } from '@angular/material/chips';
@@ -13,7 +14,7 @@ import { AboutModalComponent } from '../modals/about-modal/about-modal.component
 import { MatDialog } from  '@angular/material/dialog';
 import { catchError, retry } from 'rxjs/operators';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy, concat } from 'lodash';
-
+import { ProductFilters } from '../models/product-filters/product-filters.model';
 interface Products {
 	products: any;
 	data: any;
@@ -26,6 +27,10 @@ interface Products {
 // 	'geo': object;
 // 	'url': string;
 // }
+
+export interface AppState {
+  readonly productFilters: ProductFilters[];
+}
 @Component({
 	selector: 'app-all',
 	templateUrl: './all.component.html',
@@ -98,7 +103,7 @@ export class AllComponent implements OnInit {
 	};			
 
 
-	constructor(private http: HttpClient, private providersService: ProvidersService, private  dialogRef : MatDialog) {
+	constructor(private http: HttpClient, private providersService: ProvidersService, private  dialogRef : MatDialog, private store: Store<AppState>) {
 		this.postalCodes = PostalCodeData;
 	}
 
@@ -395,6 +400,15 @@ export class AllComponent implements OnInit {
 					let cleaned = this.removeUnusedProducts(combined); // remove bad items from the list
 					let sortedByPrice = sortBy(cleaned, ['price']); // sort by lowest price				
 					this.originalProducts = sortedByPrice; // create copy of items
+					//
+					this.store.dispatch({
+						type: 'PRODUCT_COUNT',
+						payload: <ProductFilters>{
+							productCount: this.originalProducts.length,
+							dispensaryCount: this.dispensaryList.length 
+						}
+					});
+					//
 					this.products = sortedByPrice; // out View object
 					this.productsFull = sortedByPrice;
 					this.getGeo();
