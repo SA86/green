@@ -8,7 +8,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
-import PostalCodeData from "../../assets/postal-codes.json";
+import PostalCodeData from "./postal-codes.json";
 import { AboutModalComponent } from '../modals/about-modal/about-modal.component';
 import { MatDialog } from  '@angular/material/dialog';
 import { catchError, retry } from 'rxjs/operators';
