@@ -10,7 +10,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import PostalCodeData from "./postal-codes.json";
 import { AboutModalComponent } from '../modals/about-modal/about-modal.component';
-import { MatDialog } from  '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from  '@angular/material/dialog';
+
 import { catchError, retry } from 'rxjs/operators';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy, concat } from 'lodash';
 
@@ -375,7 +376,10 @@ export class AllComponent implements OnInit {
 	}
 	
 	openAboutDialog(){
-		this.dialogRef.open(AboutModalComponent);
+		const dialogConfig = new MatDialogConfig();
+		let counts = [this.originalProducts.length, this.dispensaryList.length];
+		dialogConfig.data = counts;		
+		this.dialogRef.open(AboutModalComponent, dialogConfig);
 	}
 	
 
