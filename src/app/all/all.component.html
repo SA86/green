@@ -83,13 +83,14 @@
 				<mat-radio-button value="30">30 mi</mat-radio-button>
 			</mat-radio-group>
 		</div>
-		<div style="flex-basis:100%">Products from these dispensaries are being show in the results.</div>
+		<button mat-button color='accent' (click)="openDispensaryDialog()">Show Dispensaries in Range</button>
+		<!-- <div style="flex-basis:100%">Products from these dispensaries are being show in the results.</div>
 		<div style="display:flex;flex-wrap:wrap;font-size:0.75rem;color:#adaece;" *ngIf="productFilters.distance.length > 0">
 			<div *ngFor="let dispensary of productFilters.distance">
 				{{dispensary.name}},&nbsp;&nbsp;
 			</div>
 			<span>( {{this.productFilters.distance.length }})</span>
-		</div>		
+		</div>		 -->
 	</div>
 </header>
 

@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import PostalCodeData from "./postal-codes.json";
 import { AboutModalComponent } from '../modals/about-modal/about-modal.component';
+import { DispensaryModalComponent } from '../modals/dispensary-modal/dispensary-modal.component';
 import { MatDialog, MatDialogConfig } from  '@angular/material/dialog';
 
 import { catchError, retry } from 'rxjs/operators';
@@ -380,6 +381,13 @@ export class AllComponent implements OnInit {
 		let counts = [this.originalProducts.length, this.dispensaryList.length];
 		dialogConfig.data = counts;		
 		this.dialogRef.open(AboutModalComponent, dialogConfig);
+	}
+	
+	openDispensaryDialog(){
+		const dialogConfig = new MatDialogConfig();
+		let dispensaries = this.productFilters.distance;
+		dialogConfig.data = dispensaries;		
+		this.dialogRef.open(DispensaryModalComponent, dialogConfig);
 	}
 	
 

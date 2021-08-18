@@ -10,6 +10,7 @@ import { UnitPipe } from './pipes/unit.pipe';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AboutModalComponent } from './modals/about-modal/about-modal.component';
+import { DispensaryModalComponent } from './modals/dispensary-modal/dispensary-modal.component';
 
 @NgModule({
 	declarations: [
@@ -17,6 +18,7 @@ import { AboutModalComponent } from './modals/about-modal/about-modal.component'
 		AllComponent,
 		UnitPipe,
  		AboutModalComponent,
+   DispensaryModalComponent,
 	],
 	imports: [
 		BrowserModule,
