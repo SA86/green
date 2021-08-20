@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AboutModalComponent } from './modals/about-modal/about-modal.component';
 import { DispensaryModalComponent } from './modals/dispensary-modal/dispensary-modal.component';
+import { LocationModalComponent } from './modals/location-modal/location-modal.component';
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import { DispensaryModalComponent } from './modals/dispensary-modal/dispensary-m
 		UnitPipe,
  		AboutModalComponent,
    DispensaryModalComponent,
+   LocationModalComponent,
 	],
 	imports: [
 		BrowserModule,

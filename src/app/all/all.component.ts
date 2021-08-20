@@ -11,6 +11,7 @@ import { Options, LabelType } from "@angular-slider/ngx-slider";
 import PostalCodeData from "./postal-codes.json";
 import { AboutModalComponent } from '../modals/about-modal/about-modal.component';
 import { DispensaryModalComponent } from '../modals/dispensary-modal/dispensary-modal.component';
+import { LocationModalComponent } from '../modals/location-modal/location-modal.component';
 import { MatDialog, MatDialogConfig } from  '@angular/material/dialog';
 
 import { catchError, retry } from 'rxjs/operators';
@@ -135,15 +136,15 @@ export class AllComponent implements OnInit {
 			let inDispensary = this.productFilters.locations.indexOf(product.value);
 			let inRange = find(this.productFilters.distance, { 'value' : product.value});
 			let name = product.name.toLowerCase();
-			if ((product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1]) // 0-120
+			if ((product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1]) // prices | 0-180$
 						&&
-					(inDispensary > -1 || this.productFilters.locations.length === 0) // products is in our location array
+					(inDispensary > -1 || this.productFilters.locations.length === 0) // locations | it it selected in locations
 						&&
-					(inRange || this.productFilters.distance.length === 0 || type === 'locations') // distance // bypass on locations
+					(inRange || this.productFilters.distance.length === 0 || type === 'locations' || 'pricerange') // distance | is it a distance search, bypass on locations & pricerange
 						&&
-					(name.includes(this.productFilters.query))	// QUERY search
+					(name.includes(this.productFilters.query))	// query | is it a query search
 						&&
-					((product.discountPrice && product.discountPrice < product.price) || type !== 'sales' )	// sales			
+					((product.discountPrice && product.discountPrice < product.price) || type !== 'sales' )	// sales	| is it on Sale		
 							
 			) {
 				if(product.discountPrice) { // build discount property if on sale
@@ -388,6 +389,12 @@ export class AllComponent implements OnInit {
 		let dispensaries = this.productFilters.distance;
 		dialogConfig.data = dispensaries;		
 		this.dialogRef.open(DispensaryModalComponent, dialogConfig);
+	}
+	
+	openLocationDialog(){
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.data = this.dispensaryList;
+		this.dialogRef.open(LocationModalComponent, dialogConfig);
 	}
 	
 
