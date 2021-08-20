@@ -146,8 +146,8 @@
 				<h4 class="regular-price" *ngIf="product.discountPrice">Was: ${{ product.price }}</h4>
 
 				<div class="power">
-					<h5 *ngIf="product.THCContent?.value">THC: <strong>{{ product.THCContent.value }}{{ product.THCContent.unit | unit }}</strong></h5>
-					<h5 *ngIf="product.CBDContent?.value">CBD: <strong>{{ product.CBDContent.value }}{{ product.CBDContent.unit | unit }}</strong></h5>
+					<h5 *ngIf="product.THCContent?.range">THC: <strong>{{ product.THCContent.range }}{{ product.THCContent.unit | unit }}</strong></h5>
+					<h5 *ngIf="product.CBDContent?.range">CBD: <strong>{{ product.CBDContent.range }}{{ product.CBDContent.unit | unit }}</strong></h5>
 				</div>
 				<h5 class="cart-quantity" *ngIf="product.maxCartQuantity"><strong>{{ product.maxCartQuantity }}</strong> available</h5>
 			</div>
