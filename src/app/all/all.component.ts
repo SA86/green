@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProvidersService } from '../providers.service';
-import { Observable, throwError, forkJoin } from 'rxjs';
+import { Observable, throwError, forkJoin, Subscription } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -13,8 +14,7 @@ import { AboutModalComponent } from '../modals/about-modal/about-modal.component
 import { DispensaryModalComponent } from '../modals/dispensary-modal/dispensary-modal.component';
 import { LocationModalComponent } from '../modals/location-modal/location-modal.component';
 import { MatDialog, MatDialogConfig } from  '@angular/material/dialog';
-
-import { catchError, retry } from 'rxjs/operators';
+import { AllSharedService } from '../services/all-shared.service';
 import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq, sortBy, includes, chunk, sumBy, orderBy, concat } from 'lodash';
 
 interface Products {
@@ -33,6 +33,7 @@ export class AllComponent implements OnInit {
 	postalCodes: any; 
 	pageEvent: PageEvent;
 	dispensary = new FormControl();
+	sortByDispensarySubscription:Subscription;
 	formSearch: FormGroup = new FormGroup({});
 	search: string = '';
 	postal: number = 97006;
@@ -94,14 +95,18 @@ export class AllComponent implements OnInit {
 	};			
 
 
-	constructor(private http: HttpClient, private providersService: ProvidersService, private  dialogRef : MatDialog) {
+	constructor(private http: HttpClient, private providersService: ProvidersService, private  dialogRef : MatDialog, private allShared: AllSharedService) {
 		this.postalCodes = PostalCodeData;
+		this.sortByDispensarySubscription = this.allShared.getClickEvent().subscribe((dispensaries)=>{
+				this.sortByDispensary(dispensaries);
+			});
 	}
 
 	ngOnInit() {
 		this.getDispensaries();
 		this.getConcentrates();
 	}
+	
 	
 	processSorting(type) {
 		switch (type) {
@@ -209,7 +214,7 @@ export class AllComponent implements OnInit {
 
 	//sort by dispensary
 	sortByDispensary(o): void {
-		this.productFilters.locations = o.value;
+		this.productFilters.locations = o;
 		this.processSorting('locations');
 	}	
 
