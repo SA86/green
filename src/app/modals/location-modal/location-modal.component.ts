@@ -11,10 +11,14 @@ import { AllSharedService } from '../../services/all-shared.service';
 export class LocationModalComponent implements OnInit {
 	
 	dispensary = new FormControl();
-	
-	constructor(@Inject(MAT_DIALOG_DATA) public dispensaryList: any, private allShared: AllSharedService) { }
+	dispensaryList:object = [];
+	constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any, private allShared: AllSharedService) { }
 
 	ngOnInit(): void {
+		this.dispensaryList = this.dialogData[0];
+		if(this.dialogData[1] && this.dialogData[1] !== undefined && this.dialogData[1].length > 0) {
+			this.dispensary = new FormControl(this.dialogData[1]);
+		}
 	}
 
 	sortByDispensary(event):void {

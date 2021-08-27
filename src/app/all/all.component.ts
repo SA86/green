@@ -403,7 +403,8 @@ export class AllComponent implements OnInit {
 	
 	openLocationDialog(){
 		const dialogConfig = new MatDialogConfig();
-		dialogConfig.data = this.dispensaryList;
+		let dialogData = [this.dispensaryList, this.productFilters.locations]
+		dialogConfig.data = dialogData;
 		this.dialogRef.open(LocationModalComponent, dialogConfig);
 	}
 	
