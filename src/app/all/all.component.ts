@@ -86,7 +86,7 @@ export class AllComponent implements OnInit {
 		},
 		'query': '',
 		'locations': [],
-		'pricerange': [1,120],
+		'pricerange': [8,120],
 		'cost': ['sales', 'low/high'],
 		'distance': [],
 		'range': '5',
@@ -141,11 +141,16 @@ export class AllComponent implements OnInit {
 			let inDispensary = this.productFilters.locations.indexOf(product.value);
 			let inRange = find(this.productFilters.distance, { 'value' : product.value});
 			let name = product.name.toLowerCase();
+			// let d1 = product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1];
+			// let d2 = inDispensary > -1 || this.productFilters.locations.length === 0;
+			// let d3 = inRange || this.productFilters.distance.length === 0 || type === 'locations' || type === 'pricerange';
+			// let d4 = name.includes(this.productFilters.query);
+			// let d5 = (product.discountPrice && product.discountPrice < product.price) || type !== 'sales';
 			if ((product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1]) // prices | 0-180$
 						&&
 					(inDispensary > -1 || this.productFilters.locations.length === 0) // locations | it it selected in locations
 						&&
-					(inRange || this.productFilters.distance.length === 0 || type === 'locations' || 'pricerange') // distance | is it a distance search, bypass on locations & pricerange
+					(inRange || this.productFilters.distance.length === 0 || type === 'locations' || type === 'pricerange') // distance | is it a distance search, bypass on locations & pricerange
 						&&
 					(name.includes(this.productFilters.query))	// query | is it a query search
 						&&

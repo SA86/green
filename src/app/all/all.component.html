@@ -1,5 +1,4 @@
 <header class="row header">
-	<!-- <h1 class="title">Green Eighty Six</h1> -->
 	<div class='row quicks'>
 		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'><span class="material-icons">filter_list</span>Quick Filters</button>
 		<button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'><span class="material-icons">search</span> Search</button>
@@ -12,7 +11,6 @@
 	
 	<div id="quick-filters" class='row' *ngIf="menuQuickFiltersView">
 			<mat-divider ></mat-divider>
-			<!-- <p>Filter products by strain names and type. More indept querying capable under search.</p> -->
 			<div style="display:flex;">
 				<button class="btn-quick-all" mat-raised-button color="accent" (click)="sortByAll()">Show All</button>	
 				<button mat-button class="quick-sales" mat-raised-button (click)="quickSort('sales')" >SALES</button>
@@ -43,7 +41,6 @@
 			<div class="search-cont">
 				<input matInput type="text" [(ngModel)]='productFilters.query' (keyup)="doSearch($event)" placeholder="Enter keyword...">
 				<button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="productFilters.query='';sortByAll()"><mat-icon>close</mat-icon></button>
-				<!-- <button class="btn-search" mat-button (click)="doSearch($event)"><mat-icon>search</mat-icon></button> -->
 			</div>
 		</mat-form-field>
 	</div>
@@ -62,9 +59,9 @@
 			<!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="postal='';sortByAll()"><mat-icon>close</mat-icon></button> -->
 		</mat-form-field>	
 		<div>
-			<!-- <p>Enter zip code then choose the distance in which to include in your search.</p>	 -->
 			<mat-radio-group [(ngModel)]="productFilters.range" (change)="getGeo()">
 				<mat-radio-button value="1">1 mi</mat-radio-button>
+				<mat-radio-button value="3">3 mi</mat-radio-button>
 				<mat-radio-button value="5">5 mi</mat-radio-button>
 				<mat-radio-button value="10">10 mi</mat-radio-button>
 				<mat-radio-button value="15">15 mi</mat-radio-button>
@@ -74,13 +71,6 @@
 			</mat-radio-group>
 		</div>
 		<button mat-button color='accent' (click)="openDispensaryDialog()">Show Dispensaries in Range</button>
-		<!-- <div style="flex-basis:100%">Products from these dispensaries are being show in the results.</div>
-		<div style="display:flex;flex-wrap:wrap;font-size:0.75rem;color:#adaece;" *ngIf="productFilters.distance.length > 0">
-			<div *ngFor="let dispensary of productFilters.distance">
-				{{dispensary.name}},&nbsp;&nbsp;
-			</div>
-			<span>( {{this.productFilters.distance.length }})</span>
-		</div>		 -->
 	</div>
 </header>
 
