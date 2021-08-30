@@ -50,8 +50,6 @@ export class AllComponent implements OnInit {
 	dispensaryList; // @TODO make type
 	// menu display
 	menuQuickFiltersView: boolean = false;
-	menuSearchView: boolean = false;
-	menuLocationView: boolean = false;
 	menuPricingView: boolean = false;
 	menuAboutView: boolean = false;
 	menuDistanceView: boolean = false;

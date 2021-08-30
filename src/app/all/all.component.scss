@@ -51,22 +51,20 @@
 	}
 }
 
-.search-form-field {
-}
 
-.search-cont {
-	display: flex;
-	@media screen and (min-width: 576px) {
-		input {
-			width:125px;
-		}
-	}
-	@media screen and (min-width: 768px) {
-		input {
-			width:350px;
-		}
-	}
-}
+// .search-cont {
+// 	display: flex;
+// 	@media screen and (min-width: 576px) {
+// 		input {
+// 			width:125px;
+// 		}
+// 	}
+// 	@media screen and (min-width: 768px) {
+// 		input {
+// 			width:350px;
+// 		}
+// 	}
+// }
 
 .details-column {
 	overflow: hidden;
@@ -111,6 +109,18 @@ header {
 				
 			}
 		}
+		.search-form-field {
+			button {
+				position: absolute;
+				top: -4px;
+				right: -8px;
+				border:none !important;
+				margin:0 !important;
+				.mat-icon {
+					color:#fff;
+				}
+			}
+		}		
 	}
 	#quick-filters {
 		padding:0 12px 12px 12px;
