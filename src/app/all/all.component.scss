@@ -79,8 +79,6 @@
 }
 
 #select-dispensary {
-	width: 300px;
-	padding-top: 8px;
 }
 
 header {
@@ -290,4 +288,84 @@ h5 {
 h6 {
 	font-weight: normal;
 	color:#2e62a6;
+}
+#loading {
+	display:flex;
+	height:300px;
+	align-items:center;
+	h1 {
+		color:#242424;
+		flex-basis: 100%;
+		text-align: center;
+		background-color: transparent;
+		margin-top: -124px;	
+	}
+}
+.loader {
+	animation: spin 10s linear infinite;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	height: 70px;
+	width: 70px;
+
+	> div {
+		width: 70px;
+		height: 70px;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		> span {
+			display: block;
+			float: left;
+			width: 35px;
+			height: 35px;
+			animation: loading 2s linear infinite;
+			opacity: 0.5;
+			box-shadow: 0 0 3px #000;
+		}
+	}
+
+	> div:first-child {
+		> span {
+			background-color: #DF004F;
+		}
+	}
+
+	> div:last-child {
+		transform: rotate(45deg);
+
+		> span {
+			background-color: #74E600;
+		}
+	}
+}
+@keyframes loading {
+	0% {
+		border-radius: 0;
+		transform: scale(1.0);
+	}
+
+	50% {
+		border-radius: 35px;
+		transform: scale(0.5);
+	}
+
+	100% {
+		border-radius: 0;
+		transform: scale(1.0);
+	}
+}
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }

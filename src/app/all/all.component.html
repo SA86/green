@@ -107,9 +107,14 @@
 </section>
 
 <section class="row">
-	<div id="loading" *ngIf='loading'><h1>Loading...</h1></div>
+	<div *ngIf='loading' style="position:relative;">
+		<div id="loading"> 
+			<h1>(Fetching dispensaries and products)</h1>
+			<div class="loader"> <div> <span></span> <span></span> <span></span> <span></span> </div> <div> <span></span> <span></span> <span></span> <span></span> </div> </div> 
+		</div>
+	</div>
+	
 	<div class="mat-card col s12 m6 l4 xl3" *ngFor="let product of products">
-
 		<div class="product" [style.background-image]="'url('+product.image+')'">
 			<h1 class="product-name">{{ product.name }}</h1>
 			<h4 *ngIf='product.apiRoot != "k1"' class="product-type">{{ product.brand }}</h4>

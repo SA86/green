@@ -413,19 +413,19 @@ export class AllComponent implements OnInit {
 			let greenA = this.http.get('http://api.endo86.com:8051/greenA');
 			let greenB = this.http.get('http://api.endo86.com:8051/greenB');
 			let greenC = this.http.get('http://api.endo86.com:8051/greenC');
-				forkJoin([greenA, greenB, greenC]).subscribe(results => {
-					let combined = concat(results[0], results[1], results[2]);
-					let cleaned = this.removeUnusedProducts(combined); // remove bad items from the list
-					let sortedByPrice = sortBy(cleaned, ['price']); // sort by lowest price				
-					this.originalProducts = sortedByPrice; // create copy of items
-					this.products = sortedByPrice; // out View object
-					this.productsFull = sortedByPrice;
-					this.getGeo();
-					this.loading = false;
-					console.log('h88 prod', this.products);
-					this.gatherQuickSorts(this.originalProducts);
-					this.gatherSales(this.originalProducts);
-				});			
+			forkJoin([greenA, greenB, greenC]).subscribe(results => {
+				let combined = concat(results[0], results[1], results[2]);
+				let cleaned = this.removeUnusedProducts(combined); // remove bad items from the list
+				let sortedByPrice = sortBy(cleaned, ['price']); // sort by lowest price				
+				this.originalProducts = sortedByPrice; // create copy of items
+				this.products = sortedByPrice; // out View object
+				this.productsFull = sortedByPrice;
+				this.getGeo();
+				this.loading = false;
+				console.log('h88 prod', this.products);
+				this.gatherQuickSorts(this.originalProducts);
+				this.gatherSales(this.originalProducts);
+			});			
 	}
 	
 	getDispensaries() {
