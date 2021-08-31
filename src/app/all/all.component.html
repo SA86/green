@@ -1,4 +1,4 @@
-<header class="row header">
+<header class="row header" *ngIf='!loading'>
 	<div class='row quicks'>
 		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'><span class="material-icons">filter_list</span>Quick Filters</button>
 		<!-- <button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'><span class="material-icons">search</span> Search</button> -->
@@ -25,9 +25,9 @@
 					<button class="btn-price" mat-raised-button (click)='sortPrice("Low")' color="primary" [ngClass]='{"active": productFilters.priceSort == "Low"}'><span class="material-icons"> arrow_downward </span>Low</button>	
 				</div>			 
 			</div>			 
-			<mat-divider></mat-divider>
+			<!-- <mat-divider></mat-divider> -->
 			
-			<div class="filter-row">
+			<!-- <div class="filter-row">
 				<h2>Strain names</h2>
 				<button *ngFor='let item of sortStrainMap' mat-button (click)="quickSort(item.name)" class="quick-strain-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
 			</div>
@@ -37,7 +37,7 @@
 			<div class="filter-row">
 				<h2>Types</h2>
 				<button *ngFor='let item of sortTypeMap' mat-button (click)="quickSort(item.name)" class="quick-type-sort" [ngClass]='{"active": item.active}'>{{item.name}} <span class="sort-count">({{item.count}})</span></button>
-			</div>
+			</div> -->
 			
 	</div>
 	
@@ -71,7 +71,7 @@
 	
 </header>
 
-<section id="utility-bar" class="row col s12">
+<section id="utility-bar" class="row col s12" *ngIf='!loading'>
 		<!-- CHIPS -->
 	<div id="chips" class="col s12">
 		<mat-chip-list>
@@ -106,7 +106,7 @@
 <section class="row">
 	<div *ngIf='loading' style="position:relative;">
 		<div id="loading"> 
-			<h1>(Fetching dispensaries and products)</h1>
+			<h1>Welcome to <strong>Dabtasm!</strong><br> Fetching dispensaries and products. Might take a second..</h1>
 			<div class="loader"> <div> <span></span> <span></span> <span></span> <span></span> </div> <div> <span></span> <span></span> <span></span> <span></span> </div> </div> 
 		</div>
 	</div>
