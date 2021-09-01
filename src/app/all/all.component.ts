@@ -61,7 +61,7 @@ export class AllComponent implements OnInit {
 	saleItems: any;
 	bestSaleItems: any;
 	removable: boolean = true;
-	minValue: number = 1;
+	minValue: number = 8;
 	maxValue: number = 180;
 	soptions: Options = {
 		floor: 0,

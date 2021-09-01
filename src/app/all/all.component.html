@@ -2,9 +2,9 @@
 	<div class='row quicks'>
 		<button mat-raised-button (click)='menuQuickFiltersView = !menuQuickFiltersView' [ngClass]='{"active": menuQuickFiltersView}'><span class="material-icons">filter_list</span>Quick Filters</button>
 		<!-- <button mat-raised-button (click)='menuSearchView = !menuSearchView' [ngClass]='{"active": menuSearchView}'><span class="material-icons">search</span> Search</button> -->
-		<button mat-raised-button (click)='openLocationDialog()'><span class="material-icons">location_on</span>Locations</button>
-		<button mat-raised-button (click)='menuDistanceView = !menuDistanceView' [ngClass]='{"active": menuDistanceView}'><span class="material-icons">my_location</span>Distance</button>
-		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'><span class="material-icons">attach_money</span>Prices</button>
+		<button mat-raised-button (click)='openLocationDialog()'><span class="material-icons">location_on</span>Dispensaries</button>
+		<button mat-raised-button (click)='menuDistanceView = !menuDistanceView' [ngClass]='{"active": menuDistanceView}'><span class="material-icons">my_location</span>Search Radius</button>
+		<button mat-raised-button (click)='menuPricingView = !menuPricingView' [ngClass]='{"active": menuPricingView}'><span class="material-icons">attach_money</span>Price Range</button>
 		<button mat-raised-button (click)='openAboutDialog()'><span class="material-icons">help_outline</span>About</button>
 		<mat-form-field class="search-form-field">
 			<div class="search-cont">
