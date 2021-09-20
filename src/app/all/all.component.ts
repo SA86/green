@@ -139,6 +139,14 @@ export class AllComponent implements OnInit {
 			let inDispensary = this.productFilters.locations.indexOf(product.value);
 			let inRange = find(this.productFilters.distance, { 'value' : product.value});
 			let name = product.name.toLowerCase();
+			let brand = '';
+			let concentrate_type = '';
+			if(product.brand) {
+				brand = product.brand.toLowerCase();
+			}
+			if (product.type) {
+				concentrate_type = product.type.toLowerCase();
+			}
 			// let d1 = product.price >= this.productFilters.pricerange[0] && product.price <= this.productFilters.pricerange[1];
 			// let d2 = inDispensary > -1 || this.productFilters.locations.length === 0;
 			// let d3 = inRange || this.productFilters.distance.length === 0 || type === 'locations' || type === 'pricerange';
@@ -150,7 +158,7 @@ export class AllComponent implements OnInit {
 						&&
 					(inRange || this.productFilters.distance.length === 0 || type === 'locations' || type === 'pricerange') // distance | is it a distance search, bypass on locations & pricerange
 						&&
-					(name.includes(this.productFilters.query))	// query | is it a query search
+					(name.includes(this.productFilters.query) || brand.includes(this.productFilters.query) || concentrate_type.includes(this.productFilters.query) )	// query | is it a query search
 						&&
 					((product.discountPrice && product.discountPrice < product.price) || type !== 'sales' )	// sales	| is it on Sale		
 							
